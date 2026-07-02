@@ -1,3 +1,5 @@
+import { ClerkProvider } from '@clerk/clerk-expo';
+import { tokenCache } from '@clerk/clerk-expo/token-cache';
 import {
   DMSans_400Regular,
   DMSans_500Medium,
@@ -39,7 +41,10 @@ export default function RootLayout() {
   }
 
   return (
-    <>
+    <ClerkProvider
+      tokenCache={tokenCache}
+      publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    >
       <StatusBar style="light" />
       <Stack
         screenOptions={{
@@ -48,7 +53,8 @@ export default function RootLayout() {
         }}
       >
         <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="(auth)" />
       </Stack>
-    </>
+    </ClerkProvider>
   );
 }
