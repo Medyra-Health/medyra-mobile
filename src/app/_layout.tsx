@@ -1,18 +1,54 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
+import {
+  DMSans_400Regular,
+  DMSans_500Medium,
+  DMSans_600SemiBold,
+  DMSans_700Bold,
+} from '@expo-google-fonts/dm-sans';
+import {
+  PlayfairDisplay_700Bold,
+  PlayfairDisplay_800ExtraBold,
+} from '@expo-google-fonts/playfair-display';
+import { useFonts } from 'expo-font';
+import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { useEffect } from 'react';
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
+import { colors } from '@/theme/tokens';
 
 SplashScreen.preventAutoHideAsync();
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+export default function RootLayout() {
+  const [fontsLoaded] = useFonts({
+    PlayfairDisplay_700Bold,
+    PlayfairDisplay_800ExtraBold,
+    DMSans_400Regular,
+    DMSans_500Medium,
+    DMSans_600SemiBold,
+    DMSans_700Bold,
+  });
+
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <>
+      <StatusBar style="light" />
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          contentStyle: { backgroundColor: colors.background },
+        }}
+      >
+        <Stack.Screen name="(tabs)" />
+      </Stack>
+    </>
   );
 }
