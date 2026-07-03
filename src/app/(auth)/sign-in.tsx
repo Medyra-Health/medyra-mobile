@@ -1,6 +1,7 @@
 import { useSignIn } from '@clerk/clerk-expo';
 import { Link, useRouter } from 'expo-router';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
 
 import { Field, PrimaryButton } from '@/components/form';
@@ -10,6 +11,7 @@ import { spacing } from '@/theme/tokens';
 export default function SignInScreen() {
   const { signIn, setActive, isLoaded } = useSignIn();
   const router = useRouter();
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -25,10 +27,10 @@ export default function SignInScreen() {
         await setActive({ session: attempt.createdSessionId });
         router.replace('/(tabs)');
       } else {
-        setError('We could not complete the sign in. Please try again.');
+        setError(t('auth.signInFailed'));
       }
     } catch (err: any) {
-      setError(err?.errors?.[0]?.message ?? 'Sign in failed. Please check your details.');
+      setError(err?.errors?.[0]?.message ?? t('auth.signInFailed'));
     } finally {
       setLoading(false);
     }
@@ -40,12 +42,12 @@ export default function SignInScreen() {
         <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
           <View style={styles.header}>
             <ThemedText variant="label">Medyra</ThemedText>
-            <ThemedText variant="h1">Welcome back</ThemedText>
-            <ThemedText variant="bodyMuted">Sign in with your Medyra account.</ThemedText>
+            <ThemedText variant="h1">{t('auth.welcomeBack')}</ThemedText>
+            <ThemedText variant="bodyMuted">{t('auth.signInSubtitle')}</ThemedText>
           </View>
 
           <Field
-            label="Email"
+            label={t('auth.email')}
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
@@ -53,12 +55,12 @@ export default function SignInScreen() {
             placeholder="you@example.com"
           />
           <Field
-            label="Password"
+            label={t('auth.password')}
             value={password}
             onChangeText={setPassword}
             secureTextEntry
             autoComplete="current-password"
-            placeholder="Your password"
+            placeholder={t('auth.passwordPlaceholder')}
           />
 
           {error ? (
@@ -67,12 +69,12 @@ export default function SignInScreen() {
             </ThemedText>
           ) : null}
 
-          <PrimaryButton title="Sign in" onPress={onSignIn} loading={loading} disabled={!email || !password} />
+          <PrimaryButton title={t('auth.signIn')} onPress={onSignIn} loading={loading} disabled={!email || !password} />
 
           <View style={styles.footer}>
-            <ThemedText variant="bodyMuted">New to Medyra? </ThemedText>
+            <ThemedText variant="bodyMuted">{t('auth.newHere')}</ThemedText>
             <Link href="/(auth)/sign-up">
-              <ThemedText style={styles.link}>Create an account</ThemedText>
+              <ThemedText style={styles.link}>{t('auth.createAccount')}</ThemedText>
             </Link>
           </View>
         </ScrollView>

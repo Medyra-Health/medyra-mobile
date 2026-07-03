@@ -1,6 +1,7 @@
 import { useSignUp } from '@clerk/clerk-expo';
 import { Link, useRouter } from 'expo-router';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
 
 import { Field, PrimaryButton } from '@/components/form';
@@ -10,6 +11,7 @@ import { spacing } from '@/theme/tokens';
 export default function SignUpScreen() {
   const { signUp, setActive, isLoaded } = useSignUp();
   const router = useRouter();
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [code, setCode] = useState('');
@@ -26,7 +28,7 @@ export default function SignUpScreen() {
       await signUp.prepareEmailAddressVerification({ strategy: 'email_code' });
       setPendingVerification(true);
     } catch (err: any) {
-      setError(err?.errors?.[0]?.message ?? 'Sign up failed. Please try again.');
+      setError(err?.errors?.[0]?.message ?? t('auth.signUpFailed'));
     } finally {
       setLoading(false);
     }
@@ -42,10 +44,10 @@ export default function SignUpScreen() {
         await setActive({ session: attempt.createdSessionId });
         router.replace('/(tabs)');
       } else {
-        setError('Verification did not complete. Please try again.');
+        setError(t('auth.invalidCode'));
       }
     } catch (err: any) {
-      setError(err?.errors?.[0]?.message ?? 'Invalid code. Please try again.');
+      setError(err?.errors?.[0]?.message ?? t('auth.invalidCode'));
     } finally {
       setLoading(false);
     }
@@ -59,14 +61,12 @@ export default function SignUpScreen() {
             <>
               <View style={styles.header}>
                 <ThemedText variant="label">Medyra</ThemedText>
-                <ThemedText variant="h1">Create your account</ThemedText>
-                <ThemedText variant="bodyMuted">
-                  One account for web and mobile. 3 free reports per month.
-                </ThemedText>
+                <ThemedText variant="h1">{t('auth.createYourAccount')}</ThemedText>
+                <ThemedText variant="bodyMuted">{t('auth.signUpSubtitle')}</ThemedText>
               </View>
 
               <Field
-                label="Email"
+                label={t('auth.email')}
                 value={email}
                 onChangeText={setEmail}
                 keyboardType="email-address"
@@ -74,12 +74,12 @@ export default function SignUpScreen() {
                 placeholder="you@example.com"
               />
               <Field
-                label="Password"
+                label={t('auth.password')}
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
                 autoComplete="new-password"
-                placeholder="Choose a password"
+                placeholder={t('auth.choosePassword')}
               />
 
               {error ? (
@@ -88,12 +88,17 @@ export default function SignUpScreen() {
                 </ThemedText>
               ) : null}
 
-              <PrimaryButton title="Create account" onPress={onSignUp} loading={loading} disabled={!email || !password} />
+              <PrimaryButton
+                title={t('auth.createAccountCta')}
+                onPress={onSignUp}
+                loading={loading}
+                disabled={!email || !password}
+              />
 
               <View style={styles.footer}>
-                <ThemedText variant="bodyMuted">Already have an account? </ThemedText>
+                <ThemedText variant="bodyMuted">{t('auth.haveAccount')}</ThemedText>
                 <Link href="/(auth)/sign-in">
-                  <ThemedText style={styles.link}>Sign in</ThemedText>
+                  <ThemedText style={styles.link}>{t('auth.signIn')}</ThemedText>
                 </Link>
               </View>
             </>
@@ -101,12 +106,12 @@ export default function SignUpScreen() {
             <>
               <View style={styles.header}>
                 <ThemedText variant="label">Medyra</ThemedText>
-                <ThemedText variant="h1">Check your email</ThemedText>
-                <ThemedText variant="bodyMuted">We sent a verification code to {email.trim()}.</ThemedText>
+                <ThemedText variant="h1">{t('auth.checkEmail')}</ThemedText>
+                <ThemedText variant="bodyMuted">{t('auth.codeSent', { email: email.trim() })}</ThemedText>
               </View>
 
               <Field
-                label="Verification code"
+                label={t('auth.verificationCode')}
                 value={code}
                 onChangeText={setCode}
                 keyboardType="number-pad"
@@ -119,7 +124,12 @@ export default function SignUpScreen() {
                 </ThemedText>
               ) : null}
 
-              <PrimaryButton title="Verify and continue" onPress={onVerify} loading={loading} disabled={code.trim().length < 4} />
+              <PrimaryButton
+                title={t('auth.verifyContinue')}
+                onPress={onVerify}
+                loading={loading}
+                disabled={code.trim().length < 4}
+              />
             </>
           )}
         </ScrollView>

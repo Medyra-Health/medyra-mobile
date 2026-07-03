@@ -4,6 +4,7 @@ import * as DocumentPicker from 'expo-document-picker';
 import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   ActivityIndicator,
   Alert,
@@ -28,6 +29,7 @@ export default function HomeScreen() {
   const { user } = useUser();
   const api = useApi();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [reports, setReports] = useState<Report[]>([]);
@@ -69,16 +71,12 @@ export default function HomeScreen() {
         setPendingFile(file);
         setConsentVisible(true);
       } else if (err instanceof ApiError && err.status === 429) {
-        Alert.alert(
-          'Free limit reached',
-          'You have used your 3 free reports this month. Upgrade to Personal for more.',
-          [
-            { text: 'Not now', style: 'cancel' },
-            { text: 'See plans', onPress: () => router.push('/paywall') },
-          ],
-        );
+        Alert.alert(t('home.limitTitle'), t('home.limitBody'), [
+          { text: t('home.notNow'), style: 'cancel' },
+          { text: t('home.seePlans'), onPress: () => router.push('/paywall') },
+        ]);
       } else {
-        Alert.alert('Analysis failed', err instanceof Error ? err.message : 'Please try again.');
+        Alert.alert(t('home.analysisFailed'), err instanceof Error ? err.message : t('home.tryAgain'));
       }
     } finally {
       setAnalyzing(false);
@@ -96,7 +94,7 @@ export default function HomeScreen() {
         await analyze(file);
       }
     } catch {
-      Alert.alert('Something went wrong', 'Please try again.');
+      Alert.alert(t('home.analysisFailed'), t('home.tryAgain'));
     } finally {
       setConsentLoading(false);
     }
@@ -105,7 +103,7 @@ export default function HomeScreen() {
   async function pickFromCamera() {
     const perm = await ImagePicker.requestCameraPermissionsAsync();
     if (!perm.granted) {
-      Alert.alert('Camera access needed', 'Please allow camera access to photograph your document.');
+      Alert.alert(t('home.cameraNeeded'), t('home.cameraNeededBody'));
       return;
     }
     const res = await ImagePicker.launchCameraAsync({ quality: 0.8 });
@@ -153,12 +151,17 @@ export default function HomeScreen() {
       >
         <View style={styles.header}>
           <ThemedText variant="label">Medyra</ThemedText>
-          <ThemedText variant="h1">Hello{firstName ? `, ${firstName}` : ''}</ThemedText>
+          <ThemedText variant="h1">
+            {t('home.hello')}
+            {firstName ? `, ${firstName}` : ''}
+          </ThemedText>
           {subscription && (
             <ThemedText variant="bodyMuted">
               {subscription.tier === 'free'
-                ? `${subscription.remaining} of ${subscription.usageLimit} free reports left this month`
-                : `${subscription.tier.charAt(0).toUpperCase()}${subscription.tier.slice(1)} plan`}
+                ? t('home.freeLeft', { remaining: subscription.remaining, limit: subscription.usageLimit })
+                : t('home.plan', {
+                    tier: `${subscription.tier.charAt(0).toUpperCase()}${subscription.tier.slice(1)}`,
+                  })}
             </ThemedText>
           )}
         </View>
@@ -166,16 +169,16 @@ export default function HomeScreen() {
         {/* Upload actions */}
         <GlassCard style={styles.uploadCard}>
           <ThemedText variant="h3" style={styles.uploadTitle}>
-            Understand a medical document
+            {t('home.uploadTitle')}
           </ThemedText>
           <ThemedText variant="caption" style={styles.uploadSub}>
-            Plain language explanation in under 60 seconds
+            {t('home.uploadSubtitle')}
           </ThemedText>
           <View style={styles.actionsRow}>
             {[
-              { icon: 'camera-outline' as const, label: 'Camera', onPress: pickFromCamera },
-              { icon: 'images-outline' as const, label: 'Photos', onPress: pickFromLibrary },
-              { icon: 'document-outline' as const, label: 'Files', onPress: pickDocument },
+              { icon: 'camera-outline' as const, label: t('home.camera'), onPress: pickFromCamera },
+              { icon: 'images-outline' as const, label: t('home.photos'), onPress: pickFromLibrary },
+              { icon: 'document-outline' as const, label: t('home.files'), onPress: pickDocument },
             ].map(({ icon, label, onPress }) => (
               <Pressable
                 key={label}
@@ -194,10 +197,10 @@ export default function HomeScreen() {
 
         {/* Recent reports */}
         <View style={styles.section}>
-          <ThemedText variant="h3">Recent reports</ThemedText>
+          <ThemedText variant="h3">{t('home.recentReports')}</ThemedText>
           {reports.length === 0 ? (
             <ThemedText variant="bodyMuted" style={styles.empty}>
-              Your analyzed documents appear here. They are deleted automatically after 30 days.
+              {t('home.emptyReports')}
             </ThemedText>
           ) : (
             reports.slice(0, 10).map((r) => {
@@ -238,9 +241,9 @@ export default function HomeScreen() {
         <View style={styles.overlay}>
           <ActivityIndicator size="large" color={colors.emerald} />
           <ThemedText variant="h3" style={styles.overlayTitle}>
-            Reading your document
+            {t('home.analyzing')}
           </ThemedText>
-          <ThemedText variant="bodyMuted">This takes under 60 seconds.</ThemedText>
+          <ThemedText variant="bodyMuted">{t('home.analyzingSub')}</ThemedText>
         </View>
       )}
 

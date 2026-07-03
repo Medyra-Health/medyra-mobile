@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   ActivityIndicator,
   Alert,
@@ -30,6 +31,7 @@ export default function ReportScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const api = useApi();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const [report, setReport] = useState<Report | null>(null);
   const [profiles, setProfiles] = useState<Profile[]>([]);
@@ -48,8 +50,8 @@ export default function ReportScreen() {
       setReport(r);
       setProfiles(prof.profiles ?? []);
     } catch (err) {
-      Alert.alert('Could not load report', err instanceof Error ? err.message : 'Please try again.', [
-        { text: 'Go back', onPress: () => router.back() },
+      Alert.alert(t('report.couldNotLoad'), err instanceof Error ? err.message : '', [
+        { text: t('report.goBack'), onPress: () => router.back() },
       ]);
     } finally {
       setLoading(false);
@@ -70,7 +72,7 @@ export default function ReportScreen() {
       '',
       ...exp.tests.map((t) => `${t.name}: ${t.value}${t.flag ? ` (${t.flag})` : ''}`),
       '',
-      'Explained with Medyra. Not medical advice.',
+      t('report.sharedFooter'),
     ].filter(Boolean);
     await Share.share({ message: lines.join('\n') });
   }
@@ -83,7 +85,7 @@ export default function ReportScreen() {
       setShowAssign(false);
       await load();
     } catch (err) {
-      Alert.alert('Could not assign', err instanceof Error ? err.message : 'Please try again.');
+      Alert.alert(t('report.couldNotAssign'), err instanceof Error ? err.message : '');
     } finally {
       setAssigning(false);
     }
@@ -114,7 +116,7 @@ export default function ReportScreen() {
         <ScrollView contentContainerStyle={styles.scroll}>
           {exp.inShort ? (
             <GlassCard style={styles.inShort}>
-              <ThemedText variant="label">In short</ThemedText>
+              <ThemedText variant="label">{t('report.inShort')}</ThemedText>
               <ThemedText variant="h2" style={styles.inShortText}>
                 {exp.inShort}
               </ThemedText>
@@ -123,7 +125,7 @@ export default function ReportScreen() {
 
           {exp.summary ? (
             <View style={styles.section}>
-              <ThemedText variant="label">Summary</ThemedText>
+              <ThemedText variant="label">{t('report.summary')}</ThemedText>
               <ThemedText variant="body" style={styles.summary}>
                 {exp.summary}
               </ThemedText>
@@ -132,20 +134,20 @@ export default function ReportScreen() {
 
           {exp.tests.length > 0 && (
             <View style={styles.section}>
-              <ThemedText variant="label">Your values</ThemedText>
-              {exp.tests.map((t, i) => {
-                const flag = t.flag ?? t.status;
+              <ThemedText variant="label">{t('report.yourValues')}</ThemedText>
+              {exp.tests.map((test, i) => {
+                const flag = test.flag ?? test.status;
                 return (
-                  <GlassCard key={`${t.name}-${i}`} style={styles.testCard}>
+                  <GlassCard key={`${test.name}-${i}`} style={styles.testCard}>
                     <View style={styles.testHeader}>
                       <View style={[styles.testBar, { backgroundColor: flagColor(flag) }]} />
                       <View style={styles.testTitleWrap}>
                         <ThemedText variant="h3" style={styles.testName}>
-                          {t.name}
+                          {test.name}
                         </ThemedText>
                         <ThemedText variant="caption">
-                          {t.value}
-                          {t.range ? `  ·  Reference: ${t.range}` : ''}
+                          {test.value}
+                          {test.range ? `  ·  ${t('report.reference')}: ${test.range}` : ''}
                         </ThemedText>
                       </View>
                       {flag ? (
@@ -156,9 +158,9 @@ export default function ReportScreen() {
                         </View>
                       ) : null}
                     </View>
-                    {t.interpretation ? (
+                    {test.interpretation ? (
                       <ThemedText variant="bodyMuted" style={styles.interpretation}>
-                        {t.interpretation}
+                        {test.interpretation}
                       </ThemedText>
                     ) : null}
                   </GlassCard>
@@ -169,12 +171,12 @@ export default function ReportScreen() {
 
           {/* Assign to profile */}
           <View style={styles.section}>
-            <ThemedText variant="label">Health profile</ThemedText>
+            <ThemedText variant="label">{t('report.healthProfile')}</ThemedText>
             {assignedProfile ? (
               <GlassCard style={styles.assignRow}>
                 <Ionicons name="person-circle-outline" size={20} color={colors.emerald} />
                 <ThemedText variant="body" style={styles.assignName}>
-                  Saved to {assignedProfile.name}
+                  {t('report.savedTo', { name: assignedProfile.name })}
                 </ThemedText>
               </GlassCard>
             ) : profiles.length > 0 ? (
@@ -183,7 +185,7 @@ export default function ReportScreen() {
                   <GlassCard style={styles.assignRow}>
                     <Ionicons name="add-circle-outline" size={20} color={colors.emerald} />
                     <ThemedText variant="body" style={styles.assignName}>
-                      Save to a profile for trend tracking
+                      {t('report.saveToProfile')}
                     </ThemedText>
                     <Ionicons
                       name={showAssign ? 'chevron-up' : 'chevron-down'}
@@ -203,9 +205,7 @@ export default function ReportScreen() {
                   ))}
               </>
             ) : (
-              <ThemedText variant="caption">
-                Create a health profile in the Profiles tab to track values over time.
-              </ThemedText>
+              <ThemedText variant="caption">{t('report.createProfileHint')}</ThemedText>
             )}
           </View>
 

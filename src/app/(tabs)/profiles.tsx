@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Alert,
   Modal,
@@ -23,6 +24,7 @@ const RELATIONSHIPS = ['Me', 'Partner', 'Child', 'Parent', 'Other'];
 export default function ProfilesScreen() {
   const api = useApi();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [canCreate, setCanCreate] = useState(false);
@@ -90,7 +92,7 @@ export default function ProfilesScreen() {
         setModalVisible(false);
         router.push('/paywall');
       } else {
-        Alert.alert('Could not save profile', err instanceof Error ? err.message : 'Please try again.');
+        Alert.alert(t('profiles.couldNotSave'), err instanceof Error ? err.message : '');
       }
     } finally {
       setSaving(false);
@@ -98,25 +100,21 @@ export default function ProfilesScreen() {
   }
 
   function onDelete(p: Profile) {
-    Alert.alert(
-      'Delete profile',
-      `Delete ${p.name} and its tracked values? Reports stay until they expire.`,
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: async () => {
-            try {
-              await api.deleteProfile(p.id);
-              await load();
-            } catch (err) {
-              Alert.alert('Could not delete', err instanceof Error ? err.message : 'Please try again.');
-            }
-          },
+    Alert.alert(t('profiles.deleteTitle'), t('profiles.deleteBody', { name: p.name }), [
+      { text: t('profiles.cancel'), style: 'cancel' },
+      {
+        text: t('profiles.delete'),
+        style: 'destructive',
+        onPress: async () => {
+          try {
+            await api.deleteProfile(p.id);
+            await load();
+          } catch (err) {
+            Alert.alert(t('profiles.couldNotDelete'), err instanceof Error ? err.message : '');
+          }
         },
-      ],
-    );
+      },
+    ]);
   }
 
   const isFree = subscription?.tier === 'free';
@@ -130,9 +128,9 @@ export default function ProfilesScreen() {
         <View style={styles.headerRow}>
           <View>
             <ThemedText variant="h1" style={styles.title}>
-              Profiles
+              {t('profiles.title')}
             </ThemedText>
-            <ThemedText variant="bodyMuted">Health history for you and your family</ThemedText>
+            <ThemedText variant="bodyMuted">{t('profiles.subtitle')}</ThemedText>
           </View>
           {canCreate && (
             <Pressable onPress={openCreate} style={({ pressed }) => [styles.addBtn, pressed && styles.pressed]}>
@@ -145,19 +143,16 @@ export default function ProfilesScreen() {
           <GlassCard style={styles.upsell}>
             <Ionicons name="lock-closed-outline" size={22} color={colors.emerald} />
             <ThemedText variant="h3" style={styles.upsellTitle}>
-              Health profiles are part of Personal and Family
+              {t('profiles.upsellTitle')}
             </ThemedText>
             <ThemedText variant="bodyMuted" style={styles.upsellBody}>
-              Track lab values over time for yourself and your family, and see trends across
-              reports.
+              {t('profiles.upsellBody')}
             </ThemedText>
-            <PrimaryButton title="See plans" onPress={() => router.push('/paywall')} />
+            <PrimaryButton title={t('profiles.seePlans')} onPress={() => router.push('/paywall')} />
           </GlassCard>
         ) : profiles.length === 0 ? (
           <GlassCard>
-            <ThemedText variant="bodyMuted">
-              No profiles yet. Create one to start tracking values across reports.
-            </ThemedText>
+            <ThemedText variant="bodyMuted">{t('profiles.empty')}</ThemedText>
           </GlassCard>
         ) : (
           profiles.map((p) => (
@@ -174,7 +169,8 @@ export default function ProfilesScreen() {
                 <View style={styles.profileBody}>
                   <ThemedText variant="h3">{p.name}</ThemedText>
                   <ThemedText variant="caption">
-                    {p.relationship || 'Profile'} · {(p.biomarkers ?? []).length} tracked values
+                    {t(`profiles.relationships.${p.relationship}`, { defaultValue: p.relationship || '' })} ·{' '}
+                    {t('profiles.trackedValues', { count: (p.biomarkers ?? []).length })}
                   </ThemedText>
                 </View>
                 <Pressable onPress={() => openEdit(p)} hitSlop={10}>
@@ -188,7 +184,7 @@ export default function ProfilesScreen() {
 
         {!isFree && (
           <ThemedText variant="caption" style={styles.hint}>
-            Tip: long press a profile to delete it.
+            {t('profiles.longPressHint')}
           </ThemedText>
         )}
       </ScrollView>
@@ -198,13 +194,19 @@ export default function ProfilesScreen() {
         <View style={styles.backdrop}>
           <View style={styles.sheet}>
             <ThemedText variant="h2" style={styles.sheetTitle}>
-              {editing ? 'Edit profile' : 'New profile'}
+              {editing ? t('profiles.editProfile') : t('profiles.newProfile')}
             </ThemedText>
 
-            <Field label="Name" value={name} onChangeText={setName} placeholder="e.g. Emma" autoCapitalize="words" />
+            <Field
+              label={t('profiles.name')}
+              value={name}
+              onChangeText={setName}
+              placeholder={t('profiles.namePlaceholder')}
+              autoCapitalize="words"
+            />
 
             <ThemedText variant="caption" style={styles.groupLabel}>
-              Relationship
+              {t('profiles.relationship')}
             </ThemedText>
             <View style={styles.chips}>
               {RELATIONSHIPS.map((r) => (
@@ -214,14 +216,14 @@ export default function ProfilesScreen() {
                   style={[styles.chip, relationship === r && styles.chipActive]}
                 >
                   <ThemedText variant="caption" style={relationship === r ? styles.chipTextActive : undefined}>
-                    {r}
+                    {t(`profiles.relationships.${r}`, { defaultValue: r })}
                   </ThemedText>
                 </Pressable>
               ))}
             </View>
 
             <ThemedText variant="caption" style={styles.groupLabel}>
-              Color
+              {t('profiles.color')}
             </ThemedText>
             <View style={styles.chips}>
               {PROFILE_COLORS.map((c) => (
@@ -235,12 +237,12 @@ export default function ProfilesScreen() {
 
             <View style={styles.sheetActions}>
               <PrimaryButton
-                title={editing ? 'Save changes' : 'Create profile'}
+                title={editing ? t('profiles.saveChanges') : t('profiles.create')}
                 onPress={onSave}
                 loading={saving}
                 disabled={!name.trim()}
               />
-              <GhostButton title="Cancel" onPress={() => setModalVisible(false)} />
+              <GhostButton title={t('profiles.cancel')} onPress={() => setModalVisible(false)} />
             </View>
           </View>
         </View>

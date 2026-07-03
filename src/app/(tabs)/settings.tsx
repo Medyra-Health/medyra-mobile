@@ -2,13 +2,15 @@ import { useAuth, useUser } from '@clerk/clerk-expo';
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect, useRouter } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
-import { useCallback, useState } from 'react';
-import { Alert, Pressable, ScrollView, StyleSheet } from 'react-native';
+import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Alert, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { GlassCard, Screen, ThemedText } from '@/components/screen';
+import { getStoredLanguage, setLanguage, SUPPORTED_LANGUAGES } from '@/i18n';
 import { useApi } from '@/lib/api';
 import type { Subscription } from '@/lib/types';
-import { colors, spacing } from '@/theme/tokens';
+import { colors, radius, spacing } from '@/theme/tokens';
 
 function Row({
   icon,
@@ -37,13 +39,24 @@ export default function SettingsScreen() {
   const { signOut } = useAuth();
   const api = useApi();
   const router = useRouter();
+  const { t } = useTranslation();
   const [subscription, setSubscription] = useState<Subscription | null>(null);
+  const [languageChoice, setLanguageChoice] = useState('system');
 
   useFocusEffect(
     useCallback(() => {
       api.getSubscription().then(setSubscription).catch(() => {});
     }, [api]),
   );
+
+  useEffect(() => {
+    getStoredLanguage().then(setLanguageChoice);
+  }, []);
+
+  async function onPickLanguage(code: string) {
+    setLanguageChoice(code);
+    await setLanguage(code);
+  }
 
   const email = user?.emailAddresses?.[0]?.emailAddress;
 
@@ -52,90 +65,103 @@ export default function SettingsScreen() {
   }
 
   function onSignOut() {
-    Alert.alert('Sign out', 'Sign out of Medyra on this device?', [
-      { text: 'Cancel', style: 'cancel' },
-      { text: 'Sign out', style: 'destructive', onPress: () => signOut() },
+    Alert.alert(t('settings.signOut'), t('settings.signOutBody'), [
+      { text: t('settings.cancel'), style: 'cancel' },
+      { text: t('settings.signOut'), style: 'destructive', onPress: () => signOut() },
     ]);
   }
 
   function onDeleteAccount() {
-    Alert.alert(
-      'Delete account',
-      'This permanently deletes your account, all reports, and all profiles on web and mobile. This cannot be undone.',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Delete permanently',
-          style: 'destructive',
-          onPress: async () => {
-            try {
-              await user?.delete();
-            } catch {
-              Alert.alert(
-                'Could not delete',
-                'Please try again, or email privacy@medyra.de and we delete your account for you.',
-              );
-            }
-          },
+    Alert.alert(t('settings.deleteTitle'), t('settings.deleteBody'), [
+      { text: t('settings.cancel'), style: 'cancel' },
+      {
+        text: t('settings.deletePermanently'),
+        style: 'destructive',
+        onPress: async () => {
+          try {
+            await user?.delete();
+          } catch {
+            Alert.alert(t('settings.deleteFailed'), t('settings.deleteFailedBody'));
+          }
         },
-      ],
-    );
+      },
+    ]);
   }
 
   return (
     <Screen style={styles.noPadding}>
       <ScrollView contentContainerStyle={styles.scroll}>
         <ThemedText variant="h1" style={styles.title}>
-          Settings
+          {t('settings.title')}
         </ThemedText>
 
         {/* Account */}
         <GlassCard style={styles.card}>
-          <ThemedText variant="label">Account</ThemedText>
+          <ThemedText variant="label">{t('settings.account')}</ThemedText>
           <ThemedText variant="body">{email ?? ''}</ThemedText>
           <ThemedText variant="caption">
             {subscription
               ? subscription.tier === 'free'
-                ? `Free plan · ${subscription.remaining} of ${subscription.usageLimit} reports left this month`
-                : `${subscription.tier.charAt(0).toUpperCase()}${subscription.tier.slice(1)} plan`
+                ? t('settings.freePlanUsage', {
+                    remaining: subscription.remaining,
+                    limit: subscription.usageLimit,
+                  })
+                : t('settings.paidPlan', {
+                    tier: `${subscription.tier.charAt(0).toUpperCase()}${subscription.tier.slice(1)}`,
+                  })
               : ' '}
           </ThemedText>
           {subscription?.tier === 'free' ? (
-            <Row icon="sparkles-outline" label="Upgrade your plan" onPress={() => router.push('/paywall')} />
+            <Row icon="sparkles-outline" label={t('settings.upgrade')} onPress={() => router.push('/paywall')} />
           ) : (
             <Row
               icon="card-outline"
-              label="Manage subscription"
+              label={t('settings.manageSubscription')}
               onPress={() => open('https://medyra.de/dashboard')}
             />
           )}
         </GlassCard>
 
+        {/* Language */}
+        <GlassCard style={styles.card}>
+          <ThemedText variant="label">{t('settings.language')}</ThemedText>
+          <View style={styles.chips}>
+            {SUPPORTED_LANGUAGES.map(({ code, label }) => (
+              <Pressable
+                key={code}
+                onPress={() => onPickLanguage(code)}
+                style={[styles.chip, languageChoice === code && styles.chipActive]}
+              >
+                <ThemedText variant="caption" style={languageChoice === code ? styles.chipTextActive : undefined}>
+                  {code === 'system' ? t('settings.systemLanguage') : label}
+                </ThemedText>
+              </Pressable>
+            ))}
+          </View>
+        </GlassCard>
+
         {/* Legal */}
         <GlassCard style={styles.card}>
-          <ThemedText variant="label">Legal</ThemedText>
-          <Row icon="document-text-outline" label="Privacy Policy" onPress={() => open('https://medyra.de/privacy')} />
-          <Row icon="document-text-outline" label="Terms of Service" onPress={() => open('https://medyra.de/terms')} />
-          <Row icon="business-outline" label="Impressum" onPress={() => open('https://medyra.de/impressum')} />
+          <ThemedText variant="label">{t('settings.legal')}</ThemedText>
+          <Row icon="document-text-outline" label={t('settings.privacy')} onPress={() => open('https://medyra.de/privacy')} />
+          <Row icon="document-text-outline" label={t('settings.terms')} onPress={() => open('https://medyra.de/terms')} />
+          <Row icon="business-outline" label={t('settings.impressum')} onPress={() => open('https://medyra.de/impressum')} />
         </GlassCard>
 
         {/* About */}
         <GlassCard style={styles.card}>
-          <ThemedText variant="label">About</ThemedText>
+          <ThemedText variant="label">{t('settings.about')}</ThemedText>
           <ThemedText variant="bodyMuted" style={styles.aboutText}>
-            Medyra explains medical documents in plain language. We are supported by Potsdam
-            Transfer, the startup service of the University of Potsdam.
+            {t('settings.aboutText')}
           </ThemedText>
-          <ThemedText variant="caption">Made in Germany · medyra.de</ThemedText>
+          <ThemedText variant="caption">{t('settings.madeIn')}</ThemedText>
         </GlassCard>
 
         {/* Danger zone */}
         <GlassCard style={styles.card}>
-          <Row icon="log-out-outline" label="Sign out" onPress={onSignOut} />
-          <Row icon="trash-outline" label="Delete account and all data" onPress={onDeleteAccount} danger />
-          <ThemedText variant="caption">
-            Deletion is immediate and covers web and mobile (GDPR Art. 17).
-          </ThemedText>
+          <Row icon="log-out-outline" label={t('settings.signOut')} onPress={onSignOut} />
+          <Row icon="trash-outline" label={t('settings.deleteAccount')} onPress={onDeleteAccount} danger />
+          <ThemedText variant="caption">{t('settings.deletionNote')}</ThemedText>
         </GlassCard>
       </ScrollView>
     </Screen>
@@ -158,4 +184,14 @@ const styles = StyleSheet.create({
   dangerText: { color: colors.statusCritical },
   pressed: { opacity: 0.7 },
   aboutText: { lineHeight: 21 },
+  chips: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
+  chip: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+    borderRadius: radius.full,
+    borderWidth: 1,
+    borderColor: colors.glassBorderStrong,
+  },
+  chipActive: { backgroundColor: colors.emerald, borderColor: colors.emerald },
+  chipTextActive: { color: '#04120C' },
 });

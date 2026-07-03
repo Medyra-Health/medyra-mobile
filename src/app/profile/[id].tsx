@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   ActivityIndicator,
   Pressable,
@@ -22,6 +23,7 @@ export default function ProfileDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const api = useApi();
   const router = useRouter();
+  const { t } = useTranslation();
   const { width } = useWindowDimensions();
 
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -84,13 +86,10 @@ export default function ProfileDetailScreen() {
         <ScrollView contentContainerStyle={styles.scroll}>
           {/* Trends */}
           <View style={styles.section}>
-            <ThemedText variant="label">Trends</ThemedText>
+            <ThemedText variant="label">{t('profileDetail.trends')}</ThemedText>
             {keys.length === 0 ? (
               <GlassCard>
-                <ThemedText variant="bodyMuted">
-                  No tracked values yet. Save an analyzed report to this profile and its lab values
-                  appear here automatically.
-                </ThemedText>
+                <ThemedText variant="bodyMuted">{t('profileDetail.noValues')}</ThemedText>
               </GlassCard>
             ) : (
               <>
@@ -112,14 +111,14 @@ export default function ProfileDetailScreen() {
                     <ThemedText variant="h3">{currentKey ? biomarkerLabel(currentKey) : ''}</ThemedText>
                     {currentPoints.length > 0 && (
                       <ThemedText variant="caption">
-                        Latest: {currentPoints[currentPoints.length - 1].value}
+                        {t('profileDetail.latest')}: {currentPoints[currentPoints.length - 1].value}
                       </ThemedText>
                     )}
                   </View>
                   <LineChart points={currentPoints} width={width - spacing.lg * 2 - spacing.md * 2} />
                   {currentPoints.length === 1 && (
                     <ThemedText variant="caption" style={styles.singleNote}>
-                      One measurement so far. Upload more reports over time to see the trend.
+                      {t('profileDetail.oneMeasurement')}
                     </ThemedText>
                   )}
                 </GlassCard>
@@ -129,9 +128,9 @@ export default function ProfileDetailScreen() {
 
           {/* Document timeline */}
           <View style={styles.section}>
-            <ThemedText variant="label">Documents</ThemedText>
+            <ThemedText variant="label">{t('profileDetail.documents')}</ThemedText>
             {reports.length === 0 ? (
-              <ThemedText variant="bodyMuted">No documents saved to this profile yet.</ThemedText>
+              <ThemedText variant="bodyMuted">{t('profileDetail.noDocuments')}</ThemedText>
             ) : (
               reports.map((r) => {
                 const exp = parseExplanation(r.explanation);

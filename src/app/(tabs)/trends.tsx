@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 
 import { PrimaryButton } from '@/components/form';
@@ -13,6 +14,7 @@ import { colors, spacing } from '@/theme/tokens';
 export default function TrendsScreen() {
   const api = useApi();
   const router = useRouter();
+  const { t } = useTranslation();
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [refreshing, setRefreshing] = useState(false);
@@ -49,28 +51,25 @@ export default function TrendsScreen() {
       >
         <View>
           <ThemedText variant="h1" style={styles.title}>
-            Trends
+            {t('trends.title')}
           </ThemedText>
-          <ThemedText variant="bodyMuted">Lab values over time, per profile</ThemedText>
+          <ThemedText variant="bodyMuted">{t('trends.subtitle')}</ThemedText>
         </View>
 
         {isFree ? (
           <GlassCard style={styles.upsell}>
             <Ionicons name="trending-up-outline" size={22} color={colors.emerald} />
             <ThemedText variant="h3" style={styles.center}>
-              Trends are part of Personal and Family
+              {t('trends.upsellTitle')}
             </ThemedText>
             <ThemedText variant="bodyMuted" style={styles.center}>
-              A single value means little. The trend across months tells the story.
+              {t('trends.upsellBody')}
             </ThemedText>
-            <PrimaryButton title="See plans" onPress={() => router.push('/paywall')} />
+            <PrimaryButton title={t('profiles.seePlans')} onPress={() => router.push('/paywall')} />
           </GlassCard>
         ) : profiles.length === 0 ? (
           <GlassCard>
-            <ThemedText variant="bodyMuted">
-              Create a health profile first, then save analyzed reports to it. Tracked values show
-              up here.
-            </ThemedText>
+            <ThemedText variant="bodyMuted">{t('trends.empty')}</ThemedText>
           </GlassCard>
         ) : (
           profiles.map((p) => {
@@ -90,7 +89,7 @@ export default function TrendsScreen() {
                     <Ionicons name="chevron-forward" size={18} color={colors.textFaint} />
                   </View>
                   {keys.length === 0 ? (
-                    <ThemedText variant="caption">No tracked values yet</ThemedText>
+                    <ThemedText variant="caption">{t('trends.noValues')}</ThemedText>
                   ) : (
                     <View style={styles.badges}>
                       {keys.slice(0, 6).map((k) => (
@@ -100,7 +99,9 @@ export default function TrendsScreen() {
                           </ThemedText>
                         </View>
                       ))}
-                      {keys.length > 6 && <ThemedText variant="caption">+{keys.length - 6} more</ThemedText>}
+                      {keys.length > 6 && (
+                        <ThemedText variant="caption">{t('trends.more', { count: keys.length - 6 })}</ThemedText>
+                      )}
                     </View>
                   )}
                 </GlassCard>

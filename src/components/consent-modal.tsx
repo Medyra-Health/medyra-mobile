@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Modal, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { GhostButton, PrimaryButton } from '@/components/form';
@@ -41,20 +42,20 @@ export function ConsentModal({
   loading?: boolean;
 }) {
   const [expanded, setExpanded] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <Modal visible={visible} animationType="slide" transparent onRequestClose={onDecline}>
       <View style={styles.backdrop}>
         <View style={styles.sheet}>
           <ScrollView contentContainerStyle={styles.scroll}>
-            <ThemedText variant="h2">Your Health Data, Your Control</ThemedText>
+            <ThemedText variant="h2">{t('consent.title')}</ThemedText>
             <ThemedText variant="caption" style={styles.subtitle}>
-              Required before your first upload · GDPR Art. 9
+              {t('consent.subtitle')}
             </ThemedText>
 
             <ThemedText variant="bodyMuted" style={styles.intro}>
-              To analyze your medical report, Medyra needs to process your health data. Under EU law
-              (GDPR), we must ask for your explicit consent before doing this.
+              {t('consent.intro')}
             </ThemedText>
 
             {POINTS.map(({ icon, title, desc }) => (
@@ -102,11 +103,10 @@ export function ConsentModal({
           </ScrollView>
 
           <View style={styles.actions}>
-            <PrimaryButton title="I consent, process my report" onPress={onAccept} loading={loading} />
-            <GhostButton title="No thanks, I do not consent" onPress={onDecline} />
+            <PrimaryButton title={t('consent.accept')} onPress={onAccept} loading={loading} />
+            <GhostButton title={t('consent.decline')} onPress={onDecline} />
             <ThemedText variant="caption" style={styles.footnote}>
-              Declining means your report will not be uploaded or stored. You can change this
-              decision at any time.
+              {t('consent.footnote')}
             </ThemedText>
           </View>
         </View>

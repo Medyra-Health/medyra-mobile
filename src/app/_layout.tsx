@@ -16,9 +16,11 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 
+import { loadStoredLanguage } from '@/i18n';
 import { colors } from '@/theme/tokens';
 
 SplashScreen.preventAutoHideAsync();
+loadStoredLanguage();
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({

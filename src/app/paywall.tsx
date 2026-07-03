@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Stack, useRouter } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
+import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { GhostButton, PrimaryButton } from '@/components/form';
@@ -8,30 +9,28 @@ import { GlassCard, Screen, ThemedText } from '@/components/screen';
 import { colors, spacing } from '@/theme/tokens';
 
 // NOTE Phase 5: native purchases via RevenueCat replace the web checkout link.
-// That requires an EAS development build (react-native-purchases has native code)
-// plus RevenueCat, App Store Connect, and Play Console products. Until then we
-// route to the existing Stripe web checkout, which unlocks mobile too because
-// entitlement lives in the shared backend.
-
-const TIERS = [
-  {
-    name: 'Personal',
-    price: '4.99 EUR / month',
-    features: ['20 reports per month', '2 health profiles', 'Trends over time', 'Full PDF export'],
-  },
-  {
-    name: 'Family',
-    price: '9.99 EUR / month',
-    features: ['50 reports per month', 'Up to 5 member profiles', 'Shared family health history', 'Priority support'],
-  },
-];
+// See PHASE5-REVENUECAT.md for the full plan and backend entitlement spec.
 
 export default function PaywallScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
 
   async function openWebPricing() {
     await WebBrowser.openBrowserAsync('https://medyra.de/pricing');
   }
+
+  const tiers = [
+    {
+      name: 'Personal',
+      price: t('paywall.personalPrice'),
+      features: t('paywall.personalFeatures', { returnObjects: true }) as string[],
+    },
+    {
+      name: 'Family',
+      price: t('paywall.familyPrice'),
+      features: t('paywall.familyFeatures', { returnObjects: true }) as string[],
+    },
+  ];
 
   return (
     <Screen style={styles.noPadding}>
@@ -42,13 +41,11 @@ export default function PaywallScreen() {
             <Ionicons name="close" size={22} color={colors.text} />
           </Pressable>
           <ThemedText variant="label">Medyra</ThemedText>
-          <ThemedText variant="h1">More clarity for you and your family</ThemedText>
-          <ThemedText variant="bodyMuted">
-            One subscription works everywhere: web, iPhone, and Android.
-          </ThemedText>
+          <ThemedText variant="h1">{t('paywall.headline')}</ThemedText>
+          <ThemedText variant="bodyMuted">{t('paywall.subtitle')}</ThemedText>
         </View>
 
-        {TIERS.map((tier) => (
+        {tiers.map((tier) => (
           <GlassCard key={tier.name} style={styles.tier}>
             <ThemedText variant="h2">{tier.name}</ThemedText>
             <ThemedText variant="bodyMuted" style={styles.price}>
@@ -66,11 +63,10 @@ export default function PaywallScreen() {
         ))}
 
         <View style={styles.actions}>
-          <PrimaryButton title="Continue on medyra.de" onPress={openWebPricing} />
-          <GhostButton title="Maybe later" onPress={() => router.back()} />
+          <PrimaryButton title={t('paywall.continueWeb')} onPress={openWebPricing} />
+          <GhostButton title={t('paywall.maybeLater')} onPress={() => router.back()} />
           <ThemedText variant="caption" style={styles.note}>
-            Subscriptions are managed on medyra.de for now. Your plan unlocks the app automatically
-            with the same account. Cancel anytime.
+            {t('paywall.note')}
           </ThemedText>
         </View>
       </ScrollView>
