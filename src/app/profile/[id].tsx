@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     borderColor: colors.glassBorderStrong,
   },
   chipActive: { backgroundColor: colors.emerald, borderColor: colors.emerald },
-  chipTextActive: { color: '#04120C' },
+  chipTextActive: { color: '#FFFFFF' },
   chartHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',

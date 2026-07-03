@@ -58,7 +58,9 @@
     "couldNotLoad": "Bericht konnte nicht geladen werden",
     "goBack": "Zurück",
     "couldNotAssign": "Zuordnung fehlgeschlagen",
-    "sharedFooter": "Erklärt mit Medyra. Keine medizinische Beratung."
+    "sharedFooter": "Erklärt mit Medyra. Keine medizinische Beratung.",
+    "questionsForDoctor": "Fragen an Ihre Ärztin oder Ihren Arzt",
+    "nextSteps": "Empfohlene nächste Schritte"
   },
   "profiles": {
     "title": "Profile",
@@ -101,6 +103,39 @@
     "empty": "Erstellen Sie zuerst ein Gesundheitsprofil und speichern Sie analysierte Berichte darin. Erfasste Werte erscheinen hier.",
     "noValues": "Noch keine erfassten Werte",
     "more": "+{{count}} weitere"
+  },
+  "prep": {
+    "title": "Arztbesuch",
+    "subtitle": "Beschreiben Sie in Ihrer Sprache, wie Sie sich fühlen. Wir machen daraus eine strukturierte deutsche Zusammenfassung für Ihre Ärztin oder Ihren Arzt.",
+    "inputLabel": "Wie fühlen Sie sich?",
+    "inputPlaceholder": "Beschreiben Sie Ihre Beschwerden, Fragen oder Situation in eigenen Worten...",
+    "profileLabel": "Gesundheitsprofil anhängen (optional)",
+    "noProfile": "Keins",
+    "generate": "Arzt Zusammenfassung erstellen",
+    "generating": "Ihre Zusammenfassung wird erstellt",
+    "yourSummary": "Ihre Zusammenfassung",
+    "share": "Teilen",
+    "newSummary": "Neue Zusammenfassung",
+    "tooShort": "Bitte beschreiben Sie Ihre Situation etwas ausführlicher.",
+    "limitTitle": "Monatliches Limit erreicht",
+    "limitBody": "Ihr Tarif enthält eine begrenzte Anzahl an Arzt Zusammenfassungen pro Monat. Upgraden Sie für mehr.",
+    "failed": "Zusammenfassung konnte nicht erstellt werden",
+    "printNote": "Zeigen Sie diese Zusammenfassung zu Beginn des Termins Ihrer Ärztin oder Ihrem Arzt."
+  },
+  "learn": {
+    "title": "Wissen",
+    "blog": "Gesundheitsblog",
+    "blogDesc": "Verständliche Guides zu Laborwerten und Befunden",
+    "lexikon": "Laborwerte Lexikon",
+    "lexikonDesc": "46 Laborwerte einfach erklärt"
+  },
+  "features": {
+    "prep": "Arztbesuch",
+    "prepDesc": "Vorbereitet ankommen",
+    "profiles": "Profile",
+    "profilesDesc": "Familien Gesundheitsarchiv",
+    "trends": "Trends",
+    "trendsDesc": "Werte im Verlauf"
   },
   "paywall": {
     "headline": "Mehr Klarheit für Sie und Ihre Familie",

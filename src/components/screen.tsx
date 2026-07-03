@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     width: 420,
     height: 320,
     borderRadius: 210,
-    backgroundColor: 'rgba(16, 185, 129, 0.07)',
+    backgroundColor: 'rgba(16, 185, 129, 0.08)',
   },
   content: {
     flex: 1,
@@ -60,5 +60,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: radius.md,
     padding: spacing.md,
+    shadowColor: '#0B1F17',
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 2,
   },
 });

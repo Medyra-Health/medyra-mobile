@@ -169,6 +169,70 @@ export default function ReportScreen() {
             </View>
           )}
 
+          {/* Document sections (doctor letters, prescriptions, insurance letters) */}
+          {(exp.sections ?? []).length > 0 && (
+            <View style={styles.section}>
+              {(exp.sections ?? []).map((section, i) => (
+                <GlassCard key={`${section.title}-${i}`} style={styles.testCard}>
+                  <ThemedText variant="h3" style={styles.testName}>
+                    {section.title}
+                  </ThemedText>
+                  {section.content ? (
+                    <ThemedText variant="bodyMuted" style={styles.interpretation}>
+                      {section.content}
+                    </ThemedText>
+                  ) : null}
+                  {(section.items ?? []).map((item, j) => (
+                    <View key={j} style={styles.bulletRow}>
+                      <ThemedText variant="bodyMuted" style={styles.bullet}>
+                        ·
+                      </ThemedText>
+                      <ThemedText variant="bodyMuted" style={styles.bulletText}>
+                        {item}
+                      </ThemedText>
+                    </View>
+                  ))}
+                </GlassCard>
+              ))}
+            </View>
+          )}
+
+          {/* Questions for the doctor */}
+          {(exp.questionsForDoctor ?? []).length > 0 && (
+            <View style={styles.section}>
+              <ThemedText variant="label">{t('report.questionsForDoctor')}</ThemedText>
+              <GlassCard>
+                {(exp.questionsForDoctor ?? []).map((q, i) => (
+                  <View key={i} style={styles.bulletRow}>
+                    <ThemedText variant="bodyMuted" style={styles.bullet}>
+                      {i + 1}.
+                    </ThemedText>
+                    <ThemedText variant="bodyMuted" style={styles.bulletText}>
+                      {q}
+                    </ThemedText>
+                  </View>
+                ))}
+              </GlassCard>
+            </View>
+          )}
+
+          {/* Next steps */}
+          {(exp.nextSteps ?? []).length > 0 && (
+            <View style={styles.section}>
+              <ThemedText variant="label">{t('report.nextSteps')}</ThemedText>
+              <GlassCard>
+                {(exp.nextSteps ?? []).map((s, i) => (
+                  <View key={i} style={styles.bulletRow}>
+                    <Ionicons name="checkmark-circle-outline" size={15} color={colors.emerald} style={styles.bulletIcon} />
+                    <ThemedText variant="bodyMuted" style={styles.bulletText}>
+                      {s}
+                    </ThemedText>
+                  </View>
+                ))}
+              </GlassCard>
+            </View>
+          )}
+
           {/* Assign to profile */}
           <View style={styles.section}>
             <ThemedText variant="label">{t('report.healthProfile')}</ThemedText>
@@ -245,6 +309,10 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
   },
   interpretation: { marginTop: spacing.sm, fontSize: 14, lineHeight: 21 },
+  bulletRow: { flexDirection: 'row', gap: spacing.sm, marginTop: spacing.xs, alignItems: 'flex-start' },
+  bullet: { fontSize: 14, lineHeight: 21 },
+  bulletIcon: { marginTop: 3 },
+  bulletText: { flex: 1, fontSize: 14, lineHeight: 21 },
   assignRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
   assignName: { flex: 1 },
   assignOption: {

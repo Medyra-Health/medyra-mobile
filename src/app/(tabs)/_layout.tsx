@@ -23,7 +23,7 @@ export default function TabsLayout() {
         tabBarActiveTintColor: colors.emerald,
         tabBarInactiveTintColor: colors.textFaint,
         tabBarStyle: {
-          backgroundColor: colors.background,
+          backgroundColor: colors.surface,
           borderTopColor: colors.glassBorder,
           borderTopWidth: 1,
         },
@@ -39,6 +39,13 @@ export default function TabsLayout() {
         options={{
           title: t('tabs.home'),
           tabBarIcon: ({ color, size }) => <Ionicons name="home-outline" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="prep"
+        options={{
+          title: t('features.prep'),
+          tabBarIcon: ({ color, size }) => <Ionicons name="medkit-outline" size={size} color={color} />,
         }}
       />
       <Tabs.Screen

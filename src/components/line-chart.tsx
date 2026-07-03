@@ -62,13 +62,13 @@ export function LineChart({
         {points.map((p, i) => (
           <Circle key={i} cx={x(i)} cy={y(p.value)} r={4} fill={dotColor(p.flag)} />
         ))}
-        <SvgText x={pad.left} y={height - 8} fill="rgba(232,245,240,0.4)" fontSize="10">
+        <SvgText x={pad.left} y={height - 8} fill="rgba(11,31,23,0.45)" fontSize="10">
           {shortDate(points[0].date)}
         </SvgText>
-        <SvgText x={width - pad.right} y={height - 8} fill="rgba(232,245,240,0.4)" fontSize="10" textAnchor="end">
+        <SvgText x={width - pad.right} y={height - 8} fill="rgba(11,31,23,0.45)" fontSize="10" textAnchor="end">
           {shortDate(points[points.length - 1].date)}
         </SvgText>
-        <SvgText x={pad.left} y={12} fill="rgba(232,245,240,0.4)" fontSize="10">
+        <SvgText x={pad.left} y={12} fill="rgba(11,31,23,0.45)" fontSize="10">
           {String(max)}
         </SvgText>
       </Svg>

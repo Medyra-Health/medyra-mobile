@@ -9,10 +9,20 @@ export type ExplanationTest = {
   interpretation: string;
 };
 
+export type ExplanationSection = {
+  title: string;
+  content?: string;
+  items?: string[];
+};
+
 export type Explanation = {
   inShort?: string;
   summary: string;
   tests: ExplanationTest[];
+  sections?: ExplanationSection[];
+  questionsForDoctor?: string[];
+  nextSteps?: string[];
+  docType?: string;
 };
 
 export type Report = {
@@ -63,10 +73,18 @@ export type AnalyzeResult = {
 /** The API stores explanation as JSON or string. Always parse defensively. */
 export function parseExplanation(raw: Explanation | string | undefined | null): Explanation {
   if (!raw) return { summary: '', tests: [] };
-  if (typeof raw === 'object') return { summary: raw.summary ?? '', tests: raw.tests ?? [], inShort: raw.inShort };
+  const norm = (p: any): Explanation => ({
+    summary: p.summary ?? '',
+    tests: Array.isArray(p.tests) ? p.tests : [],
+    sections: Array.isArray(p.sections) ? p.sections : [],
+    questionsForDoctor: Array.isArray(p.questionsForDoctor) ? p.questionsForDoctor : [],
+    nextSteps: Array.isArray(p.nextSteps) ? p.nextSteps : [],
+    inShort: p.inShort,
+    docType: p.docType,
+  });
+  if (typeof raw === 'object') return norm(raw);
   try {
-    const parsed = JSON.parse(raw);
-    return { summary: parsed.summary ?? '', tests: parsed.tests ?? [], inShort: parsed.inShort };
+    return norm(JSON.parse(raw));
   } catch {
     return { summary: String(raw), tests: [] };
   }

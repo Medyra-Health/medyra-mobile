@@ -81,6 +81,13 @@ export function createApi(getToken: TokenGetter) {
       request<{ success: boolean }>(getToken, `/profiles?id=${encodeURIComponent(id)}`, { method: 'DELETE' }),
 
     getSubscription: () => request<Subscription>(getToken, '/subscription'),
+
+    generatePrep: (input: string, locale: string, profileId?: string) =>
+      request<{ success: boolean; output: string; tier: string }>(getToken, '/prep', {
+        method: 'POST',
+        ...jsonBody({ input, locale, ...(profileId ? { profileId } : {}) }),
+      }),
+    getPrepUsage: () => request<{ used?: number; limit?: number | null }>(getToken, '/prep'),
   };
 }
 

@@ -1,26 +1,29 @@
 /**
  * Medyra design tokens. Single source of truth for all styling.
- * Matches the web brand exactly: dark, premium, calm.
+ * Matches the current web brand: light, bright, clinical premium,
+ * emerald accents, Playfair Display headings, DM Sans body.
  */
 
 export const colors = {
-  /** App background */
-  background: '#040C08',
-  /** Slightly lifted surface for cards and sheets */
-  surface: '#08130D',
+  /** App background: soft mint white, like the web dashboard */
+  background: '#F7FBF9',
+  /** Card and sheet surface */
+  surface: '#FFFFFF',
   /** Accent emerald */
   emerald: '#10B981',
   emeraldLight: '#34D399',
   emeraldDeep: '#059669',
-  /** Primary text */
-  text: '#E8F5F0',
-  /** Muted text at common opacities */
-  textMuted: 'rgba(232, 245, 240, 0.6)',
-  textFaint: 'rgba(232, 245, 240, 0.4)',
-  /** Glass surfaces: translucent emerald tinted */
-  glassFill: 'rgba(16, 185, 129, 0.04)',
-  glassBorder: 'rgba(16, 185, 129, 0.08)',
-  glassBorderStrong: 'rgba(16, 185, 129, 0.22)',
+  /** Primary text: deep green black, like web headings */
+  text: '#0B1F17',
+  /** Muted text */
+  textMuted: 'rgba(11, 31, 23, 0.62)',
+  textFaint: 'rgba(11, 31, 23, 0.42)',
+  /** Card surfaces: white with soft emerald tinted borders */
+  glassFill: '#FFFFFF',
+  glassBorder: 'rgba(16, 185, 129, 0.16)',
+  glassBorderStrong: 'rgba(16, 185, 129, 0.38)',
+  /** Soft mint fill for secondary surfaces */
+  mint: '#F3FAF6',
   /** Semantic status, used only for lab value states */
   statusNormal: '#10B981',
   statusElevated: '#F97316',
@@ -67,6 +70,6 @@ export const typography = {
     lineHeight: 14,
     letterSpacing: 1.5,
     textTransform: 'uppercase' as const,
-    color: colors.emerald,
+    color: colors.emeraldDeep,
   },
 } as const;

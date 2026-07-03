@@ -2,6 +2,7 @@ import { useUser } from '@clerk/clerk-expo';
 import { Ionicons } from '@expo/vector-icons';
 import * as DocumentPicker from 'expo-document-picker';
 import * as ImagePicker from 'expo-image-picker';
+import * as WebBrowser from 'expo-web-browser';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -195,6 +196,29 @@ export default function HomeScreen() {
           </View>
         </GlassCard>
 
+        {/* Feature grid */}
+        <View style={styles.featureRow}>
+          {[
+            { icon: 'medkit-outline' as const, title: t('features.prep'), desc: t('features.prepDesc'), href: '/(tabs)/prep' as const },
+            { icon: 'people-outline' as const, title: t('features.profiles'), desc: t('features.profilesDesc'), href: '/(tabs)/profiles' as const },
+            { icon: 'trending-up-outline' as const, title: t('features.trends'), desc: t('features.trendsDesc'), href: '/(tabs)/trends' as const },
+          ].map(({ icon, title, desc, href }) => (
+            <Pressable
+              key={title}
+              onPress={() => router.push(href)}
+              style={({ pressed }) => [styles.featureCard, pressed && styles.actionPressed]}
+            >
+              <Ionicons name={icon} size={20} color={colors.emerald} />
+              <ThemedText variant="caption" style={styles.featureTitle}>
+                {title}
+              </ThemedText>
+              <ThemedText variant="caption" style={styles.featureDesc} numberOfLines={2}>
+                {desc}
+              </ThemedText>
+            </Pressable>
+          ))}
+        </View>
+
         {/* Recent reports */}
         <View style={styles.section}>
           <ThemedText variant="h3">{t('home.recentReports')}</ThemedText>
@@ -231,6 +255,32 @@ export default function HomeScreen() {
               );
             })
           )}
+        </View>
+
+        {/* Learn: blog + lexikon */}
+        <View style={styles.section}>
+          <ThemedText variant="h3">{t('learn.title')}</ThemedText>
+          {[
+            { icon: 'newspaper-outline' as const, title: t('learn.blog'), desc: t('learn.blogDesc'), url: 'https://medyra.de/blog' },
+            { icon: 'book-outline' as const, title: t('learn.lexikon'), desc: t('learn.lexikonDesc'), url: 'https://medyra.de/lexikon' },
+          ].map(({ icon, title, desc, url }) => (
+            <Pressable
+              key={title}
+              onPress={() => WebBrowser.openBrowserAsync(url)}
+              style={({ pressed }) => pressed && styles.actionPressed}
+            >
+              <GlassCard style={styles.learnCard}>
+                <Ionicons name={icon} size={20} color={colors.emerald} />
+                <View style={styles.learnBody}>
+                  <ThemedText variant="h3" style={styles.learnTitle}>
+                    {title}
+                  </ThemedText>
+                  <ThemedText variant="caption">{desc}</ThemedText>
+                </View>
+                <Ionicons name="open-outline" size={16} color={colors.textFaint} />
+              </GlassCard>
+            </Pressable>
+          ))}
         </View>
 
         <WellnessDisclaimer />
@@ -283,6 +333,22 @@ const styles = StyleSheet.create({
   actionPressed: { opacity: 0.7 },
   actionLabel: { color: colors.text },
   section: { gap: spacing.sm },
+  featureRow: { flexDirection: 'row', gap: spacing.sm },
+  featureCard: {
+    flex: 1,
+    gap: 4,
+    padding: spacing.md,
+    borderRadius: radius.sm,
+    borderWidth: 1,
+    borderColor: colors.glassBorder,
+    backgroundColor: colors.surface,
+    minHeight: 92,
+  },
+  featureTitle: { color: colors.text, fontFamily: 'DMSans_600SemiBold', fontSize: 13 },
+  featureDesc: { fontSize: 11, lineHeight: 14 },
+  learnCard: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, marginTop: spacing.xs },
+  learnBody: { flex: 1, gap: 2 },
+  learnTitle: { fontSize: 15 },
   empty: { marginTop: spacing.xs },
   reportCard: { marginTop: spacing.sm },
   reportRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
@@ -291,7 +357,7 @@ const styles = StyleSheet.create({
   reportDate: { marginTop: 2 },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(4, 12, 8, 0.92)',
+    backgroundColor: 'rgba(247, 251, 249, 0.96)',
     alignItems: 'center',
     justifyContent: 'center',
     gap: spacing.sm,

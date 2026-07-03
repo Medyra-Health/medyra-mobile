@@ -58,7 +58,9 @@
     "couldNotLoad": "Could not load report",
     "goBack": "Go back",
     "couldNotAssign": "Could not assign",
-    "sharedFooter": "Explained with Medyra. Not medical advice."
+    "sharedFooter": "Explained with Medyra. Not medical advice.",
+    "questionsForDoctor": "Questions for your doctor",
+    "nextSteps": "Suggested next steps"
   },
   "profiles": {
     "title": "Profiles",
@@ -101,6 +103,39 @@
     "empty": "Create a health profile first, then save analyzed reports to it. Tracked values show up here.",
     "noValues": "No tracked values yet",
     "more": "+{{count}} more"
+  },
+  "prep": {
+    "title": "Doctor Visit",
+    "subtitle": "Describe how you feel in any language. We turn it into a structured German summary your doctor can read in seconds.",
+    "inputLabel": "How do you feel?",
+    "inputPlaceholder": "Describe your symptoms, questions, or situation in your own words...",
+    "profileLabel": "Attach a health profile (optional)",
+    "noProfile": "None",
+    "generate": "Create doctor summary",
+    "generating": "Preparing your summary",
+    "yourSummary": "Your summary",
+    "share": "Share",
+    "newSummary": "New summary",
+    "tooShort": "Please describe your situation in a bit more detail.",
+    "limitTitle": "Monthly limit reached",
+    "limitBody": "Your plan includes a limited number of doctor summaries per month. Upgrade for more.",
+    "failed": "Could not create the summary",
+    "printNote": "Show this summary to your doctor at the start of your visit."
+  },
+  "learn": {
+    "title": "Learn",
+    "blog": "Health blog",
+    "blogDesc": "Plain language guides to lab values and reports",
+    "lexikon": "Laborwerte Lexikon",
+    "lexikonDesc": "46 lab values explained in German"
+  },
+  "features": {
+    "prep": "Doctor Visit",
+    "prepDesc": "Arrive prepared",
+    "profiles": "Profiles",
+    "profilesDesc": "Family health vault",
+    "trends": "Trends",
+    "trendsDesc": "Values over time"
   },
   "paywall": {
     "headline": "More clarity for you and your family",
