@@ -32,4 +32,6 @@ Official Medyra app (iOS + Android), Expo SDK 54 (pinned to the user's Expo Go, 
 4. EAS submit config once store accounts exist; listing drafts ready in `store/metadata.md`.
 
 ## Fixed issues log
+- Analysis prompt was lab-only; backend now classifies docType and returns sections for letters/prescriptions/insurance (web commit bf60f04); mobile renders sections + questions + next steps (2026-07-03).
+- App rethemed LIGHT to match web (tokens.ts is the source); dark splash kept as brand moment. Doctor Visit prep tab + dashboard home + Learn links added (commit 6b3c31c).
 - ExpoCryptoAES crash in Expo Go: Clerk pulled SDK 57 expo-crypto/expo-auth-session; pinned both to SDK 54 top-level so npm dedupes (2026-07-03).
