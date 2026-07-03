@@ -19,6 +19,8 @@
     "verificationCode": "Verification code",
     "verifyContinue": "Verify and continue",
     "signInFailed": "Sign in failed. Please check your details.",
+    "continueWith": "Continue with {{provider}}",
+    "or": "or",
     "signUpFailed": "Sign up failed. Please try again.",
     "invalidCode": "Invalid code. Please try again."
   },

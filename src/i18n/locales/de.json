@@ -19,6 +19,8 @@
     "verificationCode": "Bestätigungscode",
     "verifyContinue": "Bestätigen und weiter",
     "signInFailed": "Anmeldung fehlgeschlagen. Bitte prüfen Sie Ihre Angaben.",
+    "continueWith": "Weiter mit {{provider}}",
+    "or": "oder",
     "signUpFailed": "Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut.",
     "invalidCode": "Ungültiger Code. Bitte versuchen Sie es erneut."
   },

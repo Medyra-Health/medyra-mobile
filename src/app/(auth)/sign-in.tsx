@@ -6,6 +6,7 @@ import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 're
 
 import { Field, PrimaryButton } from '@/components/form';
 import { Screen, ThemedText } from '@/components/screen';
+import { SocialAuthButtons } from '@/components/social-auth';
 import { spacing } from '@/theme/tokens';
 
 export default function SignInScreen() {
@@ -45,6 +46,8 @@ export default function SignInScreen() {
             <ThemedText variant="h1">{t('auth.welcomeBack')}</ThemedText>
             <ThemedText variant="bodyMuted">{t('auth.signInSubtitle')}</ThemedText>
           </View>
+
+          <SocialAuthButtons onError={setError} />
 
           <Field
             label={t('auth.email')}

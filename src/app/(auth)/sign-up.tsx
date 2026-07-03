@@ -6,6 +6,7 @@ import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 're
 
 import { Field, PrimaryButton } from '@/components/form';
 import { Screen, ThemedText } from '@/components/screen';
+import { SocialAuthButtons } from '@/components/social-auth';
 import { spacing } from '@/theme/tokens';
 
 export default function SignUpScreen() {
@@ -64,6 +65,8 @@ export default function SignUpScreen() {
                 <ThemedText variant="h1">{t('auth.createYourAccount')}</ThemedText>
                 <ThemedText variant="bodyMuted">{t('auth.signUpSubtitle')}</ThemedText>
               </View>
+
+              <SocialAuthButtons onError={setError} />
 
               <Field
                 label={t('auth.email')}
