@@ -26,7 +26,10 @@ Official Medyra app (iOS + Android), Expo SDK 54 (pinned to the user's Expo Go, 
 - npm needs legacy peer deps: `npx expo install --fix -- --legacy-peer-deps` (run from Git Bash; PowerShell eats the `--`).
 
 ## Next actions (in order)
-1. User verifies Phases 1-4 on device (sign in with existing account, upload a test document, create profile, assign, view trend).
-2. i18n: import web `messages/*.json` locales with i18next (deferred; UI is English-only right now).
-3. RevenueCat (needs user accounts + EAS build + approved backend entitlement spec).
-4. Store listing metadata drafts (DE + EN), EAS submit config.
+1. User verifies the full loop on device (sign in with existing account, upload a test document, create profile, assign, view trend, switch language in Settings).
+2. RevenueCat: see PHASE5-REVENUECAT.md — blocked on owner accounts (Apple Developer, Play Console, RevenueCat) + `eas login` + approved backend webhook spec.
+3. Additional locales beyond EN/DE in `src/i18n/locales/` (copy the en.json key structure).
+4. EAS submit config once store accounts exist; listing drafts ready in `store/metadata.md`.
+
+## Fixed issues log
+- ExpoCryptoAES crash in Expo Go: Clerk pulled SDK 57 expo-crypto/expo-auth-session; pinned both to SDK 54 top-level so npm dedupes (2026-07-03).
