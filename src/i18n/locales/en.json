@@ -1,5 +1,10 @@
 {
-  "tabs": { "home": "Home", "profiles": "Profiles", "trends": "Trends", "settings": "Settings" },
+  "tabs": {
+    "home": "Home",
+    "profiles": "Profiles",
+    "trends": "Trends",
+    "settings": "Settings"
+  },
   "auth": {
     "welcomeBack": "Welcome back",
     "signInSubtitle": "Sign in with your Medyra account.",
@@ -44,7 +49,12 @@
     "notNow": "Not now",
     "seePlans": "See plans",
     "analysisFailed": "Analysis failed",
-    "tryAgain": "Please try again."
+    "tryAgain": "Please try again.",
+    "docTypeAuto": "Detect automatically",
+    "docTypeLab": "Lab report",
+    "docTypeLetter": "Doctor letter",
+    "docTypeMedication": "Medication plan",
+    "docTypeInsurance": "Insurance letter"
   },
   "report": {
     "inShort": "In short",
@@ -60,7 +70,22 @@
     "couldNotAssign": "Could not assign",
     "sharedFooter": "Explained with Medyra. Not medical advice.",
     "questionsForDoctor": "Questions for your doctor",
-    "nextSteps": "Suggested next steps"
+    "nextSteps": "Suggested next steps",
+    "shareTitle": "Share this explanation",
+    "shareBody": "A secure link shows only the explanation and expires after 7 days. Text copies a short summary.",
+    "shareAsLink": "Share secure link",
+    "shareAsText": "Share as text",
+    "shareCancel": "Cancel",
+    "shareLinkText": "My Medyra explanation (link expires in 7 days):",
+    "shareLinkFailed": "Could not create the link",
+    "reminderTitle": "Recheck reminder",
+    "reminderDesc": "We email you when it is time to check your values again, so you can compare old and new.",
+    "reminder_4w": "In 4 weeks",
+    "reminder_3m": "In 3 months",
+    "reminder_6m": "In 6 months",
+    "reminderActive": "We will email you on {{date}}.",
+    "reminderCancel": "Cancel reminder",
+    "reminderFailed": "Could not set the reminder"
   },
   "profiles": {
     "title": "Profiles",
@@ -85,7 +110,13 @@
     "saveChanges": "Save changes",
     "create": "Create profile",
     "longPressHint": "Tip: long press a profile to delete it.",
-    "relationships": { "Me": "Me", "Partner": "Partner", "Child": "Child", "Parent": "Parent", "Other": "Other" }
+    "relationships": {
+      "Me": "Me",
+      "Partner": "Partner",
+      "Child": "Child",
+      "Parent": "Parent",
+      "Other": "Other"
+    }
   },
   "profileDetail": {
     "trends": "Trends",
@@ -135,7 +166,9 @@
     "profiles": "Profiles",
     "profilesDesc": "Family health vault",
     "trends": "Trends",
-    "trendsDesc": "Values over time"
+    "trendsDesc": "Values over time",
+    "check": "Value check",
+    "checkDesc": "Is a single value in the usual range?"
   },
   "paywall": {
     "headline": "More clarity for you and your family",
@@ -146,8 +179,18 @@
     "maybeLater": "Maybe later",
     "note": "Subscriptions are managed on medyra.de for now. Your plan unlocks the app automatically with the same account. Cancel anytime.",
     "storeNote": "Paid plans are currently not available for purchase in the app. If your Medyra account already has a plan, it is active here automatically.",
-    "personalFeatures": ["20 reports per month", "2 health profiles", "Trends over time", "Full PDF export"],
-    "familyFeatures": ["50 reports per month", "Up to 5 member profiles", "Shared family health history", "Priority support"]
+    "personalFeatures": [
+      "20 reports per month",
+      "2 health profiles",
+      "Trends over time",
+      "Full PDF export"
+    ],
+    "familyFeatures": [
+      "50 reports per month",
+      "Up to 5 member profiles",
+      "Shared family health history",
+      "Priority support"
+    ]
   },
   "settings": {
     "title": "Settings",
@@ -184,5 +227,29 @@
     "decline": "No thanks, I do not consent",
     "footnote": "Declining means your report will not be uploaded or stored. You can change this decision at any time."
   },
-  "disclaimer": "Medyra is an educational tool that explains medical terminology: it does not provide medical advice, diagnoses, or treatment recommendations. Always consult your licensed physician before making any health decisions. Your data is handled in compliance with GDPR and automatically deleted after 30 days."
+  "disclaimer": "Medyra is an educational tool that explains medical terminology: it does not provide medical advice, diagnoses, or treatment recommendations. Always consult your licensed physician before making any health decisions. Your data is handled in compliance with GDPR and automatically deleted after 30 days.",
+  "check": {
+    "title": "Value check",
+    "subtitle": "Pick a value and type your number to see how it compares to the usual range. Nothing is stored.",
+    "searchPlaceholder": "Search value, e.g. TSH, Ferritin",
+    "valuePlaceholder": "Your value, e.g. 5.2",
+    "popular": "Popular",
+    "status": {
+      "low": "Below the usual range",
+      "normal": "In the usual range",
+      "elevated": "Above the usual range",
+      "high": "Well above the usual range"
+    },
+    "usualRange": "Usual range",
+    "learnMore": "More about {{value}}",
+    "enterValue": "Enter your {{value}} value in {{unit}} to see how it compares.",
+    "rangeNote": "General information based on usual adult reference ranges. Your lab may use different ranges; the range on your report applies. Please discuss your values with your doctor."
+  },
+  "referral": {
+    "title": "Invite friends",
+    "description": "Share your link. You and your friend each get 1 extra free report per month.",
+    "shareButton": "Share my invite link",
+    "shareText": "We explain medical reports in plain language. With my link we both get an extra free report:",
+    "stats": "{{count}} invited, +{{bonus}} bonus reports"
+  }
 }

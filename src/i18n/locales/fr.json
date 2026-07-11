@@ -1,5 +1,10 @@
 {
-  "tabs": { "home": "Accueil", "profiles": "Profils", "trends": "Évolution", "settings": "Réglages" },
+  "tabs": {
+    "home": "Accueil",
+    "profiles": "Profils",
+    "trends": "Évolution",
+    "settings": "Réglages"
+  },
   "auth": {
     "welcomeBack": "Bon retour",
     "signInSubtitle": "Connectez vous avec votre compte Medyra.",
@@ -44,7 +49,12 @@
     "notNow": "Pas maintenant",
     "seePlans": "Voir les formules",
     "analysisFailed": "Échec de l'analyse",
-    "tryAgain": "Veuillez réessayer."
+    "tryAgain": "Veuillez réessayer.",
+    "docTypeAuto": "Détecter automatiquement",
+    "docTypeLab": "Analyse de laboratoire",
+    "docTypeLetter": "Courrier médical",
+    "docTypeMedication": "Plan de médication",
+    "docTypeInsurance": "Courrier d’assurance"
   },
   "report": {
     "inShort": "En bref",
@@ -60,7 +70,22 @@
     "couldNotAssign": "Attribution impossible",
     "sharedFooter": "Expliqué avec Medyra. Pas un avis médical.",
     "questionsForDoctor": "Questions pour votre médecin",
-    "nextSteps": "Prochaines étapes suggérées"
+    "nextSteps": "Prochaines étapes suggérées",
+    "shareTitle": "Partager cette explication",
+    "shareBody": "Un lien sécurisé montre uniquement l’explication et expire après 7 jours. En texte, un court résumé est partagé.",
+    "shareAsLink": "Partager le lien sécurisé",
+    "shareAsText": "Partager en texte",
+    "shareCancel": "Annuler",
+    "shareLinkText": "Mon explication Medyra (le lien expire dans 7 jours) :",
+    "shareLinkFailed": "Impossible de créer le lien",
+    "reminderTitle": "Rappel de contrôle",
+    "reminderDesc": "Nous vous envoyons un e-mail quand il est temps de revérifier vos valeurs, pour comparer anciennes et nouvelles.",
+    "reminder_4w": "Dans 4 semaines",
+    "reminder_3m": "Dans 3 mois",
+    "reminder_6m": "Dans 6 mois",
+    "reminderActive": "Nous vous écrirons le {{date}}.",
+    "reminderCancel": "Annuler le rappel",
+    "reminderFailed": "Impossible de créer le rappel"
   },
   "profiles": {
     "title": "Profils",
@@ -85,7 +110,13 @@
     "saveChanges": "Enregistrer les modifications",
     "create": "Créer le profil",
     "longPressHint": "Astuce : appuyez longuement sur un profil pour le supprimer.",
-    "relationships": { "Me": "Moi", "Partner": "Partenaire", "Child": "Enfant", "Parent": "Parent", "Other": "Autre" }
+    "relationships": {
+      "Me": "Moi",
+      "Partner": "Partenaire",
+      "Child": "Enfant",
+      "Parent": "Parent",
+      "Other": "Autre"
+    }
   },
   "profileDetail": {
     "trends": "Évolution",
@@ -135,7 +166,9 @@
     "profiles": "Profils",
     "profilesDesc": "Coffre santé familial",
     "trends": "Évolution",
-    "trendsDesc": "Valeurs dans le temps"
+    "trendsDesc": "Valeurs dans le temps",
+    "check": "Vérifier une valeur",
+    "checkDesc": "Une valeur est elle dans la plage habituelle ?"
   },
   "paywall": {
     "headline": "Plus de clarté pour vous et votre famille",
@@ -146,8 +179,18 @@
     "maybeLater": "Peut être plus tard",
     "note": "Les abonnements sont gérés sur medyra.de pour le moment. Votre formule débloque l'application automatiquement avec le même compte. Résiliable à tout moment.",
     "storeNote": "Les formules payantes ne sont actuellement pas disponibles à l'achat dans l'application. Si votre compte Medyra a déjà une formule, elle est active ici automatiquement.",
-    "personalFeatures": ["20 rapports par mois", "2 profils de santé", "Évolution dans le temps", "Export PDF complet"],
-    "familyFeatures": ["50 rapports par mois", "Jusqu'à 5 profils", "Historique de santé familial partagé", "Assistance prioritaire"]
+    "personalFeatures": [
+      "20 rapports par mois",
+      "2 profils de santé",
+      "Évolution dans le temps",
+      "Export PDF complet"
+    ],
+    "familyFeatures": [
+      "50 rapports par mois",
+      "Jusqu'à 5 profils",
+      "Historique de santé familial partagé",
+      "Assistance prioritaire"
+    ]
   },
   "settings": {
     "title": "Réglages",
@@ -184,5 +227,29 @@
     "decline": "Non merci, je ne consens pas",
     "footnote": "Sans consentement, votre rapport ne sera ni envoyé ni conservé. Vous pouvez changer cette décision à tout moment."
   },
-  "disclaimer": "Medyra est un outil éducatif qui explique la terminologie médicale : il ne fournit ni avis médical, ni diagnostic, ni recommandation de traitement. Consultez toujours votre médecin avant toute décision de santé. Vos données sont traitées conformément au RGPD et supprimées automatiquement après 30 jours."
+  "disclaimer": "Medyra est un outil éducatif qui explique la terminologie médicale : il ne fournit ni avis médical, ni diagnostic, ni recommandation de traitement. Consultez toujours votre médecin avant toute décision de santé. Vos données sont traitées conformément au RGPD et supprimées automatiquement après 30 jours.",
+  "check": {
+    "title": "Vérifier une valeur",
+    "subtitle": "Choisissez une valeur et saisissez votre chiffre pour voir où il se situe par rapport à la plage habituelle. Rien n’est enregistré.",
+    "searchPlaceholder": "Rechercher une valeur, ex. TSH, Ferritin",
+    "valuePlaceholder": "Votre valeur, ex. 5,2",
+    "popular": "Populaires",
+    "status": {
+      "low": "Sous la plage habituelle",
+      "normal": "Dans la plage habituelle",
+      "elevated": "Au dessus de la plage habituelle",
+      "high": "Bien au dessus de la plage habituelle"
+    },
+    "usualRange": "Plage habituelle",
+    "learnMore": "En savoir plus sur {{value}}",
+    "enterValue": "Saisissez votre valeur {{value}} en {{unit}} pour voir le résultat.",
+    "rangeNote": "Informations générales fondées sur les plages de référence habituelles pour adultes. Votre laboratoire peut utiliser des plages différentes ; la plage de votre compte rendu fait foi. Parlez de vos valeurs avec votre médecin."
+  },
+  "referral": {
+    "title": "Invitez vos amis",
+    "description": "Partagez votre lien. Vous et votre ami recevez chacun 1 rapport gratuit supplémentaire par mois.",
+    "shareButton": "Partager mon lien",
+    "shareText": "Nous expliquons les documents médicaux en langage simple. Avec mon lien, nous recevons tous les deux un rapport gratuit :",
+    "stats": "{{count}} invités, +{{bonus}} rapports bonus"
+  }
 }

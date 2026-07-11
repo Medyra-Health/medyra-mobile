@@ -35,6 +35,14 @@ Official Medyra app (iOS + Android), Expo SDK 54 (pinned to the user's Expo Go, 
 3. When funding exists: store accounts + `store/submission-guide.md` end to end, then RevenueCat (PHASE5-REVENUECAT.md).
 4. Optional: Arabic locale with an RTL layout pass.
 
+## Feature parity with web (2026-07-12)
+Growth feature wave shipped in the app, matching web branch `feature/growth-wave` (web repo):
+- Upload: document type chips (auto/lab/letter/medication/insurance) sent as `docType` hint; app UI language sent as `language` so the explanation arrives in the user's language.
+- Value check screen (`src/app/check.tsx`): search a lab value, enter a number, see how it compares to the usual range; data from public `GET /api/werte`; wellness wording ("usual range"), lexikon link, nothing stored.
+- Report screen: share menu (secure 7 day read only link via `/reports/:id/share`, or plain text) and recheck reminder card (4w/3m/6m presets via `/reminders`; backend emails when due, needs RESEND_API_KEY on the web side).
+- Referral card on home (`src/components/referral-card.tsx`): native share of `https://medyra.de/?ref=<code>`; both sides earn one extra free report per month.
+- i18n: all new keys in all 9 locales (scripts/add-feature-i18n.js, additive), check-locales passes (209 keys).
+
 ## Fixed issues log
 - Analysis prompt was lab-only; backend now classifies docType and returns sections for letters/prescriptions/insurance (web commit bf60f04); mobile renders sections + questions + next steps (2026-07-03).
 - App rethemed LIGHT to match web (tokens.ts is the source); dark splash kept as brand moment. Doctor Visit prep tab + dashboard home + Learn links added (commit 6b3c31c).

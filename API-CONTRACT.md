@@ -9,7 +9,7 @@ Base URL: `https://medyra.de/api`. All authenticated calls send `Authorization: 
 | `/` | GET | no | none | `{ message, status, features }` health check |
 | `/consent` | GET | yes | none | `{ consented: boolean, consentDate }` |
 | `/consent` | POST | yes | `{ version: string }` | `{ success: true }` |
-| `/reports/analyze` | POST | yes | multipart form: `file` (pdf/jpg/png/webp/txt, max 10MB), optional `profileId` | `{ success, reportId, explanation, biomarkersExtracted, usage: { current, limit, tier } }`. 403 `consent_required` if no consent. 429 when free limit reached. |
+| `/reports/analyze` | POST | yes | multipart form: `file` (pdf/jpg/png/webp/txt, max 10MB), optional `profileId`, optional `docType` (`lab`\|`letter`\|`medication`\|`insurance`, hint for the model), optional `language` (locale code; the explanation is written in that language) | `{ success, reportId, explanation, biomarkersExtracted, usage: { current, limit, tier } }`. 403 `consent_required` if no consent. 429 when free limit reached. |
 | `/reports` | GET | yes | query `?profileId=` optional | `{ success, reports: Report[], count }` (no extractedText) |
 | `/reports/:id` | GET | yes | none | `{ success, report }` |
 | `/reports/:id/chat` | POST | yes | `{ message }` | conversational reply (not in v1 mobile) |
@@ -19,6 +19,14 @@ Base URL: `https://medyra.de/api`. All authenticated calls send `Authorization: 
 | `/profiles` | PUT | yes | `{ profileId, updates: { name?, dob?, gender?, relationship?, color? } }` | `{ success }` |
 | `/profiles` | DELETE | yes | query `?id=` | `{ success }` |
 | `/subscription` | GET | yes | none | `{ success, tier: 'free'\|'personal'\|'family'\|'admin', status, usageLimit, currentUsage, remaining }` |
+| `/reminders` | POST | yes | `{ preset: '4w'\|'3m'\|'6m', reportId?, label?, locale? }` | `{ success, reminder: { id, dueAt, label } }`. Backend emails when due (daily cron). Max 10 active. |
+| `/reminders` | GET | yes | query `?reportId=` optional | `{ success, reminders: [{ id, reportId, label, dueAt }] }` (scheduled only) |
+| `/reminders/:id` | DELETE | yes | none | `{ success }` (cancels the reminder) |
+| `/reports/:id/share` | POST | yes | none | `{ success, token, expiresAt }`. Rotates: older links for the report are revoked. Public page: `https://medyra.de/share/<token>` (7 day expiry, sanitized explanation only, no file name or chat). |
+| `/reports/:id/share` | GET | yes | none | `{ success, share: { token, expiresAt, views } \| null }` |
+| `/reports/:id/share` | DELETE | yes | none | `{ success }` (revokes all links for the report) |
+| `/referral` | GET | yes | none | `{ success, code, referredCount, bonusReports, maxCredits }`. Invite link `https://medyra.de/?ref=<code>`; the claim happens on web signup (cookie plus first consent). |
+| `/werte` | GET | no | none | `{ success, entries: WerteEntry[] }` compact lexikon lab values (acronym, name, category, unit, ranges, shortAnswer) for the value check screen. |
 
 ## Shapes
 

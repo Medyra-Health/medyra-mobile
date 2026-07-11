@@ -1,5 +1,10 @@
 {
-  "tabs": { "home": "Start", "profiles": "Profile", "trends": "Trends", "settings": "Einstellungen" },
+  "tabs": {
+    "home": "Start",
+    "profiles": "Profile",
+    "trends": "Trends",
+    "settings": "Einstellungen"
+  },
   "auth": {
     "welcomeBack": "Willkommen zurück",
     "signInSubtitle": "Melden Sie sich mit Ihrem Medyra Konto an.",
@@ -44,7 +49,12 @@
     "notNow": "Nicht jetzt",
     "seePlans": "Tarife ansehen",
     "analysisFailed": "Analyse fehlgeschlagen",
-    "tryAgain": "Bitte versuchen Sie es erneut."
+    "tryAgain": "Bitte versuchen Sie es erneut.",
+    "docTypeAuto": "Automatisch erkennen",
+    "docTypeLab": "Laborbefund",
+    "docTypeLetter": "Arztbrief",
+    "docTypeMedication": "Medikationsplan",
+    "docTypeInsurance": "Krankenkassen Brief"
   },
   "report": {
     "inShort": "Kurz gesagt",
@@ -60,7 +70,22 @@
     "couldNotAssign": "Zuordnung fehlgeschlagen",
     "sharedFooter": "Erklärt mit Medyra. Keine medizinische Beratung.",
     "questionsForDoctor": "Fragen an Ihre Ärztin oder Ihren Arzt",
-    "nextSteps": "Empfohlene nächste Schritte"
+    "nextSteps": "Empfohlene nächste Schritte",
+    "shareTitle": "Erklärung teilen",
+    "shareBody": "Ein sicherer Link zeigt nur die Erklärung und läuft nach 7 Tagen ab. Als Text wird eine kurze Zusammenfassung geteilt.",
+    "shareAsLink": "Sicheren Link teilen",
+    "shareAsText": "Als Text teilen",
+    "shareCancel": "Abbrechen",
+    "shareLinkText": "Meine Medyra Erklärung (Link läuft in 7 Tagen ab):",
+    "shareLinkFailed": "Link konnte nicht erstellt werden",
+    "reminderTitle": "Kontroll Erinnerung",
+    "reminderDesc": "Wir erinnern Sie per E-Mail, wenn es Zeit für die nächste Kontrolle ist. So können Sie alte und neue Werte vergleichen.",
+    "reminder_4w": "In 4 Wochen",
+    "reminder_3m": "In 3 Monaten",
+    "reminder_6m": "In 6 Monaten",
+    "reminderActive": "Wir erinnern Sie am {{date}} per E-Mail.",
+    "reminderCancel": "Erinnerung löschen",
+    "reminderFailed": "Erinnerung konnte nicht eingerichtet werden"
   },
   "profiles": {
     "title": "Profile",
@@ -85,7 +110,13 @@
     "saveChanges": "Änderungen speichern",
     "create": "Profil erstellen",
     "longPressHint": "Tipp: Profil lange drücken, um es zu löschen.",
-    "relationships": { "Me": "Ich", "Partner": "Partner", "Child": "Kind", "Parent": "Elternteil", "Other": "Andere" }
+    "relationships": {
+      "Me": "Ich",
+      "Partner": "Partner",
+      "Child": "Kind",
+      "Parent": "Elternteil",
+      "Other": "Andere"
+    }
   },
   "profileDetail": {
     "trends": "Trends",
@@ -135,7 +166,9 @@
     "profiles": "Profile",
     "profilesDesc": "Familien Gesundheitsarchiv",
     "trends": "Trends",
-    "trendsDesc": "Werte im Verlauf"
+    "trendsDesc": "Werte im Verlauf",
+    "check": "Wert Check",
+    "checkDesc": "Liegt ein einzelner Wert im üblichen Bereich?"
   },
   "paywall": {
     "headline": "Mehr Klarheit für Sie und Ihre Familie",
@@ -146,8 +179,18 @@
     "maybeLater": "Vielleicht später",
     "note": "Abos werden derzeit auf medyra.de verwaltet. Ihr Tarif schaltet die App mit demselben Konto automatisch frei. Jederzeit kündbar.",
     "storeNote": "Bezahlte Tarife sind derzeit nicht in der App erhältlich. Wenn Ihr Medyra Konto bereits einen Tarif hat, ist er hier automatisch aktiv.",
-    "personalFeatures": ["20 Berichte pro Monat", "2 Gesundheitsprofile", "Verläufe über die Zeit", "Voller PDF Export"],
-    "familyFeatures": ["50 Berichte pro Monat", "Bis zu 5 Profile", "Gemeinsamer Familienverlauf", "Bevorzugter Support"]
+    "personalFeatures": [
+      "20 Berichte pro Monat",
+      "2 Gesundheitsprofile",
+      "Verläufe über die Zeit",
+      "Voller PDF Export"
+    ],
+    "familyFeatures": [
+      "50 Berichte pro Monat",
+      "Bis zu 5 Profile",
+      "Gemeinsamer Familienverlauf",
+      "Bevorzugter Support"
+    ]
   },
   "settings": {
     "title": "Einstellungen",
@@ -184,5 +227,29 @@
     "decline": "Nein danke, ich willige nicht ein",
     "footnote": "Ohne Einwilligung wird Ihr Bericht weder hochgeladen noch gespeichert. Sie können diese Entscheidung jederzeit ändern."
   },
-  "disclaimer": "Medyra ist ein Bildungswerkzeug, das medizinische Fachbegriffe erklärt: Es bietet keine medizinische Beratung, keine Diagnosen und keine Behandlungsempfehlungen. Sprechen Sie vor Gesundheitsentscheidungen immer mit Ihrer Ärztin oder Ihrem Arzt. Ihre Daten werden DSGVO konform verarbeitet und nach 30 Tagen automatisch gelöscht."
+  "disclaimer": "Medyra ist ein Bildungswerkzeug, das medizinische Fachbegriffe erklärt: Es bietet keine medizinische Beratung, keine Diagnosen und keine Behandlungsempfehlungen. Sprechen Sie vor Gesundheitsentscheidungen immer mit Ihrer Ärztin oder Ihrem Arzt. Ihre Daten werden DSGVO konform verarbeitet und nach 30 Tagen automatisch gelöscht.",
+  "check": {
+    "title": "Wert Check",
+    "subtitle": "Wert auswählen und Zahl eintippen, um zu sehen, wie er im üblichen Bereich liegt. Es wird nichts gespeichert.",
+    "searchPlaceholder": "Wert suchen, z. B. TSH, Ferritin",
+    "valuePlaceholder": "Ihr Wert, z. B. 5,2",
+    "popular": "Beliebt",
+    "status": {
+      "low": "Unter dem üblichen Bereich",
+      "normal": "Im üblichen Bereich",
+      "elevated": "Über dem üblichen Bereich",
+      "high": "Deutlich über dem üblichen Bereich"
+    },
+    "usualRange": "Üblicher Bereich",
+    "learnMore": "Mehr über {{value}}",
+    "enterValue": "Geben Sie Ihren {{value}} Wert in {{unit}} ein, um ihn einzuordnen.",
+    "rangeNote": "Allgemeine Information auf Basis üblicher Referenzbereiche für Erwachsene. Ihr Labor kann abweichen; maßgeblich ist der Bereich auf Ihrem Befund. Besprechen Sie Ihre Werte bitte mit Ihrer Ärztin oder Ihrem Arzt."
+  },
+  "referral": {
+    "title": "Freunde einladen",
+    "description": "Teilen Sie Ihren Link. Sie und Ihre Freunde erhalten je 1 zusätzlichen Gratis Befund pro Monat.",
+    "shareButton": "Einladungslink teilen",
+    "shareText": "Wir erklären medizinische Befunde in verständlicher Sprache. Mit meinem Link bekommen wir beide einen zusätzlichen Gratis Befund:",
+    "stats": "{{count}} eingeladen, +{{bonus}} Bonus Befunde"
+  }
 }

@@ -1,5 +1,10 @@
 {
-  "tabs": { "home": "Ana sayfa", "profiles": "Profiller", "trends": "Değişim", "settings": "Ayarlar" },
+  "tabs": {
+    "home": "Ana sayfa",
+    "profiles": "Profiller",
+    "trends": "Değişim",
+    "settings": "Ayarlar"
+  },
   "auth": {
     "welcomeBack": "Tekrar hoş geldiniz",
     "signInSubtitle": "Medyra hesabınızla giriş yapın.",
@@ -44,7 +49,12 @@
     "notNow": "Şimdi değil",
     "seePlans": "Paketleri gör",
     "analysisFailed": "Analiz başarısız",
-    "tryAgain": "Lütfen tekrar deneyin."
+    "tryAgain": "Lütfen tekrar deneyin.",
+    "docTypeAuto": "Otomatik algıla",
+    "docTypeLab": "Laboratuvar raporu",
+    "docTypeLetter": "Doktor mektubu",
+    "docTypeMedication": "İlaç planı",
+    "docTypeInsurance": "Sigorta mektubu"
   },
   "report": {
     "inShort": "Kısaca",
@@ -60,7 +70,22 @@
     "couldNotAssign": "Atanamadı",
     "sharedFooter": "Medyra ile açıklandı. Tıbbi tavsiye değildir.",
     "questionsForDoctor": "Doktorunuza sorular",
-    "nextSteps": "Önerilen sonraki adımlar"
+    "nextSteps": "Önerilen sonraki adımlar",
+    "shareTitle": "Bu açıklamayı paylaş",
+    "shareBody": "Güvenli bağlantı yalnızca açıklamayı gösterir ve 7 gün sonra sona erer. Metin olarak kısa bir özet paylaşılır.",
+    "shareAsLink": "Güvenli bağlantıyı paylaş",
+    "shareAsText": "Metin olarak paylaş",
+    "shareCancel": "İptal",
+    "shareLinkText": "Medyra açıklamam (bağlantı 7 gün içinde sona erer):",
+    "shareLinkFailed": "Bağlantı oluşturulamadı",
+    "reminderTitle": "Kontrol hatırlatıcısı",
+    "reminderDesc": "Değerlerinizi tekrar kontrol etme zamanı geldiğinde size e-posta göndeririz; eski ve yeni değerleri karşılaştırabilirsiniz.",
+    "reminder_4w": "4 hafta sonra",
+    "reminder_3m": "3 ay sonra",
+    "reminder_6m": "6 ay sonra",
+    "reminderActive": "{{date}} tarihinde size e-posta göndereceğiz.",
+    "reminderCancel": "Hatırlatıcıyı iptal et",
+    "reminderFailed": "Hatırlatıcı kurulamadı"
   },
   "profiles": {
     "title": "Profiller",
@@ -85,7 +110,13 @@
     "saveChanges": "Değişiklikleri kaydet",
     "create": "Profil oluştur",
     "longPressHint": "İpucu: silmek için bir profile uzun basın.",
-    "relationships": { "Me": "Ben", "Partner": "Eş", "Child": "Çocuk", "Parent": "Ebeveyn", "Other": "Diğer" }
+    "relationships": {
+      "Me": "Ben",
+      "Partner": "Eş",
+      "Child": "Çocuk",
+      "Parent": "Ebeveyn",
+      "Other": "Diğer"
+    }
   },
   "profileDetail": {
     "trends": "Değişim",
@@ -135,7 +166,9 @@
     "profiles": "Profiller",
     "profilesDesc": "Aile sağlık arşivi",
     "trends": "Değişim",
-    "trendsDesc": "Zaman içindeki değerler"
+    "trendsDesc": "Zaman içindeki değerler",
+    "check": "Değer kontrolü",
+    "checkDesc": "Tek bir değer olağan aralıkta mı?"
   },
   "paywall": {
     "headline": "Siz ve aileniz için daha fazla netlik",
@@ -146,8 +179,18 @@
     "maybeLater": "Belki sonra",
     "note": "Abonelikler şimdilik medyra.de üzerinden yönetiliyor. Paketiniz aynı hesapla uygulamayı otomatik olarak açar. İstediğiniz zaman iptal edebilirsiniz.",
     "storeNote": "Ücretli paketler şu anda uygulama içinden satın alınamıyor. Medyra hesabınızda zaten bir paket varsa burada otomatik olarak etkindir.",
-    "personalFeatures": ["Ayda 20 rapor", "2 sağlık profili", "Zaman içinde değişim", "Tam PDF dışa aktarma"],
-    "familyFeatures": ["Ayda 50 rapor", "En fazla 5 profil", "Ortak aile sağlık geçmişi", "Öncelikli destek"]
+    "personalFeatures": [
+      "Ayda 20 rapor",
+      "2 sağlık profili",
+      "Zaman içinde değişim",
+      "Tam PDF dışa aktarma"
+    ],
+    "familyFeatures": [
+      "Ayda 50 rapor",
+      "En fazla 5 profil",
+      "Ortak aile sağlık geçmişi",
+      "Öncelikli destek"
+    ]
   },
   "settings": {
     "title": "Ayarlar",
@@ -184,5 +227,29 @@
     "decline": "Hayır teşekkürler, onaylamıyorum",
     "footnote": "Onay vermezseniz raporunuz yüklenmez ve saklanmaz. Bu kararı istediğiniz zaman değiştirebilirsiniz."
   },
-  "disclaimer": "Medyra, tıbbi terimleri açıklayan eğitici bir araçtır: tıbbi tavsiye, teşhis veya tedavi önerisi sunmaz. Sağlıkla ilgili kararlar öncesinde her zaman doktorunuza danışın. Verileriniz GDPR'a uygun şekilde işlenir ve 30 gün sonra otomatik olarak silinir."
+  "disclaimer": "Medyra, tıbbi terimleri açıklayan eğitici bir araçtır: tıbbi tavsiye, teşhis veya tedavi önerisi sunmaz. Sağlıkla ilgili kararlar öncesinde her zaman doktorunuza danışın. Verileriniz GDPR'a uygun şekilde işlenir ve 30 gün sonra otomatik olarak silinir.",
+  "check": {
+    "title": "Değer kontrolü",
+    "subtitle": "Bir değer seçin ve sayınızı yazın, olağan aralığa göre durumunu görün. Hiçbir şey kaydedilmez.",
+    "searchPlaceholder": "Değer arayın, örn. TSH, Ferritin",
+    "valuePlaceholder": "Değeriniz, örn. 5,2",
+    "popular": "Popüler",
+    "status": {
+      "low": "Olağan aralığın altında",
+      "normal": "Olağan aralıkta",
+      "elevated": "Olağan aralığın üzerinde",
+      "high": "Olağan aralığın çok üzerinde"
+    },
+    "usualRange": "Olağan aralık",
+    "learnMore": "{{value}} hakkında daha fazla",
+    "enterValue": "{{value}} değerinizi {{unit}} olarak girin ve sonucu görün.",
+    "rangeNote": "Yetişkinler için olağan referans aralıklarına dayalı genel bilgidir. Laboratuvarınız farklı aralıklar kullanabilir; raporunuzdaki aralık geçerlidir. Değerlerinizi doktorunuzla konuşun."
+  },
+  "referral": {
+    "title": "Arkadaşlarınızı davet edin",
+    "description": "Bağlantınızı paylaşın. Siz ve arkadaşınız ayda 1 ek ücretsiz rapor kazanırsınız.",
+    "shareButton": "Davet bağlantımı paylaş",
+    "shareText": "Tıbbi raporları anlaşılır bir dille açıklıyoruz. Bağlantımla ikimiz de ekstra ücretsiz rapor kazanırız:",
+    "stats": "{{count}} davet edildi, +{{bonus}} bonus rapor"
+  }
 }

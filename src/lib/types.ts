@@ -70,6 +70,45 @@ export type AnalyzeResult = {
   usage: { current: number; limit: number; tier: string };
 };
 
+/** User hint for what kind of document is being analyzed. */
+export type DocType = 'lab' | 'letter' | 'medication' | 'insurance';
+
+export type Reminder = {
+  id: string;
+  reportId?: string | null;
+  label?: string | null;
+  dueAt: string;
+};
+
+export type ShareInfo = {
+  token: string;
+  expiresAt: string;
+  views: number;
+};
+
+export type Referral = {
+  code: string;
+  referredCount: number;
+  bonusReports: number;
+  maxCredits: number;
+};
+
+/** Compact lab value entry powering the value check screen (public endpoint). */
+export type WerteEntry = {
+  slug: string;
+  acronym: string;
+  name: string;
+  category: string;
+  unit: string;
+  ranges: {
+    low?: { min: number | null; max: number | null; label?: string };
+    normal: { min: number | null; max: number | null; label?: string };
+    elevated?: { min: number | null; max: number | null; label?: string };
+    high?: { min: number | null; max: number | null; label?: string };
+  };
+  shortAnswer: string;
+};
+
 /** The API stores explanation as JSON or string. Always parse defensively. */
 export function parseExplanation(raw: Explanation | string | undefined | null): Explanation {
   if (!raw) return { summary: '', tests: [] };

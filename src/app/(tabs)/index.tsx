@@ -18,19 +18,29 @@ import {
 
 import { ConsentModal } from '@/components/consent-modal';
 import { WellnessDisclaimer } from '@/components/disclaimer';
+import { ReferralCard } from '@/components/referral-card';
 import { GlassCard, Screen, ThemedText } from '@/components/screen';
 import { ApiError, useApi } from '@/lib/api';
-import type { Report, Subscription } from '@/lib/types';
+import type { DocType, Report, Subscription } from '@/lib/types';
 import { parseExplanation } from '@/lib/types';
 import { colors, radius, spacing } from '@/theme/tokens';
 
 type PickedFile = { uri: string; name: string; type: string };
 
+const DOC_TYPES: { id: DocType | 'auto'; labelKey: string }[] = [
+  { id: 'auto', labelKey: 'home.docTypeAuto' },
+  { id: 'lab', labelKey: 'home.docTypeLab' },
+  { id: 'letter', labelKey: 'home.docTypeLetter' },
+  { id: 'medication', labelKey: 'home.docTypeMedication' },
+  { id: 'insurance', labelKey: 'home.docTypeInsurance' },
+];
+
 export default function HomeScreen() {
   const { user } = useUser();
   const api = useApi();
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [docType, setDocType] = useState<DocType | 'auto'>('auto');
 
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [reports, setReports] = useState<Report[]>([]);
@@ -63,7 +73,10 @@ export default function HomeScreen() {
   async function analyze(file: PickedFile) {
     setAnalyzing(true);
     try {
-      const result = await api.analyzeReport(file);
+      const result = await api.analyzeReport(file, undefined, {
+        docType: docType === 'auto' ? undefined : docType,
+        language: i18n.language,
+      });
       setPendingFile(null);
       await load();
       router.push({ pathname: '/report/[id]', params: { id: result.reportId } });
@@ -175,6 +188,29 @@ export default function HomeScreen() {
           <ThemedText variant="caption" style={styles.uploadSub}>
             {t('home.uploadSubtitle')}
           </ThemedText>
+
+          {/* Document type hint, helps the analysis match intent */}
+          <View style={styles.docTypeRow}>
+            {DOC_TYPES.map(({ id, labelKey }) => {
+              const active = docType === id;
+              return (
+                <Pressable
+                  key={id}
+                  onPress={() => setDocType(id)}
+                  disabled={analyzing}
+                  style={[styles.docTypeChip, active && styles.docTypeChipActive]}
+                >
+                  <ThemedText
+                    variant="caption"
+                    style={[styles.docTypeLabel, active && styles.docTypeLabelActive]}
+                  >
+                    {t(labelKey)}
+                  </ThemedText>
+                </Pressable>
+              );
+            })}
+          </View>
+
           <View style={styles.actionsRow}>
             {[
               { icon: 'camera-outline' as const, label: t('home.camera'), onPress: pickFromCamera },
@@ -202,6 +238,7 @@ export default function HomeScreen() {
             { icon: 'medkit-outline' as const, title: t('features.prep'), desc: t('features.prepDesc'), href: '/(tabs)/prep' as const },
             { icon: 'people-outline' as const, title: t('features.profiles'), desc: t('features.profilesDesc'), href: '/(tabs)/profiles' as const },
             { icon: 'trending-up-outline' as const, title: t('features.trends'), desc: t('features.trendsDesc'), href: '/(tabs)/trends' as const },
+            { icon: 'flask-outline' as const, title: t('features.check'), desc: t('features.checkDesc'), href: '/check' as const },
           ].map(({ icon, title, desc, href }) => (
             <Pressable
               key={title}
@@ -283,6 +320,9 @@ export default function HomeScreen() {
           ))}
         </View>
 
+        {/* Invite friends, both sides get a free report */}
+        <ReferralCard />
+
         <WellnessDisclaimer />
       </ScrollView>
 
@@ -333,9 +373,22 @@ const styles = StyleSheet.create({
   actionPressed: { opacity: 0.7 },
   actionLabel: { color: colors.text },
   section: { gap: spacing.sm },
-  featureRow: { flexDirection: 'row', gap: spacing.sm },
+  docTypeRow: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.xs, marginBottom: spacing.md },
+  docTypeChip: {
+    paddingHorizontal: spacing.sm + 2,
+    paddingVertical: 5,
+    borderRadius: radius.full,
+    borderWidth: 1,
+    borderColor: colors.glassBorder,
+    backgroundColor: colors.mint,
+  },
+  docTypeChipActive: { backgroundColor: colors.emerald, borderColor: colors.emerald },
+  docTypeLabel: { color: colors.textMuted },
+  docTypeLabelActive: { color: '#FFFFFF', fontFamily: 'DMSans_600SemiBold' },
+  featureRow: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
   featureCard: {
-    flex: 1,
+    flexBasis: '47%',
+    flexGrow: 1,
     gap: 4,
     padding: spacing.md,
     borderRadius: radius.sm,

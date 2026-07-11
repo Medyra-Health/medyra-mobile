@@ -1,7 +1,17 @@
 import { useAuth } from '@clerk/clerk-expo';
 import { useMemo } from 'react';
 
-import type { AnalyzeResult, Profile, Report, Subscription } from './types';
+import type {
+  AnalyzeResult,
+  DocType,
+  Profile,
+  Referral,
+  Reminder,
+  Report,
+  ShareInfo,
+  Subscription,
+  WerteEntry,
+} from './types';
 
 const BASE_URL = `${process.env.EXPO_PUBLIC_API_URL ?? 'https://medyra.de'}/api`;
 
@@ -54,11 +64,17 @@ export function createApi(getToken: TokenGetter) {
     getConsent: () => request<{ consented: boolean }>(getToken, '/consent'),
     grantConsent: () => request<{ success: boolean }>(getToken, '/consent', { method: 'POST', ...jsonBody({ version: '1.0' }) }),
 
-    analyzeReport: (file: { uri: string; name: string; type: string }, profileId?: string) => {
+    analyzeReport: (
+      file: { uri: string; name: string; type: string },
+      profileId?: string,
+      opts?: { docType?: DocType; language?: string },
+    ) => {
       const form = new FormData();
       // React Native FormData file part
       form.append('file', { uri: file.uri, name: file.name, type: file.type } as unknown as Blob);
       if (profileId) form.append('profileId', profileId);
+      if (opts?.docType) form.append('docType', opts.docType);
+      if (opts?.language) form.append('language', opts.language);
       return request<AnalyzeResult>(getToken, '/reports/analyze', { method: 'POST', body: form });
     },
 
@@ -81,6 +97,40 @@ export function createApi(getToken: TokenGetter) {
       request<{ success: boolean }>(getToken, `/profiles?id=${encodeURIComponent(id)}`, { method: 'DELETE' }),
 
     getSubscription: () => request<Subscription>(getToken, '/subscription'),
+
+    // Recheck reminders: backend emails when it is time to test again
+    createReminder: (preset: '4w' | '3m' | '6m', reportId?: string, label?: string, locale?: string) =>
+      request<{ success: boolean; reminder: Reminder }>(getToken, '/reminders', {
+        method: 'POST',
+        ...jsonBody({ preset, reportId, label, locale }),
+      }),
+    getReminders: (reportId?: string) =>
+      request<{ reminders: Reminder[] }>(
+        getToken,
+        `/reminders${reportId ? `?reportId=${encodeURIComponent(reportId)}` : ''}`,
+      ),
+    deleteReminder: (id: string) =>
+      request<{ success: boolean }>(getToken, `/reminders/${encodeURIComponent(id)}`, { method: 'DELETE' }),
+
+    // Read only share links (7 day expiry, revocable)
+    createShareLink: (reportId: string) =>
+      request<{ success: boolean; token: string; expiresAt: string }>(
+        getToken,
+        `/reports/${encodeURIComponent(reportId)}/share`,
+        { method: 'POST' },
+      ),
+    getShareStatus: (reportId: string) =>
+      request<{ share: ShareInfo | null }>(getToken, `/reports/${encodeURIComponent(reportId)}/share`),
+    revokeShareLink: (reportId: string) =>
+      request<{ success: boolean }>(getToken, `/reports/${encodeURIComponent(reportId)}/share`, {
+        method: 'DELETE',
+      }),
+
+    // Referral program: invite link, both sides earn a free report per month
+    getReferral: () => request<Referral>(getToken, '/referral'),
+
+    // Public compact lab value dataset for the value check screen
+    getWerte: () => request<{ entries: WerteEntry[] }>(getToken, '/werte'),
 
     generatePrep: (input: string, locale: string, profileId?: string) =>
       request<{ success: boolean; output: string; tier: string }>(getToken, '/prep', {

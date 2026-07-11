@@ -1,5 +1,10 @@
 {
-  "tabs": { "home": "Home", "profiles": "Profili", "trends": "Andamento", "settings": "Impostazioni" },
+  "tabs": {
+    "home": "Home",
+    "profiles": "Profili",
+    "trends": "Andamento",
+    "settings": "Impostazioni"
+  },
   "auth": {
     "welcomeBack": "Bentornato",
     "signInSubtitle": "Accedi con il tuo account Medyra.",
@@ -44,7 +49,12 @@
     "notNow": "Non ora",
     "seePlans": "Vedi i piani",
     "analysisFailed": "Analisi non riuscita",
-    "tryAgain": "Riprova."
+    "tryAgain": "Riprova.",
+    "docTypeAuto": "Rileva automaticamente",
+    "docTypeLab": "Referto di laboratorio",
+    "docTypeLetter": "Lettera del medico",
+    "docTypeMedication": "Piano terapeutico",
+    "docTypeInsurance": "Lettera dell’assicurazione"
   },
   "report": {
     "inShort": "In breve",
@@ -60,7 +70,22 @@
     "couldNotAssign": "Assegnazione non riuscita",
     "sharedFooter": "Spiegato con Medyra. Non è un parere medico.",
     "questionsForDoctor": "Domande per il tuo medico",
-    "nextSteps": "Prossimi passi suggeriti"
+    "nextSteps": "Prossimi passi suggeriti",
+    "shareTitle": "Condividi questa spiegazione",
+    "shareBody": "Un link sicuro mostra solo la spiegazione e scade dopo 7 giorni. Come testo viene condiviso un breve riepilogo.",
+    "shareAsLink": "Condividi link sicuro",
+    "shareAsText": "Condividi come testo",
+    "shareCancel": "Annulla",
+    "shareLinkText": "La mia spiegazione Medyra (il link scade tra 7 giorni):",
+    "shareLinkFailed": "Impossibile creare il link",
+    "reminderTitle": "Promemoria di controllo",
+    "reminderDesc": "Ti inviamo una email quando è ora di ricontrollare i tuoi valori, così puoi confrontare vecchi e nuovi.",
+    "reminder_4w": "Tra 4 settimane",
+    "reminder_3m": "Tra 3 mesi",
+    "reminder_6m": "Tra 6 mesi",
+    "reminderActive": "Ti scriveremo il {{date}}.",
+    "reminderCancel": "Annulla promemoria",
+    "reminderFailed": "Impossibile impostare il promemoria"
   },
   "profiles": {
     "title": "Profili",
@@ -85,7 +110,13 @@
     "saveChanges": "Salva modifiche",
     "create": "Crea profilo",
     "longPressHint": "Suggerimento: tieni premuto un profilo per eliminarlo.",
-    "relationships": { "Me": "Io", "Partner": "Partner", "Child": "Figlio o figlia", "Parent": "Genitore", "Other": "Altro" }
+    "relationships": {
+      "Me": "Io",
+      "Partner": "Partner",
+      "Child": "Figlio o figlia",
+      "Parent": "Genitore",
+      "Other": "Altro"
+    }
   },
   "profileDetail": {
     "trends": "Andamento",
@@ -135,7 +166,9 @@
     "profiles": "Profili",
     "profilesDesc": "Archivio salute di famiglia",
     "trends": "Andamento",
-    "trendsDesc": "Valori nel tempo"
+    "trendsDesc": "Valori nel tempo",
+    "check": "Controlla valore",
+    "checkDesc": "Un singolo valore è nell’intervallo abituale?"
   },
   "paywall": {
     "headline": "Più chiarezza per te e la tua famiglia",
@@ -146,8 +179,18 @@
     "maybeLater": "Forse più tardi",
     "note": "Per ora gli abbonamenti si gestiscono su medyra.de. Il tuo piano sblocca l'app automaticamente con lo stesso account. Disdici quando vuoi.",
     "storeNote": "I piani a pagamento non sono attualmente acquistabili nell'app. Se il tuo account Medyra ha già un piano, qui è attivo automaticamente.",
-    "personalFeatures": ["20 referti al mese", "2 profili di salute", "Andamento nel tempo", "Esportazione PDF completa"],
-    "familyFeatures": ["50 referti al mese", "Fino a 5 profili", "Storia della salute condivisa in famiglia", "Assistenza prioritaria"]
+    "personalFeatures": [
+      "20 referti al mese",
+      "2 profili di salute",
+      "Andamento nel tempo",
+      "Esportazione PDF completa"
+    ],
+    "familyFeatures": [
+      "50 referti al mese",
+      "Fino a 5 profili",
+      "Storia della salute condivisa in famiglia",
+      "Assistenza prioritaria"
+    ]
   },
   "settings": {
     "title": "Impostazioni",
@@ -184,5 +227,29 @@
     "decline": "No grazie, non acconsento",
     "footnote": "Senza consenso il tuo referto non viene caricato né salvato. Puoi cambiare questa decisione in qualsiasi momento."
   },
-  "disclaimer": "Medyra è uno strumento educativo che spiega la terminologia medica: non fornisce pareri medici, diagnosi o raccomandazioni di trattamento. Consulta sempre il tuo medico prima di prendere decisioni sulla salute. I tuoi dati sono trattati nel rispetto del GDPR e vengono eliminati automaticamente dopo 30 giorni."
+  "disclaimer": "Medyra è uno strumento educativo che spiega la terminologia medica: non fornisce pareri medici, diagnosi o raccomandazioni di trattamento. Consulta sempre il tuo medico prima di prendere decisioni sulla salute. I tuoi dati sono trattati nel rispetto del GDPR e vengono eliminati automaticamente dopo 30 giorni.",
+  "check": {
+    "title": "Controlla valore",
+    "subtitle": "Scegli un valore e inserisci il numero per vedere come si colloca rispetto all’intervallo abituale. Non viene salvato nulla.",
+    "searchPlaceholder": "Cerca valore, es. TSH, Ferritin",
+    "valuePlaceholder": "Il tuo valore, es. 5,2",
+    "popular": "Più cercati",
+    "status": {
+      "low": "Sotto l’intervallo abituale",
+      "normal": "Nell’intervallo abituale",
+      "elevated": "Sopra l’intervallo abituale",
+      "high": "Molto sopra l’intervallo abituale"
+    },
+    "usualRange": "Intervallo abituale",
+    "learnMore": "Scopri di più su {{value}}",
+    "enterValue": "Inserisci il tuo valore {{value}} in {{unit}} per vedere il risultato.",
+    "rangeNote": "Informazioni generali basate su intervalli di riferimento abituali per adulti. Il tuo laboratorio può usare intervalli diversi; vale quello indicato sul tuo referto. Parla dei tuoi valori con il tuo medico."
+  },
+  "referral": {
+    "title": "Invita gli amici",
+    "description": "Condividi il tuo link. Tu e il tuo amico ricevete 1 referto gratuito extra al mese.",
+    "shareButton": "Condividi il mio link",
+    "shareText": "Spieghiamo i referti medici in linguaggio semplice. Con il mio link riceviamo entrambi un referto gratis in più:",
+    "stats": "{{count}} invitati, +{{bonus}} referti bonus"
+  }
 }

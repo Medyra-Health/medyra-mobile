@@ -15,9 +15,11 @@ import {
 import { WellnessDisclaimer } from '@/components/disclaimer';
 import { GlassCard, Screen, ThemedText } from '@/components/screen';
 import { useApi } from '@/lib/api';
-import type { Profile, Report } from '@/lib/types';
+import type { Profile, Reminder, Report } from '@/lib/types';
 import { parseExplanation } from '@/lib/types';
 import { colors, radius, spacing } from '@/theme/tokens';
+
+const REMINDER_PRESETS = ['4w', '3m', '6m'] as const;
 
 function flagColor(flag?: string) {
   const f = (flag ?? 'normal').toLowerCase();
@@ -31,24 +33,29 @@ export default function ReportScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const api = useApi();
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [report, setReport] = useState<Report | null>(null);
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [loading, setLoading] = useState(true);
   const [assigning, setAssigning] = useState(false);
   const [showAssign, setShowAssign] = useState(false);
+  const [reminder, setReminder] = useState<Reminder | null>(null);
+  const [reminderBusy, setReminderBusy] = useState(false);
+  const [sharingLink, setSharingLink] = useState(false);
 
   const load = useCallback(async () => {
     if (!id) return;
     setLoading(true);
     try {
-      const [{ report: r }, prof] = await Promise.all([
+      const [{ report: r }, prof, rem] = await Promise.all([
         api.getReport(id),
         api.getProfiles().catch(() => ({ profiles: [] as Profile[] })),
+        api.getReminders(id).catch(() => ({ reminders: [] as Reminder[] })),
       ]);
       setReport(r);
       setProfiles(prof.profiles ?? []);
+      setReminder(rem.reminders?.[0] ?? null);
     } catch (err) {
       Alert.alert(t('report.couldNotLoad'), err instanceof Error ? err.message : '', [
         { text: t('report.goBack'), onPress: () => router.back() },
@@ -64,7 +71,7 @@ export default function ReportScreen() {
 
   const exp = parseExplanation(report?.explanation);
 
-  async function onShare() {
+  async function shareAsText() {
     const lines = [
       exp.inShort ? exp.inShort : '',
       '',
@@ -75,6 +82,52 @@ export default function ReportScreen() {
       t('report.sharedFooter'),
     ].filter(Boolean);
     await Share.share({ message: lines.join('\n') });
+  }
+
+  // Secure read only link: shows only the explanation, expires after 7 days
+  async function shareAsLink() {
+    if (!report || sharingLink) return;
+    setSharingLink(true);
+    try {
+      const { token } = await api.createShareLink(report.id);
+      await Share.share({ message: `${t('report.shareLinkText')} https://medyra.de/share/${token}` });
+    } catch (err) {
+      Alert.alert(t('report.shareLinkFailed'), err instanceof Error ? err.message : '');
+    } finally {
+      setSharingLink(false);
+    }
+  }
+
+  function onShare() {
+    Alert.alert(t('report.shareTitle'), t('report.shareBody'), [
+      { text: t('report.shareAsLink'), onPress: shareAsLink },
+      { text: t('report.shareAsText'), onPress: shareAsText },
+      { text: t('report.shareCancel'), style: 'cancel' },
+    ]);
+  }
+
+  async function setRecheckReminder(preset: (typeof REMINDER_PRESETS)[number]) {
+    if (!report || reminderBusy) return;
+    setReminderBusy(true);
+    try {
+      const res = await api.createReminder(preset, report.id, report.fileName, i18n.language);
+      setReminder(res.reminder);
+    } catch (err) {
+      Alert.alert(t('report.reminderFailed'), err instanceof Error ? err.message : '');
+    } finally {
+      setReminderBusy(false);
+    }
+  }
+
+  async function cancelReminder() {
+    if (!reminder) return;
+    const prev = reminder;
+    setReminder(null);
+    try {
+      await api.deleteReminder(prev.id);
+    } catch {
+      setReminder(prev);
+    }
   }
 
   async function onAssign(profileId: string) {
@@ -233,6 +286,53 @@ export default function ReportScreen() {
             </View>
           )}
 
+          {/* Recheck reminder */}
+          <View style={styles.section}>
+            <ThemedText variant="label">{t('report.reminderTitle')}</ThemedText>
+            <GlassCard style={styles.reminderCard}>
+              {reminder ? (
+                <>
+                  <View style={styles.reminderActiveRow}>
+                    <Ionicons name="notifications-outline" size={18} color={colors.emerald} />
+                    <ThemedText variant="body" style={styles.reminderActiveText}>
+                      {t('report.reminderActive', {
+                        date: new Date(reminder.dueAt).toLocaleDateString(),
+                      })}
+                    </ThemedText>
+                  </View>
+                  <Pressable onPress={cancelReminder} hitSlop={8}>
+                    <ThemedText variant="caption" style={styles.reminderCancel}>
+                      {t('report.reminderCancel')}
+                    </ThemedText>
+                  </Pressable>
+                </>
+              ) : (
+                <>
+                  <ThemedText variant="bodyMuted" style={styles.reminderDesc}>
+                    {t('report.reminderDesc')}
+                  </ThemedText>
+                  <View style={styles.reminderRow}>
+                    {REMINDER_PRESETS.map((preset) => (
+                      <Pressable
+                        key={preset}
+                        onPress={() => setRecheckReminder(preset)}
+                        disabled={reminderBusy}
+                        style={({ pressed }) => [
+                          styles.reminderChip,
+                          (pressed || reminderBusy) && { opacity: 0.6 },
+                        ]}
+                      >
+                        <ThemedText variant="caption" style={styles.reminderChipLabel}>
+                          {t(`report.reminder_${preset}`)}
+                        </ThemedText>
+                      </Pressable>
+                    ))}
+                  </View>
+                </>
+              )}
+            </GlassCard>
+          </View>
+
           {/* Assign to profile */}
           <View style={styles.section}>
             <ThemedText variant="label">{t('report.healthProfile')}</ThemedText>
@@ -313,6 +413,21 @@ const styles = StyleSheet.create({
   bullet: { fontSize: 14, lineHeight: 21 },
   bulletIcon: { marginTop: 3 },
   bulletText: { flex: 1, fontSize: 14, lineHeight: 21 },
+  reminderCard: { gap: spacing.sm },
+  reminderDesc: { fontSize: 14, lineHeight: 20 },
+  reminderRow: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
+  reminderChip: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+    borderRadius: radius.full,
+    borderWidth: 1,
+    borderColor: colors.glassBorderStrong,
+    backgroundColor: colors.mint,
+  },
+  reminderChipLabel: { color: colors.text, fontFamily: 'DMSans_600SemiBold' },
+  reminderActiveRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
+  reminderActiveText: { flex: 1, fontSize: 14 },
+  reminderCancel: { color: colors.statusCritical, fontFamily: 'DMSans_600SemiBold' },
   assignRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
   assignName: { flex: 1 },
   assignOption: {

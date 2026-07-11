@@ -1,5 +1,10 @@
 {
-  "tabs": { "home": "Inicio", "profiles": "Perfiles", "trends": "Evolución", "settings": "Ajustes" },
+  "tabs": {
+    "home": "Inicio",
+    "profiles": "Perfiles",
+    "trends": "Evolución",
+    "settings": "Ajustes"
+  },
   "auth": {
     "welcomeBack": "Bienvenido de nuevo",
     "signInSubtitle": "Inicie sesión con su cuenta de Medyra.",
@@ -44,7 +49,12 @@
     "notNow": "Ahora no",
     "seePlans": "Ver planes",
     "analysisFailed": "El análisis falló",
-    "tryAgain": "Inténtelo de nuevo."
+    "tryAgain": "Inténtelo de nuevo.",
+    "docTypeAuto": "Detectar automáticamente",
+    "docTypeLab": "Informe de laboratorio",
+    "docTypeLetter": "Carta médica",
+    "docTypeMedication": "Plan de medicación",
+    "docTypeInsurance": "Carta del seguro"
   },
   "report": {
     "inShort": "En resumen",
@@ -60,7 +70,22 @@
     "couldNotAssign": "No se pudo asignar",
     "sharedFooter": "Explicado con Medyra. No es consejo médico.",
     "questionsForDoctor": "Preguntas para su médico",
-    "nextSteps": "Próximos pasos sugeridos"
+    "nextSteps": "Próximos pasos sugeridos",
+    "shareTitle": "Compartir esta explicación",
+    "shareBody": "Un enlace seguro muestra solo la explicación y caduca a los 7 días. Como texto se comparte un resumen breve.",
+    "shareAsLink": "Compartir enlace seguro",
+    "shareAsText": "Compartir como texto",
+    "shareCancel": "Cancelar",
+    "shareLinkText": "Mi explicación de Medyra (el enlace caduca en 7 días):",
+    "shareLinkFailed": "No se pudo crear el enlace",
+    "reminderTitle": "Recordatorio de control",
+    "reminderDesc": "Te enviamos un correo cuando sea hora de revisar tus valores de nuevo, para comparar antiguos y nuevos.",
+    "reminder_4w": "En 4 semanas",
+    "reminder_3m": "En 3 meses",
+    "reminder_6m": "En 6 meses",
+    "reminderActive": "Te escribiremos el {{date}}.",
+    "reminderCancel": "Cancelar recordatorio",
+    "reminderFailed": "No se pudo crear el recordatorio"
   },
   "profiles": {
     "title": "Perfiles",
@@ -85,7 +110,13 @@
     "saveChanges": "Guardar cambios",
     "create": "Crear perfil",
     "longPressHint": "Consejo: mantenga pulsado un perfil para eliminarlo.",
-    "relationships": { "Me": "Yo", "Partner": "Pareja", "Child": "Hijo o hija", "Parent": "Padre o madre", "Other": "Otro" }
+    "relationships": {
+      "Me": "Yo",
+      "Partner": "Pareja",
+      "Child": "Hijo o hija",
+      "Parent": "Padre o madre",
+      "Other": "Otro"
+    }
   },
   "profileDetail": {
     "trends": "Evolución",
@@ -135,7 +166,9 @@
     "profiles": "Perfiles",
     "profilesDesc": "Archivo de salud familiar",
     "trends": "Evolución",
-    "trendsDesc": "Valores en el tiempo"
+    "trendsDesc": "Valores en el tiempo",
+    "check": "Comprobar valor",
+    "checkDesc": "¿Está un valor dentro del rango habitual?"
   },
   "paywall": {
     "headline": "Más claridad para usted y su familia",
@@ -146,8 +179,18 @@
     "maybeLater": "Quizá más tarde",
     "note": "Por ahora las suscripciones se gestionan en medyra.de. Su plan desbloquea la app automáticamente con la misma cuenta. Cancele cuando quiera.",
     "storeNote": "Los planes de pago no están disponibles actualmente para su compra en la app. Si su cuenta de Medyra ya tiene un plan, está activo aquí automáticamente.",
-    "personalFeatures": ["20 informes al mes", "2 perfiles de salud", "Evolución en el tiempo", "Exportación completa a PDF"],
-    "familyFeatures": ["50 informes al mes", "Hasta 5 perfiles", "Historial de salud familiar compartido", "Soporte prioritario"]
+    "personalFeatures": [
+      "20 informes al mes",
+      "2 perfiles de salud",
+      "Evolución en el tiempo",
+      "Exportación completa a PDF"
+    ],
+    "familyFeatures": [
+      "50 informes al mes",
+      "Hasta 5 perfiles",
+      "Historial de salud familiar compartido",
+      "Soporte prioritario"
+    ]
   },
   "settings": {
     "title": "Ajustes",
@@ -184,5 +227,29 @@
     "decline": "No gracias, no doy mi consentimiento",
     "footnote": "Si no da su consentimiento, su informe no se subirá ni se guardará. Puede cambiar esta decisión en cualquier momento."
   },
-  "disclaimer": "Medyra es una herramienta educativa que explica terminología médica: no ofrece consejo médico, diagnósticos ni recomendaciones de tratamiento. Consulte siempre a su médico antes de tomar decisiones de salud. Sus datos se tratan conforme al RGPD y se eliminan automáticamente a los 30 días."
+  "disclaimer": "Medyra es una herramienta educativa que explica terminología médica: no ofrece consejo médico, diagnósticos ni recomendaciones de tratamiento. Consulte siempre a su médico antes de tomar decisiones de salud. Sus datos se tratan conforme al RGPD y se eliminan automáticamente a los 30 días.",
+  "check": {
+    "title": "Comprobar valor",
+    "subtitle": "Elige un valor y escribe tu número para ver cómo se compara con el rango habitual. No se guarda nada.",
+    "searchPlaceholder": "Buscar valor, p. ej. TSH, Ferritin",
+    "valuePlaceholder": "Tu valor, p. ej. 5,2",
+    "popular": "Populares",
+    "status": {
+      "low": "Por debajo del rango habitual",
+      "normal": "Dentro del rango habitual",
+      "elevated": "Por encima del rango habitual",
+      "high": "Muy por encima del rango habitual"
+    },
+    "usualRange": "Rango habitual",
+    "learnMore": "Más sobre {{value}}",
+    "enterValue": "Introduce tu valor de {{value}} en {{unit}} para ver el resultado.",
+    "rangeNote": "Información general basada en rangos de referencia habituales para adultos. Tu laboratorio puede usar rangos diferentes; el rango de tu informe es el válido. Comenta tus valores con tu médico."
+  },
+  "referral": {
+    "title": "Invita a tus amigos",
+    "description": "Comparte tu enlace. Tú y tu amigo recibís 1 informe gratis adicional al mes.",
+    "shareButton": "Compartir mi enlace",
+    "shareText": "Explicamos informes médicos en lenguaje sencillo. Con mi enlace ambos recibimos un informe gratis extra:",
+    "stats": "{{count}} invitados, +{{bonus}} informes extra"
+  }
 }
