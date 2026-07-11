@@ -1,4 +1,6 @@
 {
-  "NSCameraUsageDescription": "Medyra uses the camera to photograph your medical document so we can explain it in plain language.",
-  "NSPhotoLibraryUsageDescription": "Medyra uses your photo library so you can pick an existing photo of a medical document to explain."
+  "ios": {
+    "NSCameraUsageDescription": "Medyra uses the camera to photograph your medical document so we can explain it in plain language.",
+    "NSPhotoLibraryUsageDescription": "Medyra uses your photo library so you can pick an existing photo of a medical document to explain."
+  }
 }
