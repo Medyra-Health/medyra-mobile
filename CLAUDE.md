@@ -23,10 +23,16 @@ Official Medyra app (iOS + Android), Expo SDK 54 (pinned to the user's Expo Go, 
 - Verify: `npx tsc --noEmit`, `npx expo lint`, `npx expo export --platform ios`.
 - npm needs legacy peer deps: `npx expo install --fix -- --legacy-peer-deps` (run from Git Bash; PowerShell eats the `--`).
 
+## Distribution (2026-07-11): no store budget yet, direct download instead
+- Owner has no funding for Apple Developer / Play Console fees. Interim plan: Android sideload APK + iPhone PWA (medyra.de added to home screen). Store submission deferred, playbook stays in `store/submission-guide.md`.
+- eas.json `apk` profile builds a sideloadable APK. It intentionally does NOT set EXPO_PUBLIC_STORE_BUILD, so the web checkout stays visible (store billing rules do not apply outside the stores).
+- Download page: medyra.de/app (web repo `app/app/page.js`, 17 locales, footer link, public in middleware). APK button points to https://github.com/Medyra-Health/medyra-mobile/releases/latest/download/medyra.apk — publish each APK as a GitHub release with the asset named exactly `medyra.apk`.
+- APK release flow (after owner runs `npx eas-cli login`, one time): `npx eas-cli init` once, then `npx eas-cli build --platform android --profile apk`, download the artifact, `gh release create vX.Y.Z medyra.apk --repo Medyra-Health/medyra-mobile`.
+
 ## Next actions (in order)
 1. User verifies the full loop on device (sign in with existing account, upload a test document, create profile, assign, view trend, switch language in Settings).
-2. Owner creates store accounts and runs `npx eas-cli login` + `npx eas-cli init`, then follows `store/submission-guide.md` end to end (build, consoles, screenshots, submit).
-3. RevenueCat: see PHASE5-REVENUECAT.md — blocked on owner accounts (Apple Developer, Play Console, RevenueCat) + approved backend webhook spec. Until then store builds hide purchase UI.
+2. Owner runs `npx eas-cli login` (free) so the APK can be built and published as a GitHub release (see Distribution above).
+3. When funding exists: store accounts + `store/submission-guide.md` end to end, then RevenueCat (PHASE5-REVENUECAT.md).
 4. Optional: Arabic locale with an RTL layout pass.
 
 ## Fixed issues log
