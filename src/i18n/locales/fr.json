@@ -173,7 +173,7 @@
     "deleteBody": "Cela supprime définitivement votre compte, tous les rapports et tous les profils, sur le web et le mobile. Cette action est irréversible.",
     "deletePermanently": "Supprimer définitivement",
     "deleteFailed": "Suppression impossible",
-    "deleteFailedBody": "Réessayez ou écrivez à privacy@medyra.de et nous supprimerons votre compte pour vous.",
+    "deleteFailedBody": "Réessayez ou écrivez à hello@medyra.de et nous supprimerons votre compte pour vous.",
     "deletionNote": "La suppression est immédiate et couvre le web et le mobile (RGPD art. 17)."
   },
   "consent": {

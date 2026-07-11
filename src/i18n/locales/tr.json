@@ -173,7 +173,7 @@
     "deleteBody": "Bu işlem hesabınızı, tüm raporları ve tüm profilleri web ve mobilde kalıcı olarak siler. Geri alınamaz.",
     "deletePermanently": "Kalıcı olarak sil",
     "deleteFailed": "Silinemedi",
-    "deleteFailedBody": "Lütfen tekrar deneyin veya privacy@medyra.de adresine yazın, hesabınızı sizin için silelim.",
+    "deleteFailedBody": "Lütfen tekrar deneyin veya hello@medyra.de adresine yazın, hesabınızı sizin için silelim.",
     "deletionNote": "Silme işlemi anında gerçekleşir ve web ile mobili kapsar (GDPR md. 17)."
   },
   "consent": {

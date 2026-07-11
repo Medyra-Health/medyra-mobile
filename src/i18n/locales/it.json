@@ -173,7 +173,7 @@
     "deleteBody": "Questo elimina definitivamente il tuo account, tutti i referti e tutti i profili, su web e mobile. Non si può annullare.",
     "deletePermanently": "Elimina definitivamente",
     "deleteFailed": "Eliminazione non riuscita",
-    "deleteFailedBody": "Riprova oppure scrivi a privacy@medyra.de e elimineremo noi il tuo account.",
+    "deleteFailedBody": "Riprova oppure scrivi a hello@medyra.de e elimineremo noi il tuo account.",
     "deletionNote": "L'eliminazione è immediata e vale per web e mobile (GDPR art. 17)."
   },
   "consent": {

@@ -173,7 +173,7 @@
     "deleteBody": "To trwale usuwa Twoje konto, wszystkie raporty i wszystkie profile, w web i aplikacji. Tego nie można cofnąć.",
     "deletePermanently": "Usuń trwale",
     "deleteFailed": "Nie udało się usunąć",
-    "deleteFailedBody": "Spróbuj ponownie lub napisz na privacy@medyra.de, a usuniemy konto za Ciebie.",
+    "deleteFailedBody": "Spróbuj ponownie lub napisz na hello@medyra.de, a usuniemy konto za Ciebie.",
     "deletionNote": "Usunięcie jest natychmiastowe i obejmuje web oraz aplikację (RODO art. 17)."
   },
   "consent": {

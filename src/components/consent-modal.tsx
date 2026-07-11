@@ -86,7 +86,7 @@ export function ConsentModal({
                 <ThemedText variant="caption" style={styles.detailBlock}>
                   Legal basis: GDPR Art. 9(2)(a), explicit consent for processing special category
                   health data. You may withdraw consent at any time by deleting your account or
-                  emailing privacy@medyra.de.
+                  emailing hello@medyra.de.
                 </ThemedText>
                 <ThemedText variant="caption" style={styles.detailBlock}>
                   Data processors: Anthropic (Claude AI, report text analysis, USA with SCCs),
@@ -95,7 +95,7 @@ export function ConsentModal({
                 </ThemedText>
                 <ThemedText variant="caption" style={styles.detailBlock}>
                   Your rights under GDPR: access, correction, deletion, restriction, portability,
-                  objection, and withdrawal of consent at any time. Contact: privacy@medyra.de.
+                  objection, and withdrawal of consent at any time. Contact: hello@medyra.de.
                   Supervisory authority: Landesbeauftragter fuer Datenschutz Baden-Wuerttemberg.
                 </ThemedText>
               </View>

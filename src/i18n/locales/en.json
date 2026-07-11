@@ -173,7 +173,7 @@
     "deleteBody": "This permanently deletes your account, all reports, and all profiles on web and mobile. This cannot be undone.",
     "deletePermanently": "Delete permanently",
     "deleteFailed": "Could not delete",
-    "deleteFailedBody": "Please try again, or email privacy@medyra.de and we delete your account for you.",
+    "deleteFailedBody": "Please try again, or email hello@medyra.de and we delete your account for you.",
     "deletionNote": "Deletion is immediate and covers web and mobile (GDPR Art. 17)."
   },
   "consent": {

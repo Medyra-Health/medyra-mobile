@@ -173,7 +173,7 @@
     "deleteBody": "Dies löscht Ihr Konto, alle Berichte und alle Profile dauerhaft, auf Web und App. Das kann nicht rückgängig gemacht werden.",
     "deletePermanently": "Dauerhaft löschen",
     "deleteFailed": "Löschen fehlgeschlagen",
-    "deleteFailedBody": "Bitte versuchen Sie es erneut oder schreiben Sie an privacy@medyra.de, dann löschen wir Ihr Konto für Sie.",
+    "deleteFailedBody": "Bitte versuchen Sie es erneut oder schreiben Sie an hello@medyra.de, dann löschen wir Ihr Konto für Sie.",
     "deletionNote": "Die Löschung erfolgt sofort und gilt für Web und App (DSGVO Art. 17)."
   },
   "consent": {

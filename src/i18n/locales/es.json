@@ -173,7 +173,7 @@
     "deleteBody": "Esto elimina permanentemente su cuenta, todos los informes y todos los perfiles, en web y móvil. No se puede deshacer.",
     "deletePermanently": "Eliminar permanentemente",
     "deleteFailed": "No se pudo eliminar",
-    "deleteFailedBody": "Inténtelo de nuevo o escriba a privacy@medyra.de y eliminaremos su cuenta por usted.",
+    "deleteFailedBody": "Inténtelo de nuevo o escriba a hello@medyra.de y eliminaremos su cuenta por usted.",
     "deletionNote": "La eliminación es inmediata y cubre web y móvil (RGPD art. 17)."
   },
   "consent": {
