@@ -1,48 +1,38 @@
-# Medyra Mobile
+# Medyra
 
-Official Medyra app for iOS and Android. React Native with Expo (SDK 57), TypeScript, Expo Router.
+Understand your medical documents in plain language, in under 60 seconds.
 
-The app is a client of the existing Medyra backend at https://medyra.de. All document analysis, profile logic, and subscription state live in the web app's API routes. Authentication uses the same Clerk instance as the web app.
+Photograph a lab report, doctor letter, or health insurance document and Medyra
+explains every value in simple words. Private by design, encrypted, and GDPR
+compliant. One account works on the web and in the app.
 
-## Setup
+## Download
+
+- **Android:** [Download the latest APK](https://github.com/Medyra-Health/medyra-mobile/releases/latest/download/medyra.apk),
+  open the file, and allow the install when your phone asks.
+- **iPhone:** open [medyra.de](https://medyra.de) in Safari, tap Share, then
+  **Add to Home Screen**. Medyra installs as an app with its own icon.
+
+Get everything in one place at **[medyra.de/app](https://medyra.de/app)**.
+
+## About this repo
+
+This is the Medyra mobile app: React Native with Expo, TypeScript, Expo Router.
+It is a client of the Medyra backend at https://medyra.de, which handles all
+document analysis, health profiles, and subscriptions.
+
+## Run it locally
 
 ```bash
-cp .env.example .env   # fill in the Clerk publishable key
-npm install
+cp .env.example .env   # add your Clerk publishable key
+npm install --legacy-peer-deps
 npx expo start
 ```
 
-Scan the QR code with Expo Go (iOS or Android). Press `r` to reload, `?` for all commands.
+Scan the QR code with Expo Go on your phone.
 
-## Structure
+## Privacy
 
-```
-src/
-  app/           Expo Router routes
-    _layout.tsx  Root layout: fonts, splash, status bar
-    (tabs)/      Tab shell: Home, Profiles, Trends, Settings
-  components/    Shared UI (Screen, ThemedText, GlassCard)
-  theme/         tokens.ts, the single source of truth for colors,
-                 typography, spacing, and radii
-assets/          Icons and splash (brand versions arrive in Phase 6)
-eas.json         EAS build profiles (development, preview, production)
-```
-
-## Rules
-
-- Wellness positioning only. No diagnostic language anywhere.
-- Health data never goes into analytics, logs, or unencrypted local cache.
-- Tokens live in expo-secure-store, never AsyncStorage.
-- Speed claim is exactly "under 60 seconds".
-- Brand voice uses "we". No hyphens or em dashes in user facing copy.
-- Never commit `.env`.
-
-## Phases
-
-- [x] Phase 0: setup, theme, tab shell
-- [ ] Phase 1: Clerk authentication
-- [ ] Phase 2: document upload and analysis
-- [ ] Phase 3: health profiles
-- [ ] Phase 4: trends and history
-- [ ] Phase 5: subscriptions (RevenueCat)
-- [ ] Phase 6: settings, legal, polish
+Your health data is encrypted before it is stored and is never sold or shared.
+Reports can be kept as an encrypted backup or set to auto-delete after 30 days.
+See the [privacy policy](https://medyra.de/privacy).
