@@ -12,6 +12,10 @@ import { useApi } from '@/lib/api';
 import type { Subscription } from '@/lib/types';
 import { colors, radius, spacing } from '@/theme/tokens';
 
+// Store builds must not link out to web subscription management
+// (App Store 3.1.1, Play Payments policy). Set in eas.json production only.
+const STORE_BUILD = process.env.EXPO_PUBLIC_STORE_BUILD === '1';
+
 function Row({
   icon,
   label,
@@ -113,7 +117,7 @@ export default function SettingsScreen() {
           </ThemedText>
           {subscription?.tier === 'free' ? (
             <Row icon="sparkles-outline" label={t('settings.upgrade')} onPress={() => router.push('/paywall')} />
-          ) : (
+          ) : STORE_BUILD ? null : (
             <Row
               icon="card-outline"
               label={t('settings.manageSubscription')}

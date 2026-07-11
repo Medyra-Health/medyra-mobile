@@ -145,6 +145,7 @@
     "continueWeb": "Continue on medyra.de",
     "maybeLater": "Maybe later",
     "note": "Subscriptions are managed on medyra.de for now. Your plan unlocks the app automatically with the same account. Cancel anytime.",
+    "storeNote": "Paid plans are currently not available for purchase in the app. If your Medyra account already has a plan, it is active here automatically.",
     "personalFeatures": ["20 reports per month", "2 health profiles", "Trends over time", "Full PDF export"],
     "familyFeatures": ["50 reports per month", "Up to 5 member profiles", "Shared family health history", "Priority support"]
   },

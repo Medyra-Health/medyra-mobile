@@ -20,11 +20,21 @@
     "production": {
       "autoIncrement": true,
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://medyra.de"
+        "EXPO_PUBLIC_API_URL": "https://medyra.de",
+        "EXPO_PUBLIC_STORE_BUILD": "1"
       }
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "appleId": "abralur28@gmail.com",
+        "ascAppId": "SET_AFTER_APP_STORE_CONNECT_APP_IS_CREATED"
+      },
+      "android": {
+        "track": "internal",
+        "serviceAccountKeyPath": "./store/play-service-account.json"
+      }
+    }
   }
 }

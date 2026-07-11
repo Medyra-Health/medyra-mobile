@@ -145,6 +145,7 @@
     "continueWeb": "Weiter auf medyra.de",
     "maybeLater": "Vielleicht später",
     "note": "Abos werden derzeit auf medyra.de verwaltet. Ihr Tarif schaltet die App mit demselben Konto automatisch frei. Jederzeit kündbar.",
+    "storeNote": "Bezahlte Tarife sind derzeit nicht in der App erhältlich. Wenn Ihr Medyra Konto bereits einen Tarif hat, ist er hier automatisch aktiv.",
     "personalFeatures": ["20 Berichte pro Monat", "2 Gesundheitsprofile", "Verläufe über die Zeit", "Voller PDF Export"],
     "familyFeatures": ["50 Berichte pro Monat", "Bis zu 5 Profile", "Gemeinsamer Familienverlauf", "Bevorzugter Support"]
   },

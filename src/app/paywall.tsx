@@ -11,6 +11,11 @@ import { colors, spacing } from '@/theme/tokens';
 // NOTE Phase 5: native purchases via RevenueCat replace the web checkout link.
 // See PHASE5-REVENUECAT.md for the full plan and backend entitlement spec.
 
+// Store builds must not show prices or link to external checkout for digital
+// subscriptions (App Store 3.1.1, Play Payments policy). eas.json sets this
+// env only in the production profile; Expo Go and preview keep the web link.
+const STORE_BUILD = process.env.EXPO_PUBLIC_STORE_BUILD === '1';
+
 export default function PaywallScreen() {
   const router = useRouter();
   const { t } = useTranslation();
@@ -48,9 +53,11 @@ export default function PaywallScreen() {
         {tiers.map((tier) => (
           <GlassCard key={tier.name} style={styles.tier}>
             <ThemedText variant="h2">{tier.name}</ThemedText>
-            <ThemedText variant="bodyMuted" style={styles.price}>
-              {tier.price}
-            </ThemedText>
+            {!STORE_BUILD && (
+              <ThemedText variant="bodyMuted" style={styles.price}>
+                {tier.price}
+              </ThemedText>
+            )}
             {tier.features.map((f) => (
               <View key={f} style={styles.featureRow}>
                 <Ionicons name="checkmark-circle" size={16} color={colors.emerald} />
@@ -63,10 +70,10 @@ export default function PaywallScreen() {
         ))}
 
         <View style={styles.actions}>
-          <PrimaryButton title={t('paywall.continueWeb')} onPress={openWebPricing} />
+          {!STORE_BUILD && <PrimaryButton title={t('paywall.continueWeb')} onPress={openWebPricing} />}
           <GhostButton title={t('paywall.maybeLater')} onPress={() => router.back()} />
           <ThemedText variant="caption" style={styles.note}>
-            {t('paywall.note')}
+            {t(STORE_BUILD ? 'paywall.storeNote' : 'paywall.note')}
           </ThemedText>
         </View>
       </ScrollView>

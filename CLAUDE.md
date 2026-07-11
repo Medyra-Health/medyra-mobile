@@ -5,14 +5,12 @@ Read this first in every session. It is the single source of truth for where the
 ## What this is
 Official Medyra app (iOS + Android), Expo SDK 54 (pinned to the user's Expo Go, do not upgrade without checking their Expo Go supported SDK), TypeScript, Expo Router, `src/` layout. Client of the production backend at https://medyra.de — never build backend logic here. Full endpoint list: `API-CONTRACT.md`.
 
-## Status (2026-07-02)
-- Phase 0 setup: DONE (verified booting in Expo Go on user's iPhone)
-- Phase 1 auth: BUILT — Clerk sign in/up + email code, secure-store token cache, auth gate. Needs on-device verification with the user's real account.
-- Phase 2 upload/analysis: BUILT — camera/photos/files -> POST /reports/analyze, consent modal (copy mirrors web ConsentModal), analyzing overlay, result screen with flags/share/disclaimer. Needs on-device verification against production.
-- Phase 3 profiles: BUILT — CRUD + assign report to profile (report screen), free-tier upsell gate.
-- Phase 4 trends: BUILT — per-profile biomarker chips + hand-rolled SVG line chart + document timeline.
-- Phase 5 subscriptions: PARTIAL — paywall routes to medyra.de/pricing (Stripe web unlocks mobile via shared backend). RevenueCat NOT started: requires user accounts (RevenueCat, App Store Connect, Play Console), react-native-purchases, an EAS dev build (user's Expo account: abralur28@gmail.com, not yet logged in via `eas login`), and a backend entitlement endpoint (propose spec, get approval, then edit web repo).
-- Phase 6: BUILT except store metadata drafts — settings (plan, legal links, about w/ Potsdam Transfer, sign out, Clerk user.delete() for GDPR deletion), brand icons generated from web MedyraIcon SVG via headless Edge.
+## Status (2026-07-11)
+- Phases 0 to 4 and 6: BUILT (auth, upload/analysis, profiles, trends, settings, icons). Needs on-device verification with the user's real account.
+- Phase 5 subscriptions: paywall is store compliant. `EXPO_PUBLIC_STORE_BUILD=1` (set only in eas.json production profile) hides prices, the medyra.de checkout button, and the manage-subscription web link (App Store 3.1.1 / Play payments policy). Expo Go and preview builds keep the web checkout for testing. RevenueCat still deferred, see PHASE5-REVENUECAT.md.
+- i18n: 9 UI languages (en, de, es, fr, it, pl, tr, ru, uk). Key parity enforced by `node scripts/check-locales.js`. Arabic deferred (needs RTL pass).
+- Store readiness: DONE in code — expo-image-picker permission strings (EN + DE via app.json `locales`), microphone permission stripped, RECORD_AUDIO blocked on Android, ITSAppUsesNonExemptEncryption false. Listing drafts in `store/metadata.md`; full owner playbook in `store/submission-guide.md` (accounts, eas init/build/submit, privacy labels, screenshots, review notes).
+- Publishing blockers (owner only): Apple Developer 99 USD/yr, Play Console 25 USD, `npx eas-cli login` (not logged in) then `eas init` to write projectId into app.json.
 
 ## Hard rules (from product owner)
 - Wellness positioning; never diagnostic language. Wellness disclaimer on every analysis screen (`src/components/disclaimer.tsx`).
@@ -27,9 +25,9 @@ Official Medyra app (iOS + Android), Expo SDK 54 (pinned to the user's Expo Go, 
 
 ## Next actions (in order)
 1. User verifies the full loop on device (sign in with existing account, upload a test document, create profile, assign, view trend, switch language in Settings).
-2. RevenueCat: see PHASE5-REVENUECAT.md — blocked on owner accounts (Apple Developer, Play Console, RevenueCat) + `eas login` + approved backend webhook spec.
-3. Additional locales beyond EN/DE in `src/i18n/locales/` (copy the en.json key structure).
-4. EAS submit config once store accounts exist; listing drafts ready in `store/metadata.md`.
+2. Owner creates store accounts and runs `npx eas-cli login` + `npx eas-cli init`, then follows `store/submission-guide.md` end to end (build, consoles, screenshots, submit).
+3. RevenueCat: see PHASE5-REVENUECAT.md — blocked on owner accounts (Apple Developer, Play Console, RevenueCat) + approved backend webhook spec. Until then store builds hide purchase UI.
+4. Optional: Arabic locale with an RTL layout pass.
 
 ## Fixed issues log
 - Analysis prompt was lab-only; backend now classifies docType and returns sections for letters/prescriptions/insurance (web commit bf60f04); mobile renders sections + questions + next steps (2026-07-03).

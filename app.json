@@ -8,10 +8,19 @@
     "scheme": "medyra",
     "userInterfaceStyle": "light",
     "backgroundColor": "#F7FBF9",
+    "primaryColor": "#10B981",
+    "locales": {
+      "en": "./assets/locales/en.json",
+      "de": "./assets/locales/de.json"
+    },
     "ios": {
       "icon": "./assets/images/icon.png",
       "supportsTablet": false,
-      "bundleIdentifier": "de.medyra.app"
+      "bundleIdentifier": "de.medyra.app",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "CFBundleAllowMixedLocalizations": true
+      }
     },
     "android": {
       "package": "de.medyra.app",
@@ -21,7 +30,8 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "blockedPermissions": ["android.permission.RECORD_AUDIO"]
     },
     "web": {
       "output": "static",
@@ -35,6 +45,14 @@
           "backgroundColor": "#040C08",
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 120
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "Medyra uses the camera to photograph your medical document so we can explain it in plain language.",
+          "photosPermission": "Medyra uses your photo library so you can pick an existing photo of a medical document to explain.",
+          "microphonePermission": false
         }
       ],
       "expo-font",
