@@ -16,11 +16,15 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 
+import { AppAnalytics } from '@/components/app-analytics';
+import { AppErrorBoundary } from '@/components/error-boundary';
 import { loadStoredLanguage } from '@/i18n';
+import { setupCrashReporter } from '@/lib/crash-reporter';
 import { colors } from '@/theme/tokens';
 
 SplashScreen.preventAutoHideAsync();
 loadStoredLanguage();
+setupCrashReporter();
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -47,16 +51,19 @@ export default function RootLayout() {
       tokenCache={tokenCache}
       publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}
     >
-      <StatusBar style="dark" />
-      <Stack
-        screenOptions={{
-          headerShown: false,
-          contentStyle: { backgroundColor: colors.background },
-        }}
-      >
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="(auth)" />
-      </Stack>
+      <AppErrorBoundary>
+        <AppAnalytics />
+        <StatusBar style="dark" />
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: { backgroundColor: colors.background },
+          }}
+        >
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="(auth)" />
+        </Stack>
+      </AppErrorBoundary>
     </ClerkProvider>
   );
 }
