@@ -8,13 +8,15 @@
       "developmentClient": true,
       "distribution": "internal",
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://medyra.de"
+        "EXPO_PUBLIC_API_URL": "https://medyra.de",
+        "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_live_Y2xlcmsubWVkeXJhLmRlJA"
       }
     },
     "preview": {
       "distribution": "internal",
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://medyra.de"
+        "EXPO_PUBLIC_API_URL": "https://medyra.de",
+        "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_live_Y2xlcmsubWVkeXJhLmRlJA"
       }
     },
     "apk": {
@@ -24,14 +26,16 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://medyra.de"
+        "EXPO_PUBLIC_API_URL": "https://medyra.de",
+        "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_live_Y2xlcmsubWVkeXJhLmRlJA"
       }
     },
     "production": {
       "autoIncrement": true,
       "env": {
         "EXPO_PUBLIC_API_URL": "https://medyra.de",
-        "EXPO_PUBLIC_STORE_BUILD": "1"
+        "EXPO_PUBLIC_STORE_BUILD": "1",
+        "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_live_Y2xlcmsubWVkeXJhLmRlJA"
       }
     }
   },
