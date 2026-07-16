@@ -15,6 +15,9 @@ export default function SignInScreen() {
   const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [code, setCode] = useState('');
+  const [codeMode, setCodeMode] = useState(false);
+  const [codeSent, setCodeSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -32,6 +35,45 @@ export default function SignInScreen() {
       }
     } catch (err: any) {
       setError(err?.errors?.[0]?.message ?? t('auth.signInFailed'));
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function onSendCode() {
+    if (!isLoaded || loading) return;
+    setError(null);
+    setLoading(true);
+    try {
+      const attempt = await signIn.create({ identifier: email.trim() });
+      const factor = attempt.supportedFirstFactors?.find((f) => f.strategy === 'email_code');
+      if (!factor || !('emailAddressId' in factor)) {
+        setError(t('auth.signInFailed'));
+        return;
+      }
+      await signIn.prepareFirstFactor({ strategy: 'email_code', emailAddressId: factor.emailAddressId });
+      setCodeSent(true);
+    } catch (err: any) {
+      setError(err?.errors?.[0]?.message ?? t('auth.signInFailed'));
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function onVerifyCode() {
+    if (!isLoaded || loading) return;
+    setError(null);
+    setLoading(true);
+    try {
+      const attempt = await signIn.attemptFirstFactor({ strategy: 'email_code', code: code.trim() });
+      if (attempt.status === 'complete') {
+        await setActive({ session: attempt.createdSessionId });
+        router.replace('/(tabs)');
+      } else {
+        setError(t('auth.invalidCode'));
+      }
+    } catch (err: any) {
+      setError(err?.errors?.[0]?.message ?? t('auth.invalidCode'));
     } finally {
       setLoading(false);
     }
@@ -57,22 +99,37 @@ export default function SignInScreen() {
             autoComplete="email"
             placeholder="you@example.com"
           />
-          <Field
-            label={t('auth.password')}
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-            autoComplete="current-password"
-            placeholder={t('auth.passwordPlaceholder')}
-          />
 
-          <View style={styles.forgotRow}>
-            <Link href="/(auth)/forgot-password">
-              <ThemedText variant="caption" style={styles.link}>
-                {t('auth.forgotPassword')}
-              </ThemedText>
-            </Link>
-          </View>
+          {codeMode ? (
+            codeSent ? (
+              <Field
+                label={t('auth.verificationCode')}
+                value={code}
+                onChangeText={setCode}
+                keyboardType="number-pad"
+                placeholder="000000"
+              />
+            ) : null
+          ) : (
+            <>
+              <Field
+                label={t('auth.password')}
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+                autoComplete="current-password"
+                placeholder={t('auth.passwordPlaceholder')}
+              />
+
+              <View style={styles.forgotRow}>
+                <Link href="/(auth)/forgot-password">
+                  <ThemedText variant="caption" style={styles.link}>
+                    {t('auth.forgotPassword')}
+                  </ThemedText>
+                </Link>
+              </View>
+            </>
+          )}
 
           {error ? (
             <ThemedText variant="caption" style={styles.error}>
@@ -80,7 +137,29 @@ export default function SignInScreen() {
             </ThemedText>
           ) : null}
 
-          <PrimaryButton title={t('auth.signIn')} onPress={onSignIn} loading={loading} disabled={!email || !password} />
+          {codeMode ? (
+            codeSent ? (
+              <PrimaryButton title={t('auth.verifyContinue')} onPress={onVerifyCode} loading={loading} disabled={!code.trim()} />
+            ) : (
+              <PrimaryButton title={t('auth.sendSignInCode')} onPress={onSendCode} loading={loading} disabled={!email.trim()} />
+            )
+          ) : (
+            <PrimaryButton title={t('auth.signIn')} onPress={onSignIn} loading={loading} disabled={!email || !password} />
+          )}
+
+          <View style={styles.footer}>
+            <ThemedText
+              style={styles.link}
+              onPress={() => {
+                setCodeMode(!codeMode);
+                setCodeSent(false);
+                setCode('');
+                setError(null);
+              }}
+            >
+              {codeMode ? t('auth.usePasswordInstead') : t('auth.useCodeInstead')}
+            </ThemedText>
+          </View>
 
           <View style={styles.footer}>
             <ThemedText variant="bodyMuted">{t('auth.newHere')}</ThemedText>

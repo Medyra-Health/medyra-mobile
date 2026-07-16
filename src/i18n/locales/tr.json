@@ -36,7 +36,10 @@
     "resetCta": "Yeni şifreyi kaydet",
     "resetFailed": "Sıfırlama başarısız oldu. Lütfen tekrar deneyin.",
     "backToSignIn": "Girişe geri dön",
-    "passwordTooShort": "Şifre en az 8 karakter olmalıdır."
+    "passwordTooShort": "Şifre en az 8 karakter olmalıdır.",
+    "sendSignInCode": "Bana giriş kodu gönder",
+    "useCodeInstead": "E posta kodu ile giriş yap",
+    "usePasswordInstead": "Şifre ile giriş yap"
   },
   "home": {
     "hello": "Merhaba",

@@ -36,7 +36,10 @@
     "resetCta": "Set new password",
     "resetFailed": "Password reset failed. Please try again.",
     "backToSignIn": "Back to sign in",
-    "passwordTooShort": "The password must have at least 8 characters."
+    "passwordTooShort": "The password must have at least 8 characters.",
+    "sendSignInCode": "Email me a sign in code",
+    "useCodeInstead": "Sign in with an email code instead",
+    "usePasswordInstead": "Sign in with a password instead"
   },
   "home": {
     "hello": "Hello",

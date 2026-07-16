@@ -36,7 +36,10 @@
     "resetCta": "Zapisz nowe hasło",
     "resetFailed": "Reset nie powiódł się. Spróbuj ponownie.",
     "backToSignIn": "Wróć do logowania",
-    "passwordTooShort": "Hasło musi mieć co najmniej 8 znaków."
+    "passwordTooShort": "Hasło musi mieć co najmniej 8 znaków.",
+    "sendSignInCode": "Wyślij mi kod logowania",
+    "useCodeInstead": "Zaloguj się kodem z emaila",
+    "usePasswordInstead": "Zaloguj się hasłem"
   },
   "home": {
     "hello": "Cześć",

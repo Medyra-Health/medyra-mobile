@@ -36,7 +36,10 @@
     "resetCta": "Guardar nueva contraseña",
     "resetFailed": "No se pudo restablecer. Inténtelo de nuevo.",
     "backToSignIn": "Volver a iniciar sesión",
-    "passwordTooShort": "La contraseña debe tener al menos 8 caracteres."
+    "passwordTooShort": "La contraseña debe tener al menos 8 caracteres.",
+    "sendSignInCode": "Enviarme un código de acceso",
+    "useCodeInstead": "Iniciar sesión con un código por correo",
+    "usePasswordInstead": "Iniciar sesión con contraseña"
   },
   "home": {
     "hello": "Hola",

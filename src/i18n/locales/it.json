@@ -36,7 +36,10 @@
     "resetCta": "Salva la nuova password",
     "resetFailed": "Reimpostazione non riuscita. Riprova.",
     "backToSignIn": "Torna all accesso",
-    "passwordTooShort": "La password deve avere almeno 8 caratteri."
+    "passwordTooShort": "La password deve avere almeno 8 caratteri.",
+    "sendSignInCode": "Inviami un codice di accesso",
+    "useCodeInstead": "Accedi con un codice via email",
+    "usePasswordInstead": "Accedi con la password"
   },
   "home": {
     "hello": "Ciao",
