@@ -27,7 +27,16 @@
     "continueWith": "Kontynuuj z {{provider}}",
     "or": "lub",
     "signUpFailed": "Rejestracja nie powiodła się. Spróbuj ponownie.",
-    "invalidCode": "Nieprawidłowy kod. Spróbuj ponownie."
+    "invalidCode": "Nieprawidłowy kod. Spróbuj ponownie.",
+    "forgotPassword": "Nie pamiętasz hasła?",
+    "resetTitle": "Zresetuj hasło",
+    "resetSubtitle": "Podaj swój email, a my wyślemy Ci kod.",
+    "sendCode": "Wyślij kod",
+    "newPassword": "Nowe hasło",
+    "resetCta": "Zapisz nowe hasło",
+    "resetFailed": "Reset nie powiódł się. Spróbuj ponownie.",
+    "backToSignIn": "Wróć do logowania",
+    "passwordTooShort": "Hasło musi mieć co najmniej 8 znaków."
   },
   "home": {
     "hello": "Cześć",

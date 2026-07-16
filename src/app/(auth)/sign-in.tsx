@@ -66,6 +66,14 @@ export default function SignInScreen() {
             placeholder={t('auth.passwordPlaceholder')}
           />
 
+          <View style={styles.forgotRow}>
+            <Link href="/(auth)/forgot-password">
+              <ThemedText variant="caption" style={styles.link}>
+                {t('auth.forgotPassword')}
+              </ThemedText>
+            </Link>
+          </View>
+
           {error ? (
             <ThemedText variant="caption" style={styles.error}>
               {error}
@@ -92,5 +100,6 @@ const styles = StyleSheet.create({
   header: { gap: spacing.sm, marginBottom: spacing.xl },
   error: { color: '#F87171', marginBottom: spacing.md },
   footer: { flexDirection: 'row', justifyContent: 'center', marginTop: spacing.lg },
+  forgotRow: { flexDirection: 'row', justifyContent: 'flex-end', marginBottom: spacing.md },
   link: { color: '#34D399' },
 });

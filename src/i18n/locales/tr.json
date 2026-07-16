@@ -27,7 +27,16 @@
     "continueWith": "{{provider}} ile devam et",
     "or": "veya",
     "signUpFailed": "Kayıt başarısız. Lütfen tekrar deneyin.",
-    "invalidCode": "Geçersiz kod. Lütfen tekrar deneyin."
+    "invalidCode": "Geçersiz kod. Lütfen tekrar deneyin.",
+    "forgotPassword": "Şifrenizi mi unuttunuz?",
+    "resetTitle": "Şifrenizi sıfırlayın",
+    "resetSubtitle": "E postanızı girin, size bir kod gönderelim.",
+    "sendCode": "Kod gönder",
+    "newPassword": "Yeni şifre",
+    "resetCta": "Yeni şifreyi kaydet",
+    "resetFailed": "Sıfırlama başarısız oldu. Lütfen tekrar deneyin.",
+    "backToSignIn": "Girişe geri dön",
+    "passwordTooShort": "Şifre en az 8 karakter olmalıdır."
   },
   "home": {
     "hello": "Merhaba",

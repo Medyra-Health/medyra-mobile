@@ -27,7 +27,16 @@
     "continueWith": "Continue with {{provider}}",
     "or": "or",
     "signUpFailed": "Sign up failed. Please try again.",
-    "invalidCode": "Invalid code. Please try again."
+    "invalidCode": "Invalid code. Please try again.",
+    "forgotPassword": "Forgot password?",
+    "resetTitle": "Reset your password",
+    "resetSubtitle": "Enter your email and we send you a reset code.",
+    "sendCode": "Send reset code",
+    "newPassword": "New password",
+    "resetCta": "Set new password",
+    "resetFailed": "Password reset failed. Please try again.",
+    "backToSignIn": "Back to sign in",
+    "passwordTooShort": "The password must have at least 8 characters."
   },
   "home": {
     "hello": "Hello",

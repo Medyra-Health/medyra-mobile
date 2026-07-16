@@ -27,7 +27,16 @@
     "continueWith": "Weiter mit {{provider}}",
     "or": "oder",
     "signUpFailed": "Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut.",
-    "invalidCode": "Ungültiger Code. Bitte versuchen Sie es erneut."
+    "invalidCode": "Ungültiger Code. Bitte versuchen Sie es erneut.",
+    "forgotPassword": "Passwort vergessen?",
+    "resetTitle": "Passwort zurücksetzen",
+    "resetSubtitle": "Geben Sie Ihre E-Mail ein und wir senden Ihnen einen Code.",
+    "sendCode": "Code senden",
+    "newPassword": "Neues Passwort",
+    "resetCta": "Neues Passwort speichern",
+    "resetFailed": "Zurücksetzen fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "backToSignIn": "Zurück zur Anmeldung",
+    "passwordTooShort": "Das Passwort muss mindestens 8 Zeichen haben."
   },
   "home": {
     "hello": "Hallo",

@@ -27,7 +27,16 @@
     "continueWith": "Continua con {{provider}}",
     "or": "oppure",
     "signUpFailed": "Registrazione non riuscita. Riprova.",
-    "invalidCode": "Codice non valido. Riprova."
+    "invalidCode": "Codice non valido. Riprova.",
+    "forgotPassword": "Password dimenticata?",
+    "resetTitle": "Reimposta la tua password",
+    "resetSubtitle": "Inserisci la tua email e ti inviamo un codice.",
+    "sendCode": "Invia codice",
+    "newPassword": "Nuova password",
+    "resetCta": "Salva la nuova password",
+    "resetFailed": "Reimpostazione non riuscita. Riprova.",
+    "backToSignIn": "Torna all accesso",
+    "passwordTooShort": "La password deve avere almeno 8 caratteri."
   },
   "home": {
     "hello": "Ciao",

@@ -27,7 +27,16 @@
     "continueWith": "Continuar con {{provider}}",
     "or": "o",
     "signUpFailed": "No se pudo crear la cuenta. Inténtelo de nuevo.",
-    "invalidCode": "Código no válido. Inténtelo de nuevo."
+    "invalidCode": "Código no válido. Inténtelo de nuevo.",
+    "forgotPassword": "¿Olvidó su contraseña?",
+    "resetTitle": "Restablezca su contraseña",
+    "resetSubtitle": "Introduzca su correo y le enviamos un código.",
+    "sendCode": "Enviar código",
+    "newPassword": "Nueva contraseña",
+    "resetCta": "Guardar nueva contraseña",
+    "resetFailed": "No se pudo restablecer. Inténtelo de nuevo.",
+    "backToSignIn": "Volver a iniciar sesión",
+    "passwordTooShort": "La contraseña debe tener al menos 8 caracteres."
   },
   "home": {
     "hello": "Hola",
