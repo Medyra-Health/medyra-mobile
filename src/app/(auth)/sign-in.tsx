@@ -18,8 +18,29 @@ export default function SignInScreen() {
   const [code, setCode] = useState('');
   const [codeMode, setCodeMode] = useState(false);
   const [codeSent, setCodeSent] = useState(false);
+  const [deviceCheck, setDeviceCheck] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  // Clerk asks for an email code when signing in with a password on a device it
+  // has not seen before (Client Trust). Depending on the SDK version this shows
+  // up as needs_client_trust (new mfa API) or needs_second_factor (older API).
+  async function startDeviceCheck(attempt: any) {
+    if (attempt.status === 'needs_client_trust' && attempt.mfa?.sendEmailCode) {
+      await attempt.mfa.sendEmailCode();
+    } else if (attempt.status === 'needs_second_factor') {
+      await attempt.prepareSecondFactor({ strategy: 'email_code' });
+    } else {
+      const factor = attempt.supportedFirstFactors?.find((f: any) => f.strategy === 'email_code');
+      if (!factor) {
+        setError(t('auth.signInFailed'));
+        return;
+      }
+      await attempt.prepareFirstFactor({ strategy: 'email_code', emailAddressId: factor.emailAddressId });
+    }
+    setDeviceCheck(true);
+    setCode('');
+  }
 
   async function onSignIn() {
     if (!isLoaded || loading) return;
@@ -30,11 +51,42 @@ export default function SignInScreen() {
       if (attempt.status === 'complete') {
         await setActive({ session: attempt.createdSessionId });
         router.replace('/(tabs)');
+      } else if (
+        ['needs_client_trust', 'needs_second_factor', 'needs_first_factor'].includes(attempt.status as string)
+      ) {
+        await startDeviceCheck(attempt);
       } else {
         setError(t('auth.signInFailed'));
       }
     } catch (err: any) {
       setError(err?.errors?.[0]?.message ?? t('auth.signInFailed'));
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function onVerifyDeviceCheck() {
+    if (!isLoaded || loading) return;
+    setError(null);
+    setLoading(true);
+    try {
+      const s: any = signIn;
+      let attempt: any;
+      if (s.status === 'needs_client_trust' && s.mfa?.verifyEmailCode) {
+        attempt = await s.mfa.verifyEmailCode({ code: code.trim() });
+      } else if (s.status === 'needs_second_factor') {
+        attempt = await s.attemptSecondFactor({ strategy: 'email_code', code: code.trim() });
+      } else {
+        attempt = await s.attemptFirstFactor({ strategy: 'email_code', code: code.trim() });
+      }
+      if (attempt.status === 'complete') {
+        await setActive({ session: attempt.createdSessionId });
+        router.replace('/(tabs)');
+      } else {
+        setError(t('auth.invalidCode'));
+      }
+    } catch (err: any) {
+      setError(err?.errors?.[0]?.message ?? t('auth.invalidCode'));
     } finally {
       setLoading(false);
     }
@@ -86,9 +138,46 @@ export default function SignInScreen() {
           <View style={styles.header}>
             <ThemedText variant="label">Medyra</ThemedText>
             <ThemedText variant="h1">{t('auth.welcomeBack')}</ThemedText>
-            <ThemedText variant="bodyMuted">{t('auth.signInSubtitle')}</ThemedText>
+            <ThemedText variant="bodyMuted">
+              {deviceCheck ? t('auth.codeSent', { email: email.trim() }) : t('auth.signInSubtitle')}
+            </ThemedText>
           </View>
 
+          {deviceCheck ? (
+            <>
+              <Field
+                label={t('auth.verificationCode')}
+                value={code}
+                onChangeText={setCode}
+                keyboardType="number-pad"
+                placeholder="000000"
+              />
+              {error ? (
+                <ThemedText variant="caption" style={styles.error}>
+                  {error}
+                </ThemedText>
+              ) : null}
+              <PrimaryButton
+                title={t('auth.verifyContinue')}
+                onPress={onVerifyDeviceCheck}
+                loading={loading}
+                disabled={!code.trim()}
+              />
+              <View style={styles.footer}>
+                <ThemedText
+                  style={styles.link}
+                  onPress={() => {
+                    setDeviceCheck(false);
+                    setCode('');
+                    setError(null);
+                  }}
+                >
+                  {t('auth.backToSignIn')}
+                </ThemedText>
+              </View>
+            </>
+          ) : (
+            <>
           <SocialAuthButtons onError={setError} />
 
           <Field
@@ -167,6 +256,8 @@ export default function SignInScreen() {
               <ThemedText style={styles.link}>{t('auth.createAccount')}</ThemedText>
             </Link>
           </View>
+            </>
+          )}
         </ScrollView>
       </KeyboardAvoidingView>
     </Screen>
