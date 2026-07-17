@@ -46,12 +46,29 @@ export default function SettingsScreen() {
   const { t } = useTranslation();
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [languageChoice, setLanguageChoice] = useState('system');
+  const [retention, setRetention] = useState<'keep' | 'auto30' | null>(null);
+  const [retentionSaving, setRetentionSaving] = useState(false);
 
   useFocusEffect(
     useCallback(() => {
       api.getSubscription().then(setSubscription).catch(() => {});
+      api.getSettings().then((s) => setRetention(s.dataRetention)).catch(() => setRetention('auto30'));
     }, [api]),
   );
+
+  async function onPickRetention(value: 'keep' | 'auto30') {
+    if (value === retention || retentionSaving) return;
+    const prev = retention;
+    setRetention(value);
+    setRetentionSaving(true);
+    try {
+      await api.updateSettings(value);
+    } catch {
+      setRetention(prev);
+    } finally {
+      setRetentionSaving(false);
+    }
+  }
 
   useEffect(() => {
     getStoredLanguage().then(setLanguageChoice);
@@ -144,6 +161,35 @@ export default function SettingsScreen() {
           </View>
         </GlassCard>
 
+        {/* Data & privacy: keep vs auto delete after 30 days, same setting as web */}
+        <GlassCard style={styles.card}>
+          <ThemedText variant="label">{t('settings.dataPrivacy')}</ThemedText>
+          {(
+            [
+              { value: 'auto30', icon: 'trash-outline', title: t('settings.autoDeleteTitle'), desc: t('settings.autoDeleteDesc') },
+              { value: 'keep', icon: 'shield-checkmark-outline', title: t('settings.keepDataTitle'), desc: t('settings.keepDataDesc') },
+            ] as const
+          ).map((o) => (
+            <Pressable
+              key={o.value}
+              onPress={() => onPickRetention(o.value)}
+              disabled={retention === null}
+              style={[styles.retentionOption, retention === o.value && styles.retentionActive]}
+            >
+              <Ionicons
+                name={o.icon}
+                size={18}
+                color={retention === o.value ? colors.emerald : colors.textFaint}
+              />
+              <View style={styles.retentionText}>
+                <ThemedText variant="body">{o.title}</ThemedText>
+                <ThemedText variant="caption">{o.desc}</ThemedText>
+              </View>
+              {retention === o.value ? <Ionicons name="checkmark" size={16} color={colors.emerald} /> : null}
+            </Pressable>
+          ))}
+        </GlassCard>
+
         {/* Legal */}
         <GlassCard style={styles.card}>
           <ThemedText variant="label">{t('settings.legal')}</ThemedText>
@@ -198,4 +244,15 @@ const styles = StyleSheet.create({
   },
   chipActive: { backgroundColor: colors.emerald, borderColor: colors.emerald },
   chipTextActive: { color: '#FFFFFF' },
+  retentionOption: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    padding: spacing.md,
+    borderRadius: radius.lg,
+    borderWidth: 1,
+    borderColor: colors.glassBorderStrong,
+  },
+  retentionActive: { borderColor: colors.emerald, backgroundColor: 'rgba(16, 185, 129, 0.08)' },
+  retentionText: { flex: 1, gap: 2 },
 });

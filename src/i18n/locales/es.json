@@ -229,7 +229,12 @@
     "deletePermanently": "Eliminar permanentemente",
     "deleteFailed": "No se pudo eliminar",
     "deleteFailedBody": "Inténtelo de nuevo o escriba a hello@medyra.de y eliminaremos su cuenta por usted.",
-    "deletionNote": "La eliminación es inmediata y cubre web y móvil (RGPD art. 17)."
+    "deletionNote": "La eliminación es inmediata y cubre web y móvil (RGPD art. 17).",
+    "dataPrivacy": "Datos y privacidad",
+    "keepDataTitle": "Conservar mis datos (copia de seguridad cifrada)",
+    "keepDataDesc": "Sus documentos e historial de laboratorio permanecen disponibles en todo momento, como su archivo de salud personal. Todo se cifra en reposo. Puede eliminar cualquier documento, o volver atrás, cuando quiera.",
+    "autoDeleteTitle": "Eliminación automática tras 30 días (RGPD)",
+    "autoDeleteDesc": "Cada documento se elimina permanentemente 30 días después de subirlo. Máxima privacidad, nada se conserva más tiempo del necesario."
   },
   "consent": {
     "title": "Sus datos de salud, su control",

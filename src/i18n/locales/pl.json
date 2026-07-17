@@ -229,7 +229,12 @@
     "deletePermanently": "Usuń trwale",
     "deleteFailed": "Nie udało się usunąć",
     "deleteFailedBody": "Spróbuj ponownie lub napisz na hello@medyra.de, a usuniemy konto za Ciebie.",
-    "deletionNote": "Usunięcie jest natychmiastowe i obejmuje web oraz aplikację (RODO art. 17)."
+    "deletionNote": "Usunięcie jest natychmiastowe i obejmuje web oraz aplikację (RODO art. 17).",
+    "dataPrivacy": "Dane i prywatność",
+    "keepDataTitle": "Zachowaj moje dane (zaszyfrowana kopia zapasowa)",
+    "keepDataDesc": "Twoje dokumenty i historia laboratoryjna pozostają dostępne w każdej chwili, jako Twoje osobiste archiwum zdrowotne. Wszystko jest szyfrowane w spoczynku. Możesz usunąć dowolny dokument lub zmienić opcję w dowolnym momencie.",
+    "autoDeleteTitle": "Automatyczne usuwanie po 30 dniach (RODO)",
+    "autoDeleteDesc": "Każdy dokument jest trwale usuwany 30 dni po przesłaniu. Maksymalna prywatność, nic nie jest przechowywane dłużej niż to konieczne."
   },
   "consent": {
     "title": "Twoje dane zdrowotne, Twoja kontrola",

@@ -98,6 +98,14 @@ export function createApi(getToken: TokenGetter) {
 
     getSubscription: () => request<Subscription>(getToken, '/subscription'),
 
+    // Data & privacy: keep reports forever or auto delete 30 days after upload (default)
+    getSettings: () => request<{ dataRetention: 'keep' | 'auto30'; totalReports: number }>(getToken, '/settings'),
+    updateSettings: (dataRetention: 'keep' | 'auto30') =>
+      request<{ success: boolean; dataRetention: 'keep' | 'auto30' }>(getToken, '/settings', {
+        method: 'POST',
+        ...jsonBody({ dataRetention }),
+      }),
+
     // Recheck reminders: backend emails when it is time to test again
     createReminder: (preset: '4w' | '3m' | '6m', reportId?: string, label?: string, locale?: string) =>
       request<{ success: boolean; reminder: Reminder }>(getToken, '/reminders', {

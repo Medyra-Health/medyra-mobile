@@ -229,7 +229,12 @@
     "deletePermanently": "Kalıcı olarak sil",
     "deleteFailed": "Silinemedi",
     "deleteFailedBody": "Lütfen tekrar deneyin veya hello@medyra.de adresine yazın, hesabınızı sizin için silelim.",
-    "deletionNote": "Silme işlemi anında gerçekleşir ve web ile mobili kapsar (GDPR md. 17)."
+    "deletionNote": "Silme işlemi anında gerçekleşir ve web ile mobili kapsar (GDPR md. 17).",
+    "dataPrivacy": "Veri ve Gizlilik",
+    "keepDataTitle": "Verilerimi sakla (şifreli yedek)",
+    "keepDataDesc": "Belgeleriniz ve laboratuvar geçmişiniz, kişisel sağlık arşiviniz olarak her zaman erişilebilir kalır. Her şey depolamada şifrelenir. İstediğiniz zaman herhangi bir belgeyi silebilir veya geri dönebilirsiniz.",
+    "autoDeleteTitle": "30 gün sonra otomatik sil (GDPR)",
+    "autoDeleteDesc": "Her belge, yüklendikten 30 gün sonra kalıcı olarak silinir. Maksimum gizlilik, gerekenden fazla hiçbir şey saklanmaz."
   },
   "consent": {
     "title": "Sağlık verileriniz, sizin kontrolünüz",

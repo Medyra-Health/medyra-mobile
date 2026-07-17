@@ -229,7 +229,12 @@
     "deletePermanently": "Dauerhaft löschen",
     "deleteFailed": "Löschen fehlgeschlagen",
     "deleteFailedBody": "Bitte versuchen Sie es erneut oder schreiben Sie an hello@medyra.de, dann löschen wir Ihr Konto für Sie.",
-    "deletionNote": "Die Löschung erfolgt sofort und gilt für Web und App (DSGVO Art. 17)."
+    "deletionNote": "Die Löschung erfolgt sofort und gilt für Web und App (DSGVO Art. 17).",
+    "dataPrivacy": "Daten & Datenschutz",
+    "keepDataTitle": "Meine Daten behalten (verschlüsseltes Backup)",
+    "keepDataDesc": "Ihre Dokumente und Laborhistorie bleiben jederzeit verfügbar, als persönliches Gesundheitsarchiv. Alles wird verschlüsselt gespeichert. Sie können jedes Dokument jederzeit löschen oder zurückwechseln.",
+    "autoDeleteTitle": "Automatisches Löschen nach 30 Tagen (DSGVO)",
+    "autoDeleteDesc": "Jedes Dokument wird 30 Tage nach dem Hochladen dauerhaft gelöscht. Maximaler Datenschutz, nichts wird länger als nötig aufbewahrt."
   },
   "consent": {
     "title": "Ihre Gesundheitsdaten, Ihre Kontrolle",

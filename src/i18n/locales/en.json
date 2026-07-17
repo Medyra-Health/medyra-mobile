@@ -229,7 +229,12 @@
     "deletePermanently": "Delete permanently",
     "deleteFailed": "Could not delete",
     "deleteFailedBody": "Please try again, or email hello@medyra.de and we delete your account for you.",
-    "deletionNote": "Deletion is immediate and covers web and mobile (GDPR Art. 17)."
+    "deletionNote": "Deletion is immediate and covers web and mobile (GDPR Art. 17).",
+    "dataPrivacy": "Data & Privacy",
+    "keepDataTitle": "Keep my data (encrypted backup)",
+    "keepDataDesc": "Your documents and lab history stay available any time, as your personal health archive. Everything is encrypted at rest. You can delete any document, or switch back, whenever you want.",
+    "autoDeleteTitle": "Auto-delete after 30 days (GDPR)",
+    "autoDeleteDesc": "Every document is permanently deleted 30 days after upload. Maximum privacy, nothing kept longer than needed."
   },
   "consent": {
     "title": "Your Health Data, Your Control",
