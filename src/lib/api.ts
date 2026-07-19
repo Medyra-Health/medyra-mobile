@@ -4,6 +4,10 @@ import { useMemo } from 'react';
 import type {
   AnalyzeResult,
   DocType,
+  Medication,
+  MedicationInput,
+  MedplanData,
+  MedSlot,
   Profile,
   Referral,
   Reminder,
@@ -139,6 +143,32 @@ export function createApi(getToken: TokenGetter) {
 
     // Public compact lab value dataset for the value check screen
     getWerte: () => request<{ entries: WerteEntry[] }>(getToken, '/werte'),
+
+    // Medication planner (1-0-1-0). Self is free; extra profiles need a paid tier.
+    getMedplan: (profileId?: string | null) =>
+      request<MedplanData>(getToken, `/medplan${profileId ? `?profileId=${encodeURIComponent(profileId)}` : ''}`),
+    createMedication: (med: MedicationInput) =>
+      request<{ success: boolean; medication: Medication }>(getToken, '/medplan/medications', {
+        method: 'POST',
+        ...jsonBody(med),
+      }),
+    updateMedication: (id: string, med: MedicationInput) =>
+      request<{ success: boolean }>(getToken, `/medplan/medications/${encodeURIComponent(id)}`, {
+        method: 'PATCH',
+        ...jsonBody(med),
+      }),
+    deleteMedication: (id: string) =>
+      request<{ success: boolean }>(getToken, `/medplan/medications/${encodeURIComponent(id)}`, { method: 'DELETE' }),
+    setMedIntake: (medicationId: string, slot: MedSlot, status: 'taken' | 'skipped' | null) =>
+      request<{ success: boolean; status: 'taken' | 'skipped' | null }>(getToken, '/medplan/intakes', {
+        method: 'POST',
+        ...jsonBody({ medicationId, slot, status }),
+      }),
+    setMedplanEmail: (emailReminders: boolean) =>
+      request<{ success: boolean }>(getToken, '/medplan/settings', {
+        method: 'POST',
+        ...jsonBody({ emailReminders }),
+      }),
 
     generatePrep: (input: string, locale: string, profileId?: string) =>
       request<{ success: boolean; output: string; tier: string }>(getToken, '/prep', {

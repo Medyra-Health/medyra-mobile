@@ -3,7 +3,8 @@
     "home": "Home",
     "profiles": "Profiles",
     "trends": "Trends",
-    "settings": "Settings"
+    "settings": "Settings",
+    "meds": "Meds"
   },
   "auth": {
     "welcomeBack": "Welcome back",
@@ -180,7 +181,9 @@
     "trends": "Trends",
     "trendsDesc": "Values over time",
     "check": "Value check",
-    "checkDesc": "Is a single value in the usual range?"
+    "checkDesc": "Is a single value in the usual range?",
+    "meds": "Medication plan",
+    "medsDesc": "Track doses and get reminders"
   },
   "paywall": {
     "headline": "More clarity for you and your family",
@@ -268,5 +271,50 @@
     "shareButton": "Share my invite link",
     "shareText": "We explain medical reports in plain language. With my link we both get an extra free report:",
     "stats": "{{count}} invited, +{{bonus}} bonus reports"
+  },
+  "medplan": {
+    "title": "Medication plan",
+    "subtitle": "Check off each dose, we keep the overview.",
+    "me": "Me",
+    "today": "Today",
+    "doses": "doses",
+    "streak": "day streak",
+    "rate": "over 7 days",
+    "allDone": "All done for today. Well done!",
+    "emptyTitle": "No medications yet",
+    "emptyText": "Add your first medication and check off your doses every day.",
+    "addMed": "Add medication",
+    "editMed": "Edit medication",
+    "slot_morning": "Morning",
+    "slot_noon": "Noon",
+    "slot_evening": "Evening",
+    "slot_night": "Night",
+    "reminders": "Dose reminders",
+    "remindersDesc": "Your phone reminds you at every dose time. Nothing leaves your device.",
+    "notifTitle": "Time for your medication",
+    "notifDenied": "Notifications are not allowed. You can enable them in your phone settings.",
+    "name": "Name",
+    "namePh": "e.g. Metformin",
+    "dose": "Dose",
+    "color": "Color",
+    "scheme": "Scheme (1-0-1-0)",
+    "schemeHint": "Like on the prescription: morning, noon, evening, night. Type 1-0-1 for example.",
+    "times": "Dose times",
+    "days": "Weekdays",
+    "everyDay": "Every day",
+    "notes": "Note",
+    "notesPh": "e.g. take with food",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "deleteTitle": "Delete medication?",
+    "deleteBody": "This removes the medication and its history.",
+    "nameRequired": "Please enter a name.",
+    "slotRequired": "Please pick at least one dose time.",
+    "limitReached": "You reached the limit of 20 medications per person.",
+    "saveError": "We could not save this. Please try again.",
+    "lockedTitle": "Family profiles",
+    "lockedBody": "Medication plans for family members are part of the Personal and Family plans.",
+    "upgrade": "See plans"
   }
 }

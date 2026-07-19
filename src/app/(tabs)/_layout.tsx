@@ -42,6 +42,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="meds"
+        options={{
+          title: t('tabs.meds'),
+          tabBarIcon: ({ color, size }) => <Ionicons name="alarm-outline" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="prep"
         options={{
           title: t('features.prep'),

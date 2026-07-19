@@ -43,6 +43,13 @@ Growth feature wave shipped in the app, matching web branch `feature/growth-wave
 - Referral card on home (`src/components/referral-card.tsx`): native share of `https://medyra.de/?ref=<code>`; both sides earn one extra free report per month.
 - i18n: all new keys in all 9 locales (scripts/add-feature-i18n.js, additive), check-locales passes (209 keys).
 
+## Medication planner (2026-07-18)
+Matches web `/medplan` (web commit a2aab72). New Meds tab (`src/app/(tabs)/meds.tsx`, second tab) + `src/components/med-modal.tsx`:
+- 1-0-1-0 slot cards (morning/noon/evening/night), tap to cycle taken/skipped/clear, optimistic updates against `/api/medplan/*` (endpoints in `src/lib/api.ts`, types in `src/lib/types.ts`).
+- Stats: today progress, day streak, 7 day adherence. Profile chips: Me free for everyone; family profiles need paid tier (locked chips alert to `/paywall`).
+- Local dose reminders (`src/lib/med-notifications.ts`, expo-notifications ~0.32): DAILY/WEEKLY scheduled notifications per med and slot, rescheduled after every med change; toggle state in SecureStore `medyra.medplan.notifications`; reminders always follow the user's own plan (profileId null). No push infra, nothing leaves the device. NOTE: Android Expo Go cannot show notifications since SDK 53; verify reminders in the APK build (iOS Expo Go fine).
+- Add/edit sheet: 1-0-1-0 quick scheme input fills slot toggles, per slot HH:MM times, weekday chips, 6 colors, notes. i18n via scripts/add-medplan-i18n.js (all 9 locales, 272 keys, parity passes).
+
 ## Fixed issues log
 - Analysis prompt was lab-only; backend now classifies docType and returns sections for letters/prescriptions/insurance (web commit bf60f04); mobile renders sections + questions + next steps (2026-07-03).
 - App rethemed LIGHT to match web (tokens.ts is the source); dark splash kept as brand moment. Doctor Visit prep tab + dashboard home + Learn links added (commit 6b3c31c).

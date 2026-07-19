@@ -3,7 +3,8 @@
     "home": "Accueil",
     "profiles": "Profils",
     "trends": "Évolution",
-    "settings": "Réglages"
+    "settings": "Réglages",
+    "meds": "Médicaments"
   },
   "auth": {
     "welcomeBack": "Bon retour",
@@ -180,7 +181,9 @@
     "trends": "Évolution",
     "trendsDesc": "Valeurs dans le temps",
     "check": "Vérifier une valeur",
-    "checkDesc": "Une valeur est elle dans la plage habituelle ?"
+    "checkDesc": "Une valeur est elle dans la plage habituelle ?",
+    "meds": "Plan de médication",
+    "medsDesc": "Cochez vos prises et recevez des rappels"
   },
   "paywall": {
     "headline": "Plus de clarté pour vous et votre famille",
@@ -268,5 +271,50 @@
     "shareButton": "Partager mon lien",
     "shareText": "Nous expliquons les documents médicaux en langage simple. Avec mon lien, nous recevons tous les deux un rapport gratuit :",
     "stats": "{{count}} invités, +{{bonus}} rapports bonus"
+  },
+  "medplan": {
+    "title": "Plan de médication",
+    "subtitle": "Cochez chaque prise, nous gardons la vue d’ensemble.",
+    "me": "Moi",
+    "today": "Aujourd’hui",
+    "doses": "prises",
+    "streak": "jours d’affilée",
+    "rate": "sur 7 jours",
+    "allDone": "Tout est fait pour aujourd’hui. Bravo !",
+    "emptyTitle": "Pas encore de médicaments",
+    "emptyText": "Ajoutez votre premier médicament et cochez vos prises chaque jour.",
+    "addMed": "Ajouter un médicament",
+    "editMed": "Modifier le médicament",
+    "slot_morning": "Matin",
+    "slot_noon": "Midi",
+    "slot_evening": "Soir",
+    "slot_night": "Nuit",
+    "reminders": "Rappels de prise",
+    "remindersDesc": "Votre téléphone vous rappelle à chaque prise. Rien ne quitte votre appareil.",
+    "notifTitle": "C’est l’heure de votre médicament",
+    "notifDenied": "Les notifications ne sont pas autorisées. Vous pouvez les activer dans les réglages du téléphone.",
+    "name": "Nom",
+    "namePh": "ex. Metformine",
+    "dose": "Dose",
+    "color": "Couleur",
+    "scheme": "Schéma (1-0-1-0)",
+    "schemeHint": "Comme sur l’ordonnance : matin, midi, soir, nuit. Tapez par exemple 1-0-1.",
+    "times": "Heures de prise",
+    "days": "Jours de la semaine",
+    "everyDay": "Tous les jours",
+    "notes": "Note",
+    "notesPh": "ex. à prendre pendant le repas",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "deleteTitle": "Supprimer le médicament ?",
+    "deleteBody": "Cela supprime le médicament et son historique.",
+    "nameRequired": "Veuillez saisir un nom.",
+    "slotRequired": "Choisissez au moins une heure de prise.",
+    "limitReached": "Vous avez atteint la limite de 20 médicaments par personne.",
+    "saveError": "Nous n’avons pas pu enregistrer. Réessayez.",
+    "lockedTitle": "Profils familiaux",
+    "lockedBody": "Les plans de médication pour les proches font partie des formules Personal et Family.",
+    "upgrade": "Voir les formules"
   }
 }

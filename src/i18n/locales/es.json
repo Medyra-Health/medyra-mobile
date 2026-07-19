@@ -3,7 +3,8 @@
     "home": "Inicio",
     "profiles": "Perfiles",
     "trends": "Evolución",
-    "settings": "Ajustes"
+    "settings": "Ajustes",
+    "meds": "Medicinas"
   },
   "auth": {
     "welcomeBack": "Bienvenido de nuevo",
@@ -180,7 +181,9 @@
     "trends": "Evolución",
     "trendsDesc": "Valores en el tiempo",
     "check": "Comprobar valor",
-    "checkDesc": "¿Está un valor dentro del rango habitual?"
+    "checkDesc": "¿Está un valor dentro del rango habitual?",
+    "meds": "Plan de medicación",
+    "medsDesc": "Marca tomas y recibe recordatorios"
   },
   "paywall": {
     "headline": "Más claridad para usted y su familia",
@@ -268,5 +271,50 @@
     "shareButton": "Compartir mi enlace",
     "shareText": "Explicamos informes médicos en lenguaje sencillo. Con mi enlace ambos recibimos un informe gratis extra:",
     "stats": "{{count}} invitados, +{{bonus}} informes extra"
+  },
+  "medplan": {
+    "title": "Plan de medicación",
+    "subtitle": "Marca cada toma, nosotros llevamos el control.",
+    "me": "Yo",
+    "today": "Hoy",
+    "doses": "tomas",
+    "streak": "días seguidos",
+    "rate": "en 7 días",
+    "allDone": "Todo listo por hoy. ¡Muy bien!",
+    "emptyTitle": "Aún no hay medicamentos",
+    "emptyText": "Añade tu primer medicamento y marca tus tomas cada día.",
+    "addMed": "Añadir medicamento",
+    "editMed": "Editar medicamento",
+    "slot_morning": "Mañana",
+    "slot_noon": "Mediodía",
+    "slot_evening": "Tarde",
+    "slot_night": "Noche",
+    "reminders": "Recordatorios de toma",
+    "remindersDesc": "Tu teléfono te avisa a cada hora de toma. Nada sale de tu dispositivo.",
+    "notifTitle": "Hora de tu medicamento",
+    "notifDenied": "Las notificaciones no están permitidas. Puedes activarlas en los ajustes del teléfono.",
+    "name": "Nombre",
+    "namePh": "p. ej. Metformina",
+    "dose": "Dosis",
+    "color": "Color",
+    "scheme": "Esquema (1-0-1-0)",
+    "schemeHint": "Como en la receta: mañana, mediodía, tarde, noche. Escribe por ejemplo 1-0-1.",
+    "times": "Horas de toma",
+    "days": "Días de la semana",
+    "everyDay": "Cada día",
+    "notes": "Nota",
+    "notesPh": "p. ej. tomar con comida",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "deleteTitle": "¿Eliminar medicamento?",
+    "deleteBody": "Esto elimina el medicamento y su historial.",
+    "nameRequired": "Introduce un nombre.",
+    "slotRequired": "Elige al menos una hora de toma.",
+    "limitReached": "Has llegado al límite de 20 medicamentos por persona.",
+    "saveError": "No pudimos guardarlo. Inténtalo de nuevo.",
+    "lockedTitle": "Perfiles familiares",
+    "lockedBody": "Los planes de medicación para familiares forman parte de los planes Personal y Family.",
+    "upgrade": "Ver planes"
   }
 }

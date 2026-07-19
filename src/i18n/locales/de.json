@@ -3,7 +3,8 @@
     "home": "Start",
     "profiles": "Profile",
     "trends": "Trends",
-    "settings": "Einstellungen"
+    "settings": "Einstellungen",
+    "meds": "Medikamente"
   },
   "auth": {
     "welcomeBack": "Willkommen zurück",
@@ -180,7 +181,9 @@
     "trends": "Trends",
     "trendsDesc": "Werte im Verlauf",
     "check": "Wert Check",
-    "checkDesc": "Liegt ein einzelner Wert im üblichen Bereich?"
+    "checkDesc": "Liegt ein einzelner Wert im üblichen Bereich?",
+    "meds": "Medikationsplan",
+    "medsDesc": "Einnahmen abhaken und erinnern lassen"
   },
   "paywall": {
     "headline": "Mehr Klarheit für Sie und Ihre Familie",
@@ -268,5 +271,50 @@
     "shareButton": "Einladungslink teilen",
     "shareText": "Wir erklären medizinische Befunde in verständlicher Sprache. Mit meinem Link bekommen wir beide einen zusätzlichen Gratis Befund:",
     "stats": "{{count}} eingeladen, +{{bonus}} Bonus Befunde"
+  },
+  "medplan": {
+    "title": "Medikationsplan",
+    "subtitle": "Einnahmen abhaken, wir behalten den Überblick.",
+    "me": "Ich",
+    "today": "Heute",
+    "doses": "Einnahmen",
+    "streak": "Tage in Folge",
+    "rate": "in 7 Tagen",
+    "allDone": "Alles erledigt für heute. Stark!",
+    "emptyTitle": "Noch keine Medikamente",
+    "emptyText": "Lege dein erstes Medikament an und hake Einnahmen täglich ab.",
+    "addMed": "Medikament hinzufügen",
+    "editMed": "Medikament bearbeiten",
+    "slot_morning": "Morgens",
+    "slot_noon": "Mittags",
+    "slot_evening": "Abends",
+    "slot_night": "Nachts",
+    "reminders": "Einnahme Erinnerungen",
+    "remindersDesc": "Dein Handy erinnert dich zu jeder Einnahmezeit. Nichts verlässt dein Gerät.",
+    "notifTitle": "Zeit für dein Medikament",
+    "notifDenied": "Benachrichtigungen sind nicht erlaubt. Du kannst sie in den Handy Einstellungen aktivieren.",
+    "name": "Name",
+    "namePh": "z. B. Metformin",
+    "dose": "Dosis",
+    "color": "Farbe",
+    "scheme": "Schema (1-0-1-0)",
+    "schemeHint": "Wie auf dem Rezept: morgens, mittags, abends, nachts. Tippe zum Beispiel 1-0-1.",
+    "times": "Einnahmezeiten",
+    "days": "Wochentage",
+    "everyDay": "Täglich",
+    "notes": "Notiz",
+    "notesPh": "z. B. zum Essen einnehmen",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "deleteTitle": "Medikament löschen?",
+    "deleteBody": "Das entfernt das Medikament und seinen Verlauf.",
+    "nameRequired": "Bitte gib einen Namen ein.",
+    "slotRequired": "Bitte wähle mindestens eine Einnahmezeit.",
+    "limitReached": "Du hast das Limit von 20 Medikamenten pro Person erreicht.",
+    "saveError": "Wir konnten das nicht speichern. Bitte versuche es erneut.",
+    "lockedTitle": "Familienprofile",
+    "lockedBody": "Medikationspläne für Familienmitglieder sind Teil der Personal und Family Pläne.",
+    "upgrade": "Pläne ansehen"
   }
 }

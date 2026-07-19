@@ -3,7 +3,8 @@
     "home": "Ana sayfa",
     "profiles": "Profiller",
     "trends": "Değişim",
-    "settings": "Ayarlar"
+    "settings": "Ayarlar",
+    "meds": "İlaçlar"
   },
   "auth": {
     "welcomeBack": "Tekrar hoş geldiniz",
@@ -180,7 +181,9 @@
     "trends": "Değişim",
     "trendsDesc": "Zaman içindeki değerler",
     "check": "Değer kontrolü",
-    "checkDesc": "Tek bir değer olağan aralıkta mı?"
+    "checkDesc": "Tek bir değer olağan aralıkta mı?",
+    "meds": "İlaç planı",
+    "medsDesc": "Dozları işaretle ve hatırlatıcı al"
   },
   "paywall": {
     "headline": "Siz ve aileniz için daha fazla netlik",
@@ -268,5 +271,50 @@
     "shareButton": "Davet bağlantımı paylaş",
     "shareText": "Tıbbi raporları anlaşılır bir dille açıklıyoruz. Bağlantımla ikimiz de ekstra ücretsiz rapor kazanırız:",
     "stats": "{{count}} davet edildi, +{{bonus}} bonus rapor"
+  },
+  "medplan": {
+    "title": "İlaç planı",
+    "subtitle": "Her dozu işaretle, genel bakış bizde.",
+    "me": "Ben",
+    "today": "Bugün",
+    "doses": "doz",
+    "streak": "günlük seri",
+    "rate": "7 günde",
+    "allDone": "Bugün için her şey tamam. Harika!",
+    "emptyTitle": "Henüz ilaç yok",
+    "emptyText": "İlk ilacını ekle ve dozları her gün işaretle.",
+    "addMed": "İlaç ekle",
+    "editMed": "İlacı düzenle",
+    "slot_morning": "Sabah",
+    "slot_noon": "Öğle",
+    "slot_evening": "Akşam",
+    "slot_night": "Gece",
+    "reminders": "Doz hatırlatıcıları",
+    "remindersDesc": "Telefonun her doz saatinde hatırlatır. Hiçbir şey cihazından çıkmaz.",
+    "notifTitle": "İlaç zamanı",
+    "notifDenied": "Bildirimlere izin verilmiyor. Telefon ayarlarından etkinleştirebilirsin.",
+    "name": "Ad",
+    "namePh": "örn. Metformin",
+    "dose": "Doz",
+    "color": "Renk",
+    "scheme": "Şema (1-0-1-0)",
+    "schemeHint": "Reçetedeki gibi: sabah, öğle, akşam, gece. Örneğin 1-0-1 yaz.",
+    "times": "Doz saatleri",
+    "days": "Haftanın günleri",
+    "everyDay": "Her gün",
+    "notes": "Not",
+    "notesPh": "örn. yemekle al",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "delete": "Sil",
+    "deleteTitle": "İlaç silinsin mi?",
+    "deleteBody": "Bu, ilacı ve geçmişini kaldırır.",
+    "nameRequired": "Lütfen bir ad gir.",
+    "slotRequired": "En az bir doz saati seç.",
+    "limitReached": "Kişi başına 20 ilaç sınırına ulaştın.",
+    "saveError": "Kaydedemedik. Lütfen tekrar dene.",
+    "lockedTitle": "Aile profilleri",
+    "lockedBody": "Aile üyeleri için ilaç planları Personal ve Family planlarının parçasıdır.",
+    "upgrade": "Planları gör"
   }
 }

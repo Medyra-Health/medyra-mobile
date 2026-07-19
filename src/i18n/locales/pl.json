@@ -3,7 +3,8 @@
     "home": "Start",
     "profiles": "Profile",
     "trends": "Trendy",
-    "settings": "Ustawienia"
+    "settings": "Ustawienia",
+    "meds": "Leki"
   },
   "auth": {
     "welcomeBack": "Witamy ponownie",
@@ -180,7 +181,9 @@
     "trends": "Trendy",
     "trendsDesc": "Wyniki w czasie",
     "check": "Sprawdź wynik",
-    "checkDesc": "Czy pojedynczy wynik mieści się w typowym zakresie?"
+    "checkDesc": "Czy pojedynczy wynik mieści się w typowym zakresie?",
+    "meds": "Plan leków",
+    "medsDesc": "Odhaczaj dawki i otrzymuj przypomnienia"
   },
   "paywall": {
     "headline": "Więcej jasności dla Ciebie i Twojej rodziny",
@@ -268,5 +271,50 @@
     "shareButton": "Udostępnij mój link",
     "shareText": "Wyjaśniamy dokumenty medyczne prostym językiem. Z moim linkiem oboje dostaniemy dodatkowy darmowy raport:",
     "stats": "Zaproszono: {{count}}, +{{bonus}} dodatkowych raportów"
+  },
+  "medplan": {
+    "title": "Plan leków",
+    "subtitle": "Odhaczaj każdą dawkę, my pilnujemy całości.",
+    "me": "Ja",
+    "today": "Dzisiaj",
+    "doses": "dawek",
+    "streak": "dni z rzędu",
+    "rate": "w 7 dni",
+    "allDone": "Wszystko zrobione na dziś. Brawo!",
+    "emptyTitle": "Brak leków",
+    "emptyText": "Dodaj pierwszy lek i codziennie odhaczaj dawki.",
+    "addMed": "Dodaj lek",
+    "editMed": "Edytuj lek",
+    "slot_morning": "Rano",
+    "slot_noon": "Południe",
+    "slot_evening": "Wieczór",
+    "slot_night": "Noc",
+    "reminders": "Przypomnienia o dawkach",
+    "remindersDesc": "Telefon przypomni o każdej porze dawki. Nic nie opuszcza Twojego urządzenia.",
+    "notifTitle": "Czas na Twój lek",
+    "notifDenied": "Powiadomienia są wyłączone. Możesz je włączyć w ustawieniach telefonu.",
+    "name": "Nazwa",
+    "namePh": "np. Metformina",
+    "dose": "Dawka",
+    "color": "Kolor",
+    "scheme": "Schemat (1-0-1-0)",
+    "schemeHint": "Jak na recepcie: rano, południe, wieczór, noc. Wpisz na przykład 1-0-1.",
+    "times": "Pory dawek",
+    "days": "Dni tygodnia",
+    "everyDay": "Codziennie",
+    "notes": "Notatka",
+    "notesPh": "np. przyjmować z jedzeniem",
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "delete": "Usuń",
+    "deleteTitle": "Usunąć lek?",
+    "deleteBody": "To usunie lek i jego historię.",
+    "nameRequired": "Podaj nazwę.",
+    "slotRequired": "Wybierz co najmniej jedną porę dawki.",
+    "limitReached": "Osiągnięto limit 20 leków na osobę.",
+    "saveError": "Nie udało się zapisać. Spróbuj ponownie.",
+    "lockedTitle": "Profile rodzinne",
+    "lockedBody": "Plany leków dla bliskich są częścią planów Personal i Family.",
+    "upgrade": "Zobacz plany"
   }
 }

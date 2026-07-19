@@ -109,6 +109,60 @@ export type WerteEntry = {
   shortAnswer: string;
 };
 
+/** Medication planner (1-0-1-0 scheme: morning/noon/evening/night). */
+export type MedSlot = 'morning' | 'noon' | 'evening' | 'night';
+
+export type Medication = {
+  id: string;
+  profileId: string | null;
+  name: string;
+  dose: string;
+  notes: string;
+  form: 'tablet' | 'capsule' | 'drops' | 'injection' | 'spray' | 'ointment' | 'other';
+  color: 'emerald' | 'sky' | 'violet' | 'amber' | 'rose' | 'indigo';
+  slots: Partial<Record<MedSlot, boolean>>;
+  times: Record<MedSlot, string>;
+  /** 0 = Sunday to 6 = Saturday; empty = every day */
+  days: number[];
+  active: boolean;
+  createdAt: string;
+};
+
+export type MedIntake = {
+  medicationId: string;
+  date: string;
+  slot: MedSlot;
+  status: 'taken' | 'skipped';
+};
+
+export type MedplanData = {
+  medications: Medication[];
+  todayIntakes: MedIntake[];
+  today: string;
+  weekday: number;
+  stats: {
+    streak: number;
+    adherence7: number | null;
+    dayStats: Record<string, { due: number; taken: number }>;
+  };
+  tier: string;
+  profilesAllowed: boolean;
+  emailReminders: boolean;
+  maxMeds: number;
+};
+
+export type MedicationInput = {
+  name: string;
+  dose?: string;
+  notes?: string;
+  form?: Medication['form'];
+  color?: Medication['color'];
+  slots: Partial<Record<MedSlot, boolean>>;
+  times?: Partial<Record<MedSlot, string>>;
+  days?: number[];
+  profileId?: string | null;
+};
+
 /** The API stores explanation as JSON or string. Always parse defensively. */
 export function parseExplanation(raw: Explanation | string | undefined | null): Explanation {
   if (!raw) return { summary: '', tests: [] };

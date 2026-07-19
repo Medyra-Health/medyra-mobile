@@ -3,7 +3,8 @@
     "home": "Home",
     "profiles": "Profili",
     "trends": "Andamento",
-    "settings": "Impostazioni"
+    "settings": "Impostazioni",
+    "meds": "Farmaci"
   },
   "auth": {
     "welcomeBack": "Bentornato",
@@ -180,7 +181,9 @@
     "trends": "Andamento",
     "trendsDesc": "Valori nel tempo",
     "check": "Controlla valore",
-    "checkDesc": "Un singolo valore è nell’intervallo abituale?"
+    "checkDesc": "Un singolo valore è nell’intervallo abituale?",
+    "meds": "Piano farmaci",
+    "medsDesc": "Spunta le assunzioni e ricevi promemoria"
   },
   "paywall": {
     "headline": "Più chiarezza per te e la tua famiglia",
@@ -268,5 +271,50 @@
     "shareButton": "Condividi il mio link",
     "shareText": "Spieghiamo i referti medici in linguaggio semplice. Con il mio link riceviamo entrambi un referto gratis in più:",
     "stats": "{{count}} invitati, +{{bonus}} referti bonus"
+  },
+  "medplan": {
+    "title": "Piano farmaci",
+    "subtitle": "Spunta ogni assunzione, noi teniamo il quadro completo.",
+    "me": "Io",
+    "today": "Oggi",
+    "doses": "assunzioni",
+    "streak": "giorni di fila",
+    "rate": "su 7 giorni",
+    "allDone": "Tutto fatto per oggi. Ottimo!",
+    "emptyTitle": "Ancora nessun farmaco",
+    "emptyText": "Aggiungi il tuo primo farmaco e spunta le assunzioni ogni giorno.",
+    "addMed": "Aggiungi farmaco",
+    "editMed": "Modifica farmaco",
+    "slot_morning": "Mattina",
+    "slot_noon": "Mezzogiorno",
+    "slot_evening": "Sera",
+    "slot_night": "Notte",
+    "reminders": "Promemoria assunzioni",
+    "remindersDesc": "Il telefono ti ricorda a ogni orario di assunzione. Nulla lascia il tuo dispositivo.",
+    "notifTitle": "È ora del tuo farmaco",
+    "notifDenied": "Le notifiche non sono consentite. Puoi attivarle nelle impostazioni del telefono.",
+    "name": "Nome",
+    "namePh": "es. Metformina",
+    "dose": "Dose",
+    "color": "Colore",
+    "scheme": "Schema (1-0-1-0)",
+    "schemeHint": "Come sulla ricetta: mattina, mezzogiorno, sera, notte. Digita ad esempio 1-0-1.",
+    "times": "Orari di assunzione",
+    "days": "Giorni della settimana",
+    "everyDay": "Ogni giorno",
+    "notes": "Nota",
+    "notesPh": "es. assumere con il cibo",
+    "save": "Salva",
+    "cancel": "Annulla",
+    "delete": "Elimina",
+    "deleteTitle": "Eliminare il farmaco?",
+    "deleteBody": "Questo rimuove il farmaco e il suo storico.",
+    "nameRequired": "Inserisci un nome.",
+    "slotRequired": "Scegli almeno un orario di assunzione.",
+    "limitReached": "Hai raggiunto il limite di 20 farmaci per persona.",
+    "saveError": "Non siamo riusciti a salvare. Riprova.",
+    "lockedTitle": "Profili famiglia",
+    "lockedBody": "I piani farmaci per i familiari fanno parte dei piani Personal e Family.",
+    "upgrade": "Vedi i piani"
   }
 }

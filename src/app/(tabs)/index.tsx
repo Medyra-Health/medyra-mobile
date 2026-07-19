@@ -235,6 +235,7 @@ export default function HomeScreen() {
         {/* Feature grid */}
         <View style={styles.featureRow}>
           {[
+            { icon: 'alarm-outline' as const, title: t('features.meds'), desc: t('features.medsDesc'), href: '/(tabs)/meds' as const },
             { icon: 'medkit-outline' as const, title: t('features.prep'), desc: t('features.prepDesc'), href: '/(tabs)/prep' as const },
             { icon: 'people-outline' as const, title: t('features.profiles'), desc: t('features.profilesDesc'), href: '/(tabs)/profiles' as const },
             { icon: 'trending-up-outline' as const, title: t('features.trends'), desc: t('features.trendsDesc'), href: '/(tabs)/trends' as const },
